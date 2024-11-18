@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="array_guidelines_title">
+        <item>Typography</item>
+        <item>Button &amp; Ribbon</item>
+        <item>Colors</item>
+        <item>Progress Bar</item>
+        <item>I-Kupon List</item>
+    </string-array>
+
+    <string-array name="array_guidelines_font">
+        <!--Light-->
+        <item>TextAppearance.Rubik.Semibold.D1</item>
+        <item>TextAppearance.Rubik.Semibold.D2</item>
+        <!--Regular-->
+        <item>TextAppearance.Rubik.Semibold.H1</item>
+        <item>TextAppearance.Rubik.Semibold.H2</item>
+        <item>TextAppearance.Rubik.Semibold.H3</item>
+        <item>TextAppearance.Rubik.Semibold.H4</item>
+        <!--SemiBold-->
+        <item>TextAppearance.Rubik.Regular.B1</item>
+        <item>TextAppearance.Rubik.Regular.B2</item>
+        <item>TextAppearance.Rubik.Regular.B3</item>
+        <item>TextAppearance.Rubik.Regular.B4</item>
+        <!--Bold-->
+        <item>TextAppearance.Rubik.Regular.Paragraph</item>
+    </string-array>
+
+    <string-array name="array_guidelines_font_title">
+        <!--Light-->
+        <item>Display 1 (D1)</item>
+        <item>Display 2 (D2)</item>
+        <!--Regular-->
+        <item>Heading 1 (H1)</item>
+        <item>Heading 2 (H2)</item>
+        <item>Heading 3 (H3)</item>
+        <item>Heading 4 (H4)</item>
+        <!--SemiBold-->
+        <item>Body 1 (B1)</item>
+        <item>Body 2 (B2)</item>
+        <item>Body 3 (B3)</item>
+        <item>Body 4 (B4)</item>
+        <!--Bold-->
+        <item>Paragraph</item>
+    </string-array>
+
+    <string-array name="ikupon_placeholders">
+        <item>Onigiri</item>
+        <item>Flakes</item>
+        <item>Xbox</item>
+    </string-array>
+</resources>

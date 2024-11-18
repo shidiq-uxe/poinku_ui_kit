@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".GuidelinesButtonActivity">
+
+    <id.co.edtslib.uikit.poinku.button.Button
+        android:id="@+id/btnFilled"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/s"
+        android:layout_marginHorizontal="@dimen/s"
+        android:text="Filled Button"
+        app:layout_constraintTop_toTopOf="parent"/>
+
+    <id.co.edtslib.uikit.poinku.button.Button
+        android:id="@+id/btnFilledMedium"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/s"
+        android:layout_marginHorizontal="@dimen/s"
+        android:text="Filled Medium Button"
+        app:buttonType="filledMedium"
+        app:layout_constraintTop_toBottomOf="@id/btnFilled"/>
+
+    <id.co.edtslib.uikit.poinku.button.Button
+        android:id="@+id/btnVariantFilled"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/s"
+        android:layout_marginHorizontal="@dimen/s"
+        android:text="Variant Filled Button"
+        app:buttonType="variant"
+        app:layout_constraintTop_toBottomOf="@id/btnFilledMedium"/>
+
+    <id.co.edtslib.uikit.poinku.button.Button
+        android:id="@+id/btnVariantFilledMedium"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/s"
+        android:layout_marginHorizontal="@dimen/s"
+        android:text="Variant Medium Filled Button"
+        app:buttonType="variantMedium"
+        app:layout_constraintTop_toBottomOf="@id/btnVariantFilled"/>
+
+    <id.co.edtslib.uikit.poinku.button.Button
+        android:id="@+id/btnSecondaryOutlined"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/s"
+        android:layout_marginHorizontal="@dimen/s"
+        android:text="Secondary Outlined Button"
+        app:buttonType="secondary"
+        app:layout_constraintTop_toBottomOf="@id/btnVariantFilledMedium"/>
+
+    <id.co.edtslib.uikit.poinku.button.Button
+        android:id="@+id/btnSecondaryOutlinedMedium"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/s"
+        android:layout_marginHorizontal="@dimen/s"
+        android:text="Secondary Medium Outlined Button"
+        app:buttonType="secondaryMedium"
+        app:layout_constraintTop_toBottomOf="@id/btnSecondaryOutlined"/>
+
+    <id.co.edtslib.uikit.poinku.button.Button
+        android:id="@+id/btnDisabled"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/s"
+        android:layout_marginHorizontal="@dimen/s"
+        android:text="Disabled Button"
+        android:enabled="false"
+        app:layout_constraintTop_toBottomOf="@id/btnSecondaryOutlinedMedium"/>
+
+    <id.co.edtslib.uikit.poinku.button.Button
+        android:id="@+id/btnTextButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/s"
+        android:layout_marginTop="8dp"
+        android:text="Text Button"
+        app:buttonType="text"
+        app:layout_constraintTop_toBottomOf="@id/btnDisabled" />
+
+    <id.co.edtslib.uikit.poinku.button.Button
+        android:id="@+id/btnTextButtonMedium"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/s"
+        android:text="Medium Text Button"
+        app:buttonType="textMedium"
+        app:layout_constraintTop_toBottomOf="@id/btnTextButton"/>
+
+    <id.co.edtslib.uikit.poinku.button.Button
+        android:id="@+id/btnIconButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/s"
+        android:text="Icon Button"
+        app:buttonType="filledMedium"
+        app:icon="@drawable/ic_placeholder_medium_24"
+        app:iconGravity="textStart"
+        app:layout_constraintTop_toBottomOf="@id/btnTextButtonMedium"/>
+
+    <id.co.edtslib.uikit.poinku.ribbon.Ribbon
+        android:id="@+id/ribbon"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/xxs"
+        android:layout_marginStart="-6dp"
+        android:elevation="@dimen/xxxs"
+        app:gravity="start"
+        app:text="999x"
+        app:textAppearance="@style/TextAppearance.Rubik.Semibold.H2"
+        app:layout_constraintTop_toTopOf="@id/btnDisabled"
+        app:layout_constraintStart_toStartOf="@id/btnTextButton"/>
+
+    <id.co.edtslib.uikit.poinku.ribbon.Ribbon
+        android:id="@+id/ribbon2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/xxs"
+        android:layout_marginStart="-6dp"
+        android:elevation="@dimen/xxxs"
+        app:containerStartColor="@color/secondary_10"
+        app:containerEndColor="@color/secondary_30"
+        app:triangleColor="@color/secondary_50"
+        app:gravity="start"
+        app:text="Baru!"
+        app:textAppearance="@style/TextAppearance.Rubik.Semibold.H2"
+        app:layout_constraintTop_toTopOf="@id/btnSecondaryOutlinedMedium"
+        app:layout_constraintStart_toStartOf="@id/btnTextButton"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

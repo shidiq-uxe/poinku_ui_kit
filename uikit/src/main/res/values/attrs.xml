@@ -1,0 +1,323 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!--Primary Color Attrs-->
+    <attr name="colorPrimaryDisabled" format="color" />
+    <attr name="colorPrimaryBackground" format="color" />
+    <!--Error Color Attrs-->
+    <attr name="colorErrorBackground" format="color" />
+    <!--Others Attrs-->
+    <attr name="colorWarning" format="color"/>
+    <attr name="colorWarningBackground" format="color"/>
+    <attr name="colorSuccess" format="color"/>
+    <attr name="colorSuccessBackground" format="color"/>
+    <attr name="colorInfo" format="color"/>
+    <attr name="colorInfoBackground" format="color"/>
+    <attr name="colorHub" format="color"/>
+    <attr name="colorService" format="color"/>
+    <attr name="colorSnackbar" format="color"/>
+    <attr name="colorText" format="color"/>
+    <attr name="colorTextDesc" format="color"/>
+    <attr name="colorMutedText" format="color"/>
+    <attr name="colorPlaceholder" format="color"/>
+    <attr name="colorDisableBorder" format="color"/>
+    <attr name="colorInputBorder" format="color"/>
+    <attr name="colorDisableFill" format="color"/>
+    <attr name="colorFocusBorder" format="color"/>
+
+    <attr name="buttonStyle" format="reference" />
+
+    <attr name="searchBarStyle" format="reference"/>
+    <attr name="inputSearchBarStyle" format="reference"/>
+
+    <attr name="startIconGravity" format="enum">
+        <enum name="top" value="0" />
+        <enum name="center" value="1" />
+        <enum name="bottom" value="1" />
+    </attr>
+
+    <attr name="endIconGravity" format="enum">
+        <enum name="top" value="0" />
+        <enum name="center" value="1" />
+        <enum name="bottom" value="1" />
+    </attr>
+
+    <attr name="text" format="string"/>
+    <attr name="textAppearance" format="reference" />
+
+    <attr name="titleText" format="string"/>
+    <attr name="titleTextAppearance" format="reference"/>
+    <attr name="titleTextColor" format="color"/>
+    <attr name="titleVisible" format="boolean"/>
+    <attr name="subTitleText" format="string"/>
+    <attr name="subtitleTextAppearance" format="reference"/>
+    <attr name="subtitleTextColor" format="color"/>
+    <attr name="subtitleVisible" format="boolean"/>
+    <attr name="startIcon" format="reference"/>"
+    <attr name="startIconTint" format="color"/>"
+    <attr name="startIconVisible" format="boolean"/>
+    <attr name="endIcon" format="reference"/>
+    <attr name="endIconTint" format="color"/>
+    <attr name="endIconVisible" format="boolean"/>
+    <attr name="icon" format="reference"/>
+    <attr name="strokeWidth"/>
+    <attr name="shouldAnimate" format="boolean"/>
+
+    <attr name="cornerRadius" format="dimension"/>
+    <attr name="topRightCornerRadius" format="dimension"/>
+    <attr name="topLeftCornerRadius" format="dimension"/>
+    <attr name="bottomLeftCornerRadius" format="dimension"/>
+    <attr name="bottomRightCornerRadius" format="dimension"/>
+
+    <attr name="startIconSize" format="dimension"/>
+    <attr name="endIconSize" format="dimension"/>
+    <attr name="strokeColor" format="color"/>
+
+    <attr name="backgroundColor" format="color"/>
+    <attr name="foregroundColor" format="color"/>
+    <attr name="circleRadius" format="dimension"/>
+
+    <attr name="fieldInputType" format="enum">
+        <enum name="text" value="0" />
+        <enum name="password" value="1" />
+        <enum name="pin" value="2" />
+        <enum name="phone" value="3" />
+        <enum name="email" value="4" />
+        <enum name="otp" value="5" />
+    </attr>
+
+    <attr name="fieldMaxLength" format="integer" />
+
+    <declare-styleable name="Button">
+        <attr name="buttonType" format="enum">
+            <enum name="filled" value="0" />
+            <enum name="filledMedium" value="1" />
+            <enum name="secondary" value="2" />
+            <enum name="secondaryMedium" value="3" />
+            <enum name="variant" value="4" />
+            <enum name="variantMedium" value="5" />
+            <enum name="text" value="6" />
+            <enum name="textMedium" value="7" />
+        </attr>
+        <attr name="shouldShowShimmer" format="boolean"/>
+        <attr name="pressedScale" format="float"/>
+    </declare-styleable>
+
+    <declare-styleable name="Ribbon">
+        <attr name="triangleColor" format="color"/>
+        <attr name="containerColor" format="color"/>
+        <attr name="containerStartColor" format="color"/>
+        <attr name="containerEndColor" format="color"/>
+        <attr name="textColor" format="color"/>
+        <attr name="text"/>
+        <attr name="gravity" format="enum">
+            <enum name="start" value="0" />
+            <enum name="end" value="1" />
+        </attr>
+        <attr name="textAppearance" />
+    </declare-styleable>
+
+    <declare-styleable name="LiquidRefreshLayout">
+        <attr name="backgroundColor"/>
+        <attr name="foregroundColor" />
+        <attr name="circleRadius" />
+        <attr name="icon" />
+    </declare-styleable>
+
+    <declare-styleable name="IndicatorView">
+        <attr name="indicator_checked_color" format="color" />
+        <attr name="indicator_default_color" format="color" />
+        <attr name="indicator_default_width" format="dimension" />
+        <attr name="indicator_selected_width" format="dimension" />
+        <attr name="indicator_slider_height" format="dimension" />
+        <attr name="indicator_gap" format="dimension" />
+        <attr name="rtl" format="boolean" />
+
+        <attr name="indicator_orientation" format="enum">
+            <enum name="horizontal" value="0" />
+            <enum name="vertical" value="1" />
+            <enum name="rtl" value="3"/>
+        </attr>
+
+        <attr name="indicator_slide_mode" format="enum">
+            <enum name="normal" value="0" />
+            <enum name="smooth" value="2" />
+            <enum name="worm" value="3" />
+            <enum name="scale" value="4" />
+            <enum name="color" value="5" />
+        </attr>
+
+        <attr name="indicator_style" format="enum">
+            <enum name="circle" value="0" />
+            <enum name="dash" value="2" />
+            <enum name="round_rect" value="4" />
+        </attr>
+
+    </declare-styleable>
+
+    <declare-styleable name="BoardingPagerView">
+
+        <attr name="indicator_style" />
+        <attr name="indicator_slide_mode" />
+        <attr name="indicator_orientation" />
+        <attr name="indicator_default_color" />
+        <attr name="indicator_checked_color" />
+        <attr name="indicator_default_width"/>
+        <attr name="indicator_selected_width"/>
+        <attr name="indicator_slider_height"/>
+        <attr name="indicator_gap" />
+        <attr name="rtl" />
+
+        <attr name="autoScrollInterval" format="integer" />
+        <attr name="circular" format="boolean" />
+        <attr name="canBackOnFirstPosition" format="boolean" />
+
+        <attr name="indicator_alignment" format="enum">
+            <enum name="Left" value="0" />
+            <enum name="Center" value="1" />
+            <enum name="Right" value="2" />
+        </attr>
+
+        <attr name="content_vertical_offset_percentage" format="float"/>
+        <attr name="content_horizontal_offset_percentage" format="float"/>
+
+    </declare-styleable>
+
+    <declare-styleable name="TextField">
+        <attr name="textInputStyleEnum" format="enum">
+            <enum name="labelInside" value="0" />
+            <enum name="flatStart" value="1" />
+            <enum name="flatEnd" value="2" />
+            <enum name="withoutLabel" value="3" />
+            <enum name="otp" value="4" />
+        </attr>
+        <attr name="fieldImeOptions" format="enum">
+            <enum name="next" value="0" />
+            <enum name="send" value="1" />
+            <enum name="search" value="2" />
+            <enum name="done" value="3" />
+        </attr>
+        <attr name="fieldInputType"/>
+        <attr name="fieldMaxLength"/>
+    </declare-styleable>
+
+    <declare-styleable name="SearchBar">
+        <attr name="closeIconVisible" format="boolean"/>
+
+        <attr name="fieldInputType"/>
+        <attr name="fieldMaxLength"/>
+        <attr name="startIcon"/>
+        <attr name="prefixText" format="string"/>
+        <attr name="placeholderTextList" format="reference"/>
+        <attr name="placeholderTextAppearance" format="reference"/>
+    </declare-styleable>
+
+    <!--Todo : Add Several Customization -->
+    <declare-styleable name="AlertBox">
+        <attr name="alertType" format="enum">
+            <enum name="success" value="0" />
+            <enum name="error" value="1" />
+            <enum name="warning" value="2" />
+            <enum name="info" value="3" />
+            <enum name="light" value="4" />
+        </attr>
+
+        <attr name="text"/>
+        <attr name="textAppearance"/>
+    </declare-styleable>
+
+    <declare-styleable name="OtpGroup">
+        <attr name="otpCount" format="integer"/>
+        <attr name="marginBetween" format="dimension"/>
+        <attr name="isError" format="boolean"/>
+        <attr name="animateError" format="boolean"/>
+        <attr name="vibrateOnError" format="boolean"/>
+    </declare-styleable>
+
+    <declare-styleable name="CountdownTextView">
+        <attr name="interval" format="integer" />
+        <attr name="remainingText" format="string" />
+        <attr name="format" format="enum">
+            <enum name="clock" value="0" />
+            <enum name="text" value="1" />
+        </attr>
+        <attr name="hourText" format="string" />
+        <attr name="minuteText" format="string" />
+        <attr name="secondText" format="string" />
+    </declare-styleable>
+
+    <declare-styleable name="ListItem">
+        <attr name="titleText"/>
+        <attr name="titleTextAppearance"/>
+        <attr name="titleTextColor"/>
+        <attr name="titleVisible"/>
+        <attr name="subTitleText"/>
+        <attr name="subtitleTextAppearance"/>
+        <attr name="subtitleTextColor"/>
+        <attr name="subtitleVisible"/>
+        <attr name="startIcon"/>"
+        <attr name="startIconTint"/>"
+        <attr name="startIconVisible"/>
+        <attr name="endIcon"/>
+        <attr name="endIconTint"/>
+        <attr name="endIconVisible"/>
+        <attr name="strokeWidth"/>
+        <attr name="strokeColor"/>
+        <attr name="cornerRadius"/>
+        <attr name="topLeftCornerRadius"/>
+        <attr name="topRightCornerRadius"/>
+        <attr name="bottomLeftCornerRadius"/>
+        <attr name="bottomRightCornerRadius"/>
+        <attr name="startIconSize"/>
+        <attr name="endIconSize"/>
+        <attr name="backgroundColor"/>
+        <attr name="cardElevation"/>
+        <attr name="startIconGravity"/>
+        <attr name="endIconGravity"/>
+    </declare-styleable>
+
+    <declare-styleable name="DoubleArcProgressIndicator">
+        <attr name="innerArcPadding" format="dimension"/>
+        <attr name="progressThickness" format="dimension"/>
+        <attr name="progressSize" format="dimension"/>
+        <attr name="rotateSpeed" format="float"/>
+        <attr name="arcSweepAngle" format="float"/>
+        <attr name="progressColor" format="color"/>
+    </declare-styleable>
+
+    <attr name="indicatorProgress" format="float" />
+    <attr name="maxIndicatorProgress" format="float" />
+    <attr name="indicatorStartColor" format="color" />
+    <attr name="indicatorEndColor" format="color" />
+    <attr name="trackColor" format="color" />
+    <attr name="trackThickness" format="dimension" />
+    <attr name="trackCornerRadius" format="dimension" />
+    <attr name="trackPadding" format="dimension"/>
+
+    <declare-styleable name="GradientLinearProgressBar">
+        <attr name="indicatorProgress" />
+        <attr name="maxIndicatorProgress" />
+        <attr name="indicatorStartColor" />
+        <attr name="indicatorEndColor" />
+        <attr name="trackColor" />
+        <attr name="trackThickness" />
+        <attr name="trackCornerRadius" />
+        <attr name="trackPadding" />
+        <attr name="shouldAnimate" />
+    </declare-styleable>
+
+    <declare-styleable name="GradientCircularProgressBar">
+        <attr name="indicatorProgress" />
+        <attr name="maxIndicatorProgress" />
+        <attr name="indicatorStartColor" />
+        <attr name="indicatorEndColor" />
+        <attr name="trackColor" />
+        <attr name="trackThickness" />
+        <attr name="trackCornerRadius" />
+        <attr name="trackPadding" />
+        <attr name="shouldAnimate" />
+    </declare-styleable>
+
+
+
+
+</resources>

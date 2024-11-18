@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!--Project-->
+    <string name="use_coupon">Pakai Kupon</string>
+    <string name="continue_payment">Lanjut Bayar</string>
+    <string name="see_coupon">Lihat Kupon</string>
+
+    <string name="ikupon_until">Hingga $s</string>
+    <string name="ikupon_expired_in">Berakhir $s hari lagi</string>
+    <string name="ikupon_pay_in">Bayar dalam $s jam</string>
+
+
+    <!--Library-->
+</resources>

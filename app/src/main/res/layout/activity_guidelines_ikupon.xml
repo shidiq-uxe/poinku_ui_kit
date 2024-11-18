@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".GuidelinesIkuponActivity">
+
+    <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/ablHeader"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:elevation="@dimen/xxs">
+
+        <com.google.android.material.appbar.MaterialToolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:title="I-Kupon Saya"
+            app:titleTextAppearance="@style/TextAppearance.Rubik.Semibold.H1"
+            app:menu="@menu/menu_i_kupon"/>
+
+        <com.google.android.material.divider.MaterialDivider
+            android:layout_width="wrap_content"
+            app:dividerColor="@color/black_20"
+            android:layout_height="@dimen/dimen_1"/>
+
+        <id.co.edtslib.uikit.poinku.searchbar.SearchBar
+            android:id="@+id/sbSearchCoupon"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:prefixText="Cari kupon"
+            app:placeholderTextList="@array/ikupon_placeholders"
+            android:layout_marginVertical="@dimen/xs"
+            android:layout_marginHorizontal="@dimen/s"/>
+
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rvIKupon"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingVertical="@dimen/xxxs"
+        android:paddingHorizontal="@dimen/dimen_10"
+        android:clipChildren="false"
+        android:clipToPadding="false"
+        app:spanCount="2"
+        app:layoutManager="androidx.recyclerview.widget.StaggeredGridLayoutManager"
+        app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior"
+        tools:listitem="@layout/item_grid_poinku_icoupon"/>
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

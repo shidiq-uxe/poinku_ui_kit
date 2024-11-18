@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!--Bottom Sheet-->
+    <style name="Widget.EDTS.UIKit.Poinku.BottomSheet.Modal" parent="Widget.Material3.BottomSheet.Modal">
+        <item name="backgroundTint">?colorSurface</item>
+        <item name="shapeAppearanceOverlay">@style/ShapeAppearance.EDTS.UIKit.Poinku.BottomSheet</item>
+    </style>
+
+    <!--Bottom Sheet Theme-->
+    <style name="ThemeOverlay.EDTS.UIKit.Poinku.BottomSheetDialog" parent="ThemeOverlay.Material3.BottomSheetDialog">
+        <item name="bottomSheetStyle">@style/Widget.EDTS.UIKit.Poinku.BottomSheet.Modal</item>
+    </style>
+</resources>
