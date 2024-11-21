@@ -29,7 +29,7 @@ abstract class BaseMultiTypeAdapter<T>(
 		viewTypeBindingsMap[viewType] = bind
 	}
 
-	override fun getItemId(position: Int) = position.hashCode().toLong()
+	override fun getItemId(position: Int) = position.toLong()
 
 	override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
 		val binding = viewTypeBindings[viewType]!!.invoke(LayoutInflater.from(parent.context), parent, false)

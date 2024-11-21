@@ -2,6 +2,7 @@ package id.co.edtslib.uikit.poinku.ribbon
 
 import android.graphics.Outline
 import android.graphics.Path
+import android.graphics.PathMeasure
 import android.os.Build
 import android.view.View
 import android.view.ViewOutlineProvider
@@ -15,12 +16,17 @@ class RibbonOutlineProvider(private val ribbon: Ribbon) : ViewOutlineProvider() 
             ribbon.drawEndContainer()
         }
 
-        val paddedPath = Path(path)
-
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
-            outline.setPath(paddedPath)
+            outline.setPath(path)
         } else {
-            outline.setConvexPath(paddedPath)
+            outline.setRoundRect(
+                0,
+                0,
+                ribbon.width,
+                ribbon.textContainerHeight.toInt(),
+                ribbon.cornerRadius
+            )
         }
     }
 }
+

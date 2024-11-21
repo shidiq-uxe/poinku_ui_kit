@@ -7,7 +7,9 @@ import android.os.VibrationEffect
 import android.os.Vibrator
 import android.os.VibratorManager
 import android.view.View
+import android.view.Window
 import android.view.WindowInsetsController
+import android.view.WindowManager
 import id.co.edtslib.uikit.poinku.R
 import id.co.edtslib.uikit.poinku.utils.hapticfeedback.HapticFeedback
 
@@ -48,5 +50,17 @@ fun Context?.vibratePhone(rule: HapticFeedback) {
         vibrator.vibrate(VibrationEffect.createOneShot(rule.duration, VibrationEffect.DEFAULT_AMPLITUDE))
     } else {
         vibrator.vibrate(200)
+    }
+}
+
+fun Window.setScreenBrightness(brightness: Float) {
+    attributes = attributes.apply {
+        screenBrightness = brightness
+    }
+}
+
+fun Window.resetScreenBrightness() {
+    attributes = attributes.apply {
+        screenBrightness = WindowManager.LayoutParams.BRIGHTNESS_OVERRIDE_NONE
     }
 }

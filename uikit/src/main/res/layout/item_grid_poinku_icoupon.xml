@@ -3,7 +3,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:clipChildren="false"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <id.co.edtslib.uikit.poinku.ribbon.Ribbon
@@ -124,6 +123,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="@dimen/xxs"
+                android:paddingHorizontal="@dimen/dimen_0"
                 android:text="@string/use_coupon"
                 android:maxLines="1"
                 android:ellipsize="end"

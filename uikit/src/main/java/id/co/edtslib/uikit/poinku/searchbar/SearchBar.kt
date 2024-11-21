@@ -3,10 +3,15 @@ package id.co.edtslib.uikit.poinku.searchbar
 import android.animation.AnimatorSet
 import android.animation.ObjectAnimator
 import android.content.Context
+import android.graphics.Color
+import android.graphics.Outline
+import android.graphics.drawable.ColorDrawable
 import android.os.Build
 import android.text.InputFilter
 import android.util.AttributeSet
+import android.util.Log
 import android.view.View
+import android.view.ViewOutlineProvider
 import android.view.animation.AlphaAnimation
 import android.view.animation.Animation
 import android.view.animation.AnimationSet
@@ -22,6 +27,7 @@ import id.co.edtslib.uikit.poinku.R
 import id.co.edtslib.uikit.poinku.databinding.SearchBarBinding
 import id.co.edtslib.uikit.poinku.utils.color
 import id.co.edtslib.uikit.poinku.utils.colorStateList
+import id.co.edtslib.uikit.poinku.utils.dp
 import id.co.edtslib.uikit.poinku.utils.drawable
 import id.co.edtslib.uikit.poinku.utils.fade
 import id.co.edtslib.uikit.poinku.utils.inflater
@@ -74,6 +80,18 @@ class SearchBar @JvmOverloads constructor(
             field = value
 
             editText.setText(value)
+        }
+
+    var searchBarType = SearchBarType.BORDER
+        set(value) {
+            field = value
+
+            if (value == SearchBarType.BORDER) {
+                binding.inputBackground.background = context.drawable(R.drawable.bg_search_bar_border_default)
+            } else {
+                binding.inputBackground.background = context.drawable(R.drawable.bg_search_bar_borderless)
+                elevation = 4.dp
+            }
         }
 
     var fieldMaxLength: Int? = null
@@ -323,17 +341,12 @@ class SearchBar @JvmOverloads constructor(
         onEditTextFocusChangeListener()
         onEditTextTextChangeListener()
 
+        outlineProvider = SearchBarOutlineProvider()
+        setShadowColor()
 
         endIconView.setOnClickListener {
             searchBarDelegate?.onCloseIconClicked(it)
         }
-
-        /*// Adjust the height to match 32dp based on DS
-        doOnLayout {
-            this.layoutParams = this.layoutParams?.apply {
-                this.height = resources.getDimensionPixelSize(R.dimen.l)
-            }
-        }*/
     }
 
     private fun initAttrs(attrs: AttributeSet?, defStyleAttr: Int) {
@@ -358,6 +371,8 @@ class SearchBar @JvmOverloads constructor(
                 if (itemsArrayId != 0) {
                     placeholderTexts = resources.getStringArray(itemsArrayId)
                 }
+
+                searchBarType = SearchBarType.values()[getInt(R.styleable.SearchBar_searchBarType, 0)]
 
                 recycle()
             }
@@ -474,6 +489,16 @@ class SearchBar @JvmOverloads constructor(
     }
 
     val placeholder = (textSwitcher.currentView as TextView).text
+
+    private fun setShadowColor() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
+            this.outlineSpotShadowColor = context.color(R.color.black_40)
+        }
+    }
+
+    enum class SearchBarType {
+        BORDERLESS, BORDER
+    }
 
     override fun onDetachedFromWindow() {
         super.onDetachedFromWindow()

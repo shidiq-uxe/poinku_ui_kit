@@ -8,7 +8,7 @@ import android.util.AttributeSet
 import android.view.View
 import id.co.edtslib.uikit.poinku.R
 import id.co.edtslib.uikit.poinku.utils.color
-import id.co.edtslib.uikit.poinku.utils.px
+import id.co.edtslib.uikit.poinku.utils.dp
 
 class DoubleArcProgressIndicator @JvmOverloads constructor(
     context: Context, attrs: AttributeSet? = null, defStyle: Int = 0
@@ -41,7 +41,7 @@ class DoubleArcProgressIndicator @JvmOverloads constructor(
             invalidate()
         }
 
-    var progressSize: Float = 50.px
+    var progressSize: Float = 50.dp
         set(value) {
             field = value
             requestLayout()

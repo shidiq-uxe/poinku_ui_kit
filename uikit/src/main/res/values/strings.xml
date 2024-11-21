@@ -2,13 +2,17 @@
 <resources>
     <!--Project-->
     <string name="use_coupon">Pakai Kupon</string>
+    <string name="use_i_kupon">Gunakan i-Kupon</string>
     <string name="continue_payment">Lanjut Bayar</string>
     <string name="see_coupon">Lihat Kupon</string>
+    <string name="copy_code">Salin Kode</string>
+    <string name="use_code_in">Gunakan Kode di Sini</string>
 
     <string name="ikupon_until">Hingga $s</string>
     <string name="ikupon_expired_in">Berakhir $s hari lagi</string>
     <string name="ikupon_pay_in">Bayar dalam $s jam</string>
 
-
+    <string name="coupon_description_title">Deskripsi Kupon</string>
+    <string name="coupon_description">Tunjukan %s di i-Kupon ini pada kasir Indomaret untuk melakukan Reedem Kupon</string>
     <!--Library-->
 </resources>

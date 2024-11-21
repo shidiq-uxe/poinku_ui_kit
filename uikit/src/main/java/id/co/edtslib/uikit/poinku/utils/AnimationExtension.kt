@@ -1,9 +1,14 @@
 package id.co.edtslib.uikit.poinku.utils
 
 import android.animation.ObjectAnimator
+import android.transition.AutoTransition
+import android.transition.Transition
+import android.transition.TransitionManager
 import android.view.View
 import android.view.ViewPropertyAnimator
 import android.view.animation.ScaleAnimation
+import androidx.core.transition.addListener
+import androidx.recyclerview.widget.RecyclerView
 
 fun View.scaleUpAnimation(duration: Long = 300, pivotX: Float = 0.5f, pivotY: Float = 0.5f) =  ScaleAnimation(
     0.9f, 1.0f, // Start and end values for the X axis scaling
@@ -90,4 +95,29 @@ fun View.fade(
         .setDuration(duration).also {
             it.start()
         }
+}
+
+// Todo : Workaround For another Transition
+enum class TransitionType {
+    Fade
+}
+
+fun RecyclerView.addViewTransition(
+    duration: Long = 200,
+    transitionType: TransitionType = TransitionType.Fade,
+    onAnimationStart: ((Transition) -> Unit) = {  },
+    onAnimationPause: ((Transition) -> Unit) = {  },
+    onAnimationEnd: ((Transition) -> Unit) = {  }
+): Transition {
+    return AutoTransition().apply {
+        this.duration = duration
+
+        this.addListener(
+            onStart = { onAnimationStart.invoke(it) },
+            onPause = { onAnimationPause.invoke(it) },
+            onEnd = { onAnimationEnd.invoke(it) }
+        )
+    }.also { transition ->
+        TransitionManager.beginDelayedTransition(this@addViewTransition, transition)
+    }
 }

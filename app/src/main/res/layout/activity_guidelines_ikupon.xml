@@ -6,13 +6,15 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/black_10"
     tools:context=".GuidelinesIkuponActivity">
 
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/ablHeader"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:elevation="@dimen/xxs">
+        android:background="@color/white"
+        app:elevation="@dimen/xxxs">
 
         <com.google.android.material.appbar.MaterialToolbar
             android:id="@+id/toolbar"
@@ -33,8 +35,11 @@
             android:layout_height="wrap_content"
             app:prefixText="Cari kupon"
             app:placeholderTextList="@array/ikupon_placeholders"
+            app:startIcon="@drawable/ic_search_16"
+            app:searchBarType="borderless"
             android:layout_marginVertical="@dimen/xs"
-            android:layout_marginHorizontal="@dimen/s"/>
+            android:layout_marginHorizontal="@dimen/s"
+            app:layout_scrollFlags="exitUntilCollapsed"/>
 
     </com.google.android.material.appbar.AppBarLayout>
 

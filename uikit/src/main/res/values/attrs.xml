@@ -209,6 +209,10 @@
         <attr name="prefixText" format="string"/>
         <attr name="placeholderTextList" format="reference"/>
         <attr name="placeholderTextAppearance" format="reference"/>
+        <attr name="searchBarType" format="enum">
+            <enum name="border" value="0" />
+            <enum name="borderless" value="1" />
+        </attr>
     </declare-styleable>
 
     <!--Todo : Add Several Customization -->

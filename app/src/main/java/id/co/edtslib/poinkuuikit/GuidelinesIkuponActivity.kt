@@ -6,6 +6,7 @@ import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.transition.AutoTransition
 import android.transition.TransitionManager
+import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.transition.addListener
 import androidx.core.view.ViewCompat
@@ -25,10 +26,12 @@ import id.co.edtslib.uikit.poinku.databinding.ItemGridPoinkuIcouponBinding
 import id.co.edtslib.uikit.poinku.databinding.ItemListPoinkuIcouponBinding
 import id.co.edtslib.uikit.poinku.ribbon.Ribbon
 import id.co.edtslib.uikit.poinku.searchbar.SearchBar
+import id.co.edtslib.uikit.poinku.utils.addViewTransition
 import id.co.edtslib.uikit.poinku.utils.dimen
-import id.co.edtslib.uikit.poinku.utils.px
+import id.co.edtslib.uikit.poinku.utils.dp
 import id.co.edtslib.uikit.poinku.utils.setLightStatusBar
 import id.co.edtslib.uikit.poinku.utils.viewBinding
+import id.co.edtslib.uikit.searchbar.SearchBarDelegate
 import id.co.edtslib.uikit.poinku.R as UIKitR
 
 class GuidelinesIkuponActivity : AppCompatActivity() {
@@ -36,10 +39,13 @@ class GuidelinesIkuponActivity : AppCompatActivity() {
     private val binding by viewBinding<ActivityGuidelinesIkuponBinding>()
 
     private val viewPool by lazy {
-        RecycledViewPool().apply {  setMaxRecycledViews(layoutViewType.ordinal, 10) }
+        RecycledViewPool().apply { setMaxRecycledViews(layoutViewType.ordinal, 2) }
     }
 
     private val randomVisibilityState = listOf(true, false)
+    private val iKuponDetailTray by lazy {
+        GuidelinesIKuponBottomTray(this)
+    }
 
     private val adapter = multiTypeAdapter(
         diffCallback = object : DiffUtil.ItemCallback<DummyItem>() {
@@ -70,22 +76,26 @@ class GuidelinesIkuponActivity : AppCompatActivity() {
                         this.chipCouponCategory.text = item.voucherType
 
                         ribbonCouponLeft.apply {
-                            this.elevation = 6.px
+                            this.elevation = 6.dp
                             this.ribbonText = "${item.availability.first}x"
                             this.isVisible = randomVisibilityState.random()
                         }.anchorToView(
                             rootParent = itemBinding.root,
                             targetView = itemBinding.cv,
-                            offsetY = 8.px.toInt()
+                            offsetY = 8.dp.toInt()
                         )
 
                         ribbonNew.apply {
-                            this.elevation = 6.px
+                            this.elevation = 6.dp
                         }.anchorToView(
                             rootParent = itemBinding.root,
                             targetView = itemBinding.tvExpiredIn,
                             verticalAlignment = Ribbon.VerticalAlignment.Top
                         )
+
+                        itemBinding.btnUseCoupon.setOnClickListener {
+                            iKuponDetailTray.apply { this.codeType = item.codeType }.show(item.childItems)
+                        }
                     }
                 }
             )
@@ -115,20 +125,24 @@ class GuidelinesIkuponActivity : AppCompatActivity() {
                         ribbonNew.isVisible = listOf(true, false).random()
 
                         ribbonCouponLeft.apply {
-                            this.elevation = 6.px
+                            this.elevation = 6.dp
                         }.anchorToView(
                             rootParent = itemBinding.root,
                             targetView = itemBinding.cv,
-                            offsetY = 8.px.toInt()
+                            offsetY = 8.dp.toInt()
                         )
 
                         ribbonNew.apply {
-                            this.elevation = 6.px
+                            this.elevation = 6.dp
                         }.anchorToView(
                             rootParent = itemBinding.root,
                             targetView = itemBinding.tvExpiredIn,
                             verticalAlignment = Ribbon.VerticalAlignment.Top
                         )
+
+                        itemBinding.btnUseCoupon.setOnClickListener {
+                            iKuponDetailTray.apply { this.codeType = item.codeType }.show(item.childItems)
+                        }
                     }
                 }
             )
@@ -154,14 +168,18 @@ class GuidelinesIkuponActivity : AppCompatActivity() {
                         ribbonNew.isVisible = listOf(true, false).random()
 
                         ribbonNew.apply {
-                            this.elevation = 6.px
+                            this.elevation = 6.dp
                             this.ribbonText = "Baru!"
                             this.textAppearanceRes = UIKitR.style.TextAppearance_Rubik_Semibold_H4
                         }.anchorToView(
                             rootParent = itemBinding.root,
                             targetView = itemBinding.cv,
-                            offsetY = 8.px.toInt()
+                            offsetY = 8.dp.toInt()
                         )
+
+                        itemBinding.btnUseCoupon.setOnClickListener {
+                            iKuponDetailTray.apply { this.codeType = item.codeType }.show(item.childItems)
+                        }
                     }
                 }
             )
@@ -169,17 +187,30 @@ class GuidelinesIkuponActivity : AppCompatActivity() {
         onViewDetachedFromWindow = { holder ->
             holder.itemView.clearAnimation()
         }
-    ).apply { items = List(18) {
+    ).apply { items = List(12) {
         DummyItem(
             image = images.random(),
             title = titles.random(),
             availability = availabilities.random(),
             voucherType = voucherType.random(),
+            codeType = codeType.random(),
             point = (1..1000).random(),
-            ribbonVisibility = Pair(randomVisibilityState.random(), randomVisibilityState.random())
+            ribbonVisibility = Pair(randomVisibilityState.random(), randomVisibilityState.random()),
+            childItems = List((1..10).random()) {
+                DummyItem.DummyChildClass(
+                    couponImage = images.random(),
+                    couponName = titles.random(),
+                    code = List(16) { (('A'..'Z') + ('0'..'9')).random() }.joinToString("")
+                )
+            }
         )
     } }
 
+    private val codeType get() = listOf(
+        GuidelinesIKuponBottomTray.CodeType.Barcode,
+        GuidelinesIKuponBottomTray.CodeType.QR,
+        GuidelinesIKuponBottomTray.CodeType.Code
+    )
 
     private val titles get() = listOf(
         "Voucher Belanja Elektronik Rp100.000" ,
@@ -201,37 +232,22 @@ class GuidelinesIkuponActivity : AppCompatActivity() {
     )
 
     private val images get() = listOf(
-        "https://s3-alpha-sig.figma.com/img/6c2f/36e8/ffcf10f6d9edb5dcb7fe13091b83a4ad?Expires=1731283200&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=gka7TYPhziv1v6edhrOuZ9T3LVhZ7KO019e7bosuWR3kCgUp45hVISV1wV0KDIuy88UgGNtNIq3nBM8MIdmMYJPNBq80pw8brqkEcu~ij6W1aounkuUQo~PxMhVgWp4vs5uEmD4dS92UfG~6sYYfI8SIKFaB55Ms~TXfHZqqSGrYB~qfew1B8XYd0odkzA49OSBhvSYrY60pzE~feVT~gc0aA6pLEDigliJY5jplGsedWngcknpqgdh8FI3DTK542k9MWpr4lpF3pRtPlLZH~gczdjRoQ3~KxjkgryN1RLbiUahtDnC2W8703IroPoOmbiMAu19I9aRAv62FOGbzIg__",
-        "https://s3-alpha-sig.figma.com/img/5ab7/3d0f/f2c98baca9fe6fc7423e3a62fde5a913?Expires=1731283200&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=Jzh14WhMT59xtIezfxJ22y5IpTnQWjePx81ciFsT~HpN1O~8PlqhRsXVNzymogZjXz-4Ka9c5kShqZITG8PlVLOCMjvoU~Hbj2vH~2LnXo4e8d5U6MG4liORNBYVyNSAEcmEv3hpY1Ih8vr3aE0lI~6Fj5cOlQUkflTj04LNgeg1HCcLegebXKg0I5ri7YdWD5OQSFc6xxZv4GzcrPrtMFfyLSeyoyC0RniLkw4L3Jb~WRqnRuYo1XamTnd12ra8UdvAC85W4pstRYAN1AxayrELgOZtXQvBG70vm7tO8vyzpU70pBKFtYdsYhrICsQ7hAUQqpuqBO4Wm82MQOobbw__",
-        "https://s3-alpha-sig.figma.com/img/f08e/13c5/34173b537edfebe07ce808f34503dad7?Expires=1731283200&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=otMx7qfesojwgs2TZg~Bi6ktxPThnoeaJyJIhSfZ6WgkRzkzCukc67La1eCJxK~4qzKFG6rtncRhY-5UvXZqdkiOIfV66mTeEgfr185qnKoZHbmgOpIgvEbl~8MOKrWpUhY-WEyzl9Hx0agE3X85Xu3HZf2QJqg9hfmfdlqgxnWAzL~q-Q1vQb3Zfp9ttWVFL7StDYpFxVgs7ZIaQnoQgyL0lY1TJqky6M2EmnNGyXRyetIpuYhKRkj3lu1BCn379cD-8lks~bPh50vbTAvSiWDU7NbafqNvGGmy9WqLxwZ-zWRDia8OOddfQ4Xi~x3KSN5LKKBgdRVNcHHMwoKekg__",
-        "https://s3-alpha-sig.figma.com/img/1750/330d/6648b7b26d65723688e8afa3d104153e?Expires=1731283200&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=Mgn81C~Duyy8qwjQZVuzP8D9hfS3cSHqO8LfkGJZ0~g0yp~KVmBuTc5nZvd6OCrxPXFU0ywh-S8Zb9-zV4bdbEz39Von~GzrzVd5mOBSKPFg57FacR8Gd8FlQDyZhPGna6lGBZ76NzWU4g1zU2R6d6T2zJ8~oV6dPSRFc9vl7Kz67mHY3UmMq606MydKbe~4X0hyQTDMum1QIwumMx8KcPx9JOYUOqf9YX~aTkiPuzFB0A9I3KO87nuw5IyrPar0jOXOD~tpoC~IEx3xBQXCpg1rQA-phT4zIAVCuX~A-w2G9CZgh5QXg~VqTG7gc8aSFbihLYEr0-nJfTi4bEyk2Q__"
+        "https://picsum.photos/270",
+        "https://picsum.photos/280",
+        "https://picsum.photos/290"
     )
 
     private var layoutViewType = LayoutViewType.GRID_2
         set(value) {
             field = value
 
-            val transition = AutoTransition().apply {
-                duration = 200
-
-                addListener(
-                    onStart = { /* Todo : Disable Menu (Action ViewType) */ },
-                    onEnd = { /* Todo : Disable Menu (Action ViewType) */ }
-                )
-            }
-
-            TransitionManager.beginDelayedTransition(binding.rvIKupon, transition)
+            binding.rvIKupon.addViewTransition()
 
             binding.rvIKupon.layoutManager = when(value) {
                 LayoutViewType.GRID_2 -> StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL)
                 LayoutViewType.GRID_3 -> StaggeredGridLayoutManager(3, StaggeredGridLayoutManager.VERTICAL)
                 LayoutViewType.LINEAR -> LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
             }
-
-            // Remove the current item decoration if it exists
-
-
-            // Create and add the new item decoration
         }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -270,6 +286,17 @@ class GuidelinesIkuponActivity : AppCompatActivity() {
 
     private fun setupSearchBar() {
         binding.sbSearchCoupon.placeholderAnimationType = SearchBar.PlaceholderAnimationType.TypeWriterWithPrefix
+        binding.sbSearchCoupon.searchBarDelegate = object : SearchBarDelegate {
+            override fun onCloseIconClicked(view: View) {
+                binding.sbSearchCoupon.text = ""
+            }
+
+            override fun onFocusChange(view: View, hasFocus: Boolean) {}
+
+            override fun onTextChange(text: String) {}
+        }
+
+        binding.sbSearchCoupon.searchBarType = SearchBar.SearchBarType.BORDERLESS
     }
 
     private fun setupRecyclerView() {
@@ -292,6 +319,14 @@ class GuidelinesIkuponActivity : AppCompatActivity() {
         val availability: Pair<Int, Int>,
         val voucherType: String,
         val point: Int,
-        val ribbonVisibility: Pair<Boolean, Boolean>
-    )
+        val codeType: GuidelinesIKuponBottomTray.CodeType,
+        val ribbonVisibility: Pair<Boolean, Boolean>,
+        val childItems: List<DummyChildClass>
+    ) {
+        data class DummyChildClass(
+            val couponName: String,
+            val code: String,
+            val couponImage: Any,
+        )
+    }
 }

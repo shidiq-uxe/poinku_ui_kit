@@ -20,7 +20,8 @@
         android:id="@+id/cv"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="@dimen/xxs"
+        android:layout_marginVertical="@dimen/dimen_6"
+        android:layout_marginHorizontal="@dimen/xxs"
         app:shapeAppearanceOverlay="@style/ShapeAppearance.EDTS.UIKit.Poinku.MediumComponent"
         app:strokeWidth="@dimen/dimen_0"
         app:cardElevation="@dimen/xxxs">

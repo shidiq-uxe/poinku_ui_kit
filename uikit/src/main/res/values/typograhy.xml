@@ -16,6 +16,13 @@
         <item name="lineHeight">@dimen/dimen_26</item>
     </style>
 
+    <style name="TextAppearance.Rubik.Semibold.D3" parent="Base.TextAppearance.AppCompat">
+        <item name="fontFamily">@font/rubik_semibold</item>
+        <item name="android:fontFamily">@font/rubik_semibold</item>
+        <item name="android:textSize">@dimen/d3_text_size</item>
+        <item name="lineHeight">@dimen/m1</item>
+    </style>
+
     <style name="TextAppearance.Rubik.Semibold.H1" parent="Base.TextAppearance.AppCompat">
         <item name="fontFamily">@font/rubik_semibold</item>
         <item name="android:fontFamily">@font/rubik_semibold</item>
@@ -79,6 +86,13 @@
         <item name="android:fontFamily">@font/rubik</item>
         <item name="android:textSize">@dimen/b2_text_size</item>
         <item name="lineHeight">@dimen/dimen_21</item>
+    </style>
+
+    <style name="TextAppearance.Rubik.Regular.P2" parent="Base.TextAppearance.AppCompat">
+        <item name="fontFamily">@font/rubik</item>
+        <item name="android:fontFamily">@font/rubik</item>
+        <item name="android:textSize">@dimen/b2_text_size</item>
+        <item name="lineHeight">@dimen/dimen_18</item>
     </style>
 
     <!--Other-->

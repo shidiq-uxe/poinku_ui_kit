@@ -11,17 +11,20 @@ import android.graphics.RectF
 import android.graphics.Shader
 import android.graphics.Typeface
 import android.util.AttributeSet
+import android.util.Log
 import android.view.View
 import android.view.ViewGroup
 import androidx.annotation.ColorInt
 import androidx.annotation.Dimension
 import androidx.annotation.StyleRes
+import androidx.core.content.res.use
 import androidx.core.view.doOnLayout
 import id.co.edtslib.uikit.poinku.R
 import id.co.edtslib.uikit.poinku.utils.color
 import id.co.edtslib.uikit.poinku.utils.dimen
 import id.co.edtslib.uikit.poinku.utils.font
-import id.co.edtslib.uikit.poinku.utils.px
+import id.co.edtslib.uikit.poinku.utils.dp
+import id.co.edtslib.uikit.poinku.utils.sp
 
 class Ribbon @JvmOverloads constructor(
     context: Context,
@@ -44,18 +47,22 @@ class Ribbon @JvmOverloads constructor(
         }
 
     @ColorInt
-    var containerEndColor: Int = Color.TRANSPARENT
+    var containerStartColor: Int = Color.TRANSPARENT
         set(value) {
             field = value
+            updateGradientShader()
             invalidate()
         }
 
     @ColorInt
-    var containerStartColor: Int = Color.TRANSPARENT
+    var containerEndColor: Int = Color.TRANSPARENT
         set(value) {
             field = value
+            updateGradientShader()
             invalidate()
         }
+
+    private var gradientShader: Shader? = null
 
     @ColorInt
     var textColor = context.color(R.color.white)
@@ -77,7 +84,7 @@ class Ribbon @JvmOverloads constructor(
     var cornerRadius: Float = context.dimen(R.dimen.xxxs)
 
     @Dimension
-    var textVerticalPadding = context.dimen(R.dimen.dimen_2)
+    var textVerticalPadding = context.dimen(R.dimen.dimen_0)
     @Dimension
     var textHorizontalPadding = context.dimen(R.dimen.xxxs)
 
@@ -92,15 +99,17 @@ class Ribbon @JvmOverloads constructor(
     private val trianglePaint = Paint().apply {
         color = triangleColor
         style = Paint.Style.FILL
+        flags = Paint.ANTI_ALIAS_FLAG or Paint.FILTER_BITMAP_FLAG
     }
 
     private val containerPaint = Paint().apply {
         style = Paint.Style.FILL
+        flags = Paint.ANTI_ALIAS_FLAG or Paint.FILTER_BITMAP_FLAG
     }
 
     private val textPaint = Paint().apply {
         color = textColor
-        textSize = 14.px
+        textSize = 14.dp
         textAlign = Paint.Align.CENTER
     }
 
@@ -109,26 +118,27 @@ class Ribbon @JvmOverloads constructor(
         END
     }
 
-    var ribbonText: String? = null
+    var ribbonText: String? = ""
         set(value) {
             field = value
+            updateTextMeasurements()
             requestLayout()
-            invalidate()
         }
+
+    private var textWidth: Float = 0f
+    private var textHeight: Float = 0f
+    private var textLineHeight: Float = 0f
 
     var triangleWidth = 6f * resources.displayMetrics.density // Widiuth of the triangle
         private set
     var triangleHeight = 8f * resources.displayMetrics.density // Height of the triangle
         private set
-    var textContainerHeight = textHeight + textVerticalPadding
+    var textContainerHeight = textWidth + textVerticalPadding
         private set
 
     private val containerPath = Path()
     private val trianglePath = Path()
     private val rectF = RectF()
-
-    private val textWidth get() = textPaint.measureText(ribbonText) + textHorizontalPadding.px
-    private val textHeight get() = textPaint.fontMetrics.descent - textPaint.fontMetrics.ascent
 
     init {
         context.theme.obtainStyledAttributes(attrs, R.styleable.Ribbon, 0, 0).use {
@@ -153,7 +163,7 @@ class Ribbon @JvmOverloads constructor(
 
     override fun onMeasure(widthMeasureSpec: Int, heightMeasureSpec: Int) {
         val totalWidth = textWidth
-        val totalHeight = triangleWidth + textContainerHeight + 2.px
+        val totalHeight = triangleWidth + textContainerHeight + 2.dp
 
         setMeasuredDimension(
             resolveSize(totalWidth.toInt(), widthMeasureSpec),
@@ -161,12 +171,19 @@ class Ribbon @JvmOverloads constructor(
         )
     }
 
+    override fun onSizeChanged(w: Int, h: Int, oldw: Int, oldh: Int) {
+        super.onSizeChanged(w, h, oldw, oldh)
+        updateGradientShader()
+    }
+
     override fun onDraw(canvas: Canvas) {
         super.onDraw(canvas)
 
+        canvas.save()
         drawContainer(canvas)
         drawText(canvas)
         drawTriangle(canvas)
+        canvas.restore()
     }
 
     private fun drawText(canvas: Canvas) {
@@ -180,14 +197,10 @@ class Ribbon @JvmOverloads constructor(
     private fun drawContainer(canvas: Canvas) {
         val containerPath = if (gravity == Gravity.START) drawStartContainer()  else drawEndContainer()
 
-        if (containerStartColor != Color.TRANSPARENT && containerEndColor != Color.TRANSPARENT) {
-            containerPaint.shader = LinearGradient(
-                0f, 0f,
-                width.toFloat(), 0f,
-                containerStartColor, containerEndColor,
-                Shader.TileMode.CLAMP
-            )
+        if (gradientShader != null) {
+            containerPaint.shader = gradientShader
         } else {
+            containerPaint.shader = null
             containerPaint.color = containerColor
         }
 
@@ -195,6 +208,7 @@ class Ribbon @JvmOverloads constructor(
     }
 
     fun drawStartContainer(): Path {
+        containerPath.reset()
         return containerPath.apply {
             moveTo(0f, cornerRadius)
             lineTo(0f, textContainerHeight)
@@ -216,6 +230,7 @@ class Ribbon @JvmOverloads constructor(
     }
 
     fun drawEndContainer(): Path {
+        containerPath.reset()
         return containerPath.apply {
             moveTo(0f, cornerRadius)
             lineTo(0f, textContainerHeight)
@@ -245,6 +260,7 @@ class Ribbon @JvmOverloads constructor(
     }
 
     private fun drawStartTriangle(): Path {
+        trianglePath.reset()
         return trianglePath.apply {
             moveTo(0f, textContainerHeight)
             lineTo(triangleWidth, textContainerHeight)
@@ -254,6 +270,7 @@ class Ribbon @JvmOverloads constructor(
     }
 
     private fun drawEndTriangle(): Path {
+        trianglePath.reset()
         return trianglePath.apply {
             moveTo(textWidth, textContainerHeight)
             lineTo(textWidth - triangleWidth, textContainerHeight)
@@ -262,7 +279,7 @@ class Ribbon @JvmOverloads constructor(
         }
     }
 
-    @SuppressLint("CustomViewStyleable")
+    @SuppressLint("CustomViewStyleable", "ResourceType")
     private fun applyTextAppearance(context: Context, resId: Int) {
         context.obtainStyledAttributes(resId, androidx.appcompat.R.styleable.TextAppearance).use { typedArray ->
             textPaint.textSize = typedArray.getDimension(androidx.appcompat.R.styleable.TextAppearance_android_textSize, textPaint.textSize)
@@ -279,6 +296,12 @@ class Ribbon @JvmOverloads constructor(
             if (typedArray.hasValue(androidx.appcompat.R.styleable.TextAppearance_android_textStyle)) {
                 val textStyle = typedArray.getInt(androidx.appcompat.R.styleable.TextAppearance_android_textStyle, Typeface.NORMAL)
                 textPaint.typeface = Typeface.create(textPaint.typeface, textStyle)
+            }
+        }
+
+        context.obtainStyledAttributes(resId, intArrayOf(androidx.appcompat.R.attr.lineHeight, android.R.attr.lineHeight)).use { lineHeightArray ->
+            if (lineHeightArray.hasValue(0) || lineHeightArray.hasValue(1)) {
+                textLineHeight = lineHeightArray.getDimension(0, 0f)
             }
         }
     }
@@ -334,5 +357,25 @@ class Ribbon @JvmOverloads constructor(
         if (rootParent.indexOfChild(this) == -1) {
             rootParent.addView(this)
         }
+    }
+
+    private fun updateGradientShader() {
+        gradientShader = if (containerStartColor != Color.TRANSPARENT && containerEndColor != Color.TRANSPARENT) {
+            LinearGradient(
+                0f, 0f,
+                width.toFloat(), 0f,
+                containerStartColor, containerEndColor,
+                Shader.TileMode.CLAMP
+            )
+        } else {
+            null
+        }
+    }
+
+    @SuppressLint("ResourceType")
+    private fun updateTextMeasurements() {
+        textWidth = textPaint.measureText(ribbonText) + textHorizontalPadding.dp
+        textHeight = textPaint.fontMetrics.descent - textPaint.fontMetrics.ascent
+        textContainerHeight = textHeight + textLineHeight.sp + textVerticalPadding
     }
 }

@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:clipChildren="false">
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rvCoupon"
+                android:layout_width="@dimen/dimen_0"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/s"
+                android:paddingHorizontal="@dimen/xs"
+                android:clipToPadding="false"
+                android:orientation="horizontal"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                tools:itemCount="3"
+                tools:listitem="@layout/item_icoupon_barcode"/>
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/tvDescriptionTitle"
+                android:layout_width="@dimen/dimen_0"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/s"
+                android:layout_marginHorizontal="@dimen/s"
+                android:text="@string/coupon_description_title"
+                android:textColor="@color/black_60"
+                android:textAppearance="@style/TextAppearance.Rubik.Semibold.H2"
+                app:drawableStartCompat="@drawable/ic_cash_16"
+                android:drawablePadding="@dimen/xxs"
+                android:gravity="center_vertical"
+                app:layout_constraintTop_toBottomOf="@id/rvCoupon"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"/>
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/tvDescription"
+                android:layout_width="@dimen/dimen_0"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/xxs"
+                android:layout_marginStart="@dimen/dimen_48"
+                android:layout_marginEnd="@dimen/s"
+                android:layout_marginBottom="@dimen/s"
+                android:textColor="@color/black_50"
+                android:textAppearance="@style/TextAppearance.Rubik.Regular.P2"
+                app:layout_constraintTop_toBottomOf="@id/tvDescriptionTitle"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintVertical_bias="0.0"
+                tools:text="@tools:sample/lorem/random"
+                tools:maxLines="10"/>
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/tvDescriptionInfo"
+                android:layout_width="@dimen/dimen_0"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/s"
+                android:layout_marginHorizontal="@dimen/s"
+                android:layout_marginBottom="@dimen/s"
+                android:text="@string/coupon_description"
+                android:textColor="@color/black_50"
+                android:textAppearance="@style/TextAppearance.Rubik.Regular.P2"
+                app:drawableStartCompat="@drawable/ic_info_16"
+                android:drawablePadding="@dimen/xxs"
+                android:gravity="center_vertical"
+                app:layout_constraintVertical_bias="0.0"
+                app:layout_constraintTop_toBottomOf="@id/tvDescription"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"/>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.core.widget.NestedScrollView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -74,7 +74,7 @@
         <item name="backgroundTint">@color/transparent</item>
         <item name="iconPadding">@dimen/xxxs</item>
         <item name="iconTint">@color/slr_button_outlined_text</item>
-        <item name="rippleColor">@color/slr_button_outlined_ripple</item>
+        <item name="rippleColor">@color/slr_button_text_ripple</item>
         <item name="shapeAppearance">@style/ShapeAppearance.EDTS.UIKit.Poinku.Button</item>
     </style>
 

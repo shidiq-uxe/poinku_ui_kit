@@ -15,7 +15,7 @@ afterEvaluate {
                 from(components["release"])
                 groupId = "id.co.edtslib.uikit.poinku"
                 artifactId = "poinkuuikit"
-                version = "0.1.0"
+                version = "0.1.8"
 
                 pom {
                     name.set("EDTS UI Kit")
