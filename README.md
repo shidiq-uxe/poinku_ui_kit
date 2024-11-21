@@ -17,7 +17,7 @@ dependencies {
 ## Table of Contents
 1. [Typography & TextView](docs/Typography.md)
 2. [Button](docs/Button.md)
-3. [Ribbon](docs/Button.md)
+3. [Ribbon](docs/Ribbon.md)
 
 ## Basic setup and initialization :
 
