@@ -18,8 +18,11 @@ dependencies {
 1. [Typography & TextView](docs/Typography.md)
 2. [Button](docs/Button.md)
 3. [Ribbon](docs/Ribbon.md)
-3. [AnimationWrapperAdapter](docs/AnimationWrapperAdapter.md)
-3. [Interpolator](docs/Interpolator.md)
+4. [AnimationWrapperAdapter](docs/AnimationWrapperAdapter.md)
+5. [Interpolator](docs/Interpolator.md)
+
+## Pages Reference
+1. [I-Kupon Page](docs/pages/IkuponPage.md)
 
 ## Basic setup and initialization :
 
