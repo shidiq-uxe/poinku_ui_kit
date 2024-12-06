@@ -6,10 +6,12 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityOptionsCompat
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
-import id.co.edtslib.poinkuuikit.databinding.ActivityGuidelinesIkuponBinding
 import id.co.edtslib.poinkuuikit.databinding.ActivityMainBinding
 import id.co.edtslib.poinkuuikit.databinding.ItemGuidelinesParentBinding
-import id.co.edtslib.uikit.poinku.adapter.BaseAdapter
+import id.co.edtslib.poinkuuikit.ikupon_guidelines.GuidelinesHomeCouponActivity
+import id.co.edtslib.poinkuuikit.ikupon_guidelines.GuidelinesIkuponActivity
+import id.co.edtslib.uikit.poinku.adapter.SingleItemViewTypeAdapter
+import id.co.edtslib.uikit.poinku.adapter.singleItemViewTypeAdapter
 import id.co.edtslib.uikit.poinku.utils.setLightStatusBar
 import id.co.edtslib.uikit.poinku.utils.viewBinding
 
@@ -40,22 +42,17 @@ class MainActivity : AppCompatActivity() {
     private fun bindItemMenu() {
         val items = resources.getStringArray(R.array.array_guidelines_title).toList()
 
-        binding.rvItemMenu.adapter = BaseAdapter.adapterOf<String, ItemGuidelinesParentBinding>(
-            register = BaseAdapter.Register(
-                onBindHolder = { position, item, binding, _ ->
-                    binding.tvDesignComponentTitle.transitionName = "shared_title_$position"
-
-                    binding.tvDesignComponentTitle.text = item
-                }
-            ),
-            diff = BaseAdapter.Diff(
+        binding.rvItemMenu.adapter = singleItemViewTypeAdapter<String, ItemGuidelinesParentBinding>(
+            diff = SingleItemViewTypeAdapter.Diff(
                 areItemsTheSame = { old, new -> old == new },
                 areContentsTheSame = { old, new -> old == new }
             ),
-            itemList = items
-        ).also { adapter ->
-
-            adapter.setOnItemClickListener { binding, item, position ->
+            onBindViewHolder = { position, item, binding ->
+                binding.tvDesignComponentTitle.text = item
+                ViewCompat.setTransitionName(binding.tvDesignComponentTitle, "title_$position")
+            },
+            itemList = items,
+            onItemClick = { binding, item, position ->
                 startActivity(
                     when(position) {
                         0 -> Intent(this, GuidelinesTypographyActivity::class.java)
@@ -63,11 +60,12 @@ class MainActivity : AppCompatActivity() {
                         2 -> Intent(this, GuidelinesColorsActivity::class.java)
                         3 -> Intent(this, GuidelinesProgressActivity::class.java)
                         4 -> Intent(this, GuidelinesIkuponActivity::class.java)
+                        5 -> Intent(this, GuidelinesHomeCouponActivity::class.java)
                         else -> Intent(this, WIPActivity::class.java)
                     },
                     binding.sharedElementOptions
                 )
             }
-        }
+        )
     }
 }

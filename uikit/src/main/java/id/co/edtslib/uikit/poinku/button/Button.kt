@@ -3,6 +3,7 @@ package id.co.edtslib.uikit.poinku.button
 import android.content.Context
 import android.util.AttributeSet
 import android.view.MotionEvent
+import androidx.core.content.res.use
 import androidx.core.view.doOnLayout
 import com.facebook.shimmer.ShimmerFrameLayout
 import com.google.android.material.button.MaterialButton

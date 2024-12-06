@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/tvTitle"
+        android:layout_width="@dimen/dimen_0"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/s"
+        android:layout_marginStart="@dimen/s"
+        android:layout_marginEnd="@dimen/xxs"
+        android:textAppearance="@style/TextAppearance.Rubik.Semibold.H3"
+        android:textColor="@color/black_70"
+        android:maxLines="1"
+        android:ellipsize="end"
+        app:layout_constraintHorizontal_chainStyle="packed"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/tvSeeAll"
+        tools:text="End Year Coupon Recommendation"/>
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/tvSeeAll"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/m2"
+        android:layout_marginEnd="@dimen/s"
+        android:text="@string/see_all"
+        android:textAppearance="@style/TextAppearance.Rubik.Regular.B3"
+        android:textColor="@color/primary_30"
+        android:maxLines="1"
+        android:ellipsize="end"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toEndOf="@id/tvTitle"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/tvDescription"
+        android:layout_width="@dimen/dimen_0"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/xxxs"
+        android:layout_marginStart="@dimen/s"
+        android:layout_marginEnd="@dimen/xxs"
+        android:textAppearance="@style/TextAppearance.Rubik.Regular.B3"
+        android:textColor="@color/black_50"
+        android:maxLines="1"
+        android:ellipsize="end"
+        app:layout_constraintHorizontal_chainStyle="packed"
+        app:layout_constraintTop_toBottomOf="@id/tvTitle"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/tvSeeAll"
+        tools:text="Redeem your coupon here"/>
+
+    <id.co.edtslib.uikit.poinku.overlay.ImageParallaxOverlayLayout
+        android:id="@+id/carouselOverlay"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:overlayType="backgroundOnly"
+        app:layout_constraintTop_toBottomOf="@id/tvDescription">
+
+        <id.co.edtslib.poinkuuikit.ikupon_guidelines.component.ProductHorizontalCarousel
+            android:id="@+id/horizontalCarousel"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:paddingVertical="@dimen/xxs"
+            android:clipToPadding="false"
+            android:clipChildren="false"
+            tools:listitem="@layout/item_grid_poinku_icoupon"/>
+
+    </id.co.edtslib.uikit.poinku.overlay.ImageParallaxOverlayLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

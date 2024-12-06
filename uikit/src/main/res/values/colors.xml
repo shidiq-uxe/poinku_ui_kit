@@ -33,7 +33,7 @@
 
     <!--Support - Alert-->
     <color name="alert_primary">@color/red_30</color>
-    <color name="alert_background">@color/red_10</color>
+    <color name="alert_error">@color/red_10</color>
     <color name="alert_border">@color/red_30</color>
     <color name="alert_link">#EFF5FD</color>
 
@@ -41,6 +41,7 @@
     <color name="warning_primary">#FF7D1D</color>
     <color name="warning_background">#FFF0E6</color>
     <color name="warning_border">#FF7D1D</color>
+    <color name="warning_secondary_background">#FDF0DB</color>
 
     <!--Support - Success-->
     <color name="success_primary">#8FC742</color>

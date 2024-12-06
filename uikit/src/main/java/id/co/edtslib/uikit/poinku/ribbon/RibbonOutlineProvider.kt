@@ -19,13 +19,17 @@ class RibbonOutlineProvider(private val ribbon: Ribbon) : ViewOutlineProvider() 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
             outline.setPath(path)
         } else {
-            outline.setRoundRect(
-                0,
-                0,
-                ribbon.width,
-                ribbon.textContainerHeight.toInt(),
-                ribbon.cornerRadius
-            )
+            try {
+                outline.setConvexPath(path)
+            } catch (e: Exception) {
+                outline.setRoundRect(
+                    0,
+                    0,
+                    ribbon.width,
+                    ribbon.textContainerHeight.toInt(),
+                    ribbon.cornerRadius
+                )
+            }
         }
     }
 }

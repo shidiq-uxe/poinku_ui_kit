@@ -7,7 +7,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/black_10"
-    tools:context=".GuidelinesIkuponActivity">
+    tools:context=".ikupon_guidelines.GuidelinesIkuponActivity">
 
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/ablHeader"

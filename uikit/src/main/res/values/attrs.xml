@@ -321,7 +321,23 @@
         <attr name="shouldAnimate" />
     </declare-styleable>
 
+    <declare-styleable name="HorizontalCarouselRecyclerView">
+        <attr name="itemSpacing" format="dimension" />
+    </declare-styleable>
 
-
+    <declare-styleable name="ImageOverlayLayout">
+        <attr name="drawableWidth" format="dimension" />
+        <attr name="overlayType" format="enum" >
+            <enum name="illustrationOnly" value="0" />
+            <enum name="illustrationWithBackground" value="1" />
+            <enum name="backgroundOnly" value="2" />
+        </attr>
+        <attr name="gradientColor" format="enum">
+            <enum name="blue" value="0"/>
+            <enum name="yellow" value="1"/>
+            <enum name="black" value="2"/>
+            <enum name="red" value="3"/>
+        </attr>
+    </declare-styleable>
 
 </resources>

@@ -4,9 +4,13 @@ import android.content.Context
 import android.content.res.ColorStateList
 import android.content.res.Resources
 import android.graphics.Color
+import android.graphics.LinearGradient
+import android.graphics.Shader
 import android.graphics.Typeface
 import android.graphics.drawable.ColorDrawable
 import android.graphics.drawable.Drawable
+import android.graphics.drawable.ShapeDrawable
+import android.graphics.drawable.shapes.RectShape
 import android.os.Build
 import android.text.SpannedString
 import android.text.TextUtils
@@ -120,6 +124,28 @@ fun Fragment.getText(id: Int, vararg args: Any): CharSequence {
         HtmlCompat.toHtml(resource, HtmlCompat.TO_HTML_PARAGRAPH_LINES_CONSECUTIVE)
     val formattedHtml = String.format(htmlResource, *escapedArgs)
     return HtmlCompat.fromHtml(formattedHtml, HtmlCompat.FROM_HTML_MODE_COMPACT).trim()
+}
+
+fun createGradientDrawable(
+    startColor: Int,
+    endColor: Int,
+    startX: Float = 40f,
+    startY: Float = 12f,
+    endX: Float = 120f,
+    endY: Float = 12f
+): ShapeDrawable {
+    val colors = intArrayOf(startColor, endColor)
+    val positions = floatArrayOf(0f, 1f)
+
+    val linearGradient = LinearGradient(
+        startX, startY, endX, endY,
+        colors, positions,
+        Shader.TileMode.CLAMP
+    )
+
+    return ShapeDrawable(RectShape()).apply {
+        paint.shader = linearGradient
+    }
 }
 
 val Int.px: Float get() = (this / Resources.getSystem().displayMetrics.density)

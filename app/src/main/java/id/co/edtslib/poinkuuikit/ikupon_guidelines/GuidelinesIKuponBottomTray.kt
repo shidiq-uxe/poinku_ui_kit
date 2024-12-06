@@ -1,10 +1,9 @@
-package id.co.edtslib.poinkuuikit
+package id.co.edtslib.poinkuuikit.ikupon_guidelines
 
 import android.annotation.SuppressLint
 import android.content.DialogInterface
 import android.view.View
 import android.view.ViewGroup
-import android.view.WindowManager
 import androidx.core.view.updateLayoutParams
 import androidx.fragment.app.FragmentActivity
 import androidx.recyclerview.widget.DiffUtil
@@ -12,7 +11,8 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.LinearSnapHelper
 import com.bumptech.glide.Glide
 import com.google.android.material.card.MaterialCardView
-import id.co.edtslib.poinkuuikit.GuidelinesIkuponActivity.DummyItem.DummyChildClass
+import id.co.edtslib.poinkuuikit.generateLoremIpsum
+import id.co.edtslib.poinkuuikit.ikupon_guidelines.GuidelinesIkuponActivity.DummyItem.DummyChildClass
 import id.co.edtslib.uikit.poinku.adapter.multiTypeAdapter
 import id.co.edtslib.uikit.poinku.databinding.ItemIcouponBarcodeBinding
 import id.co.edtslib.uikit.poinku.databinding.ItemIcouponCodeBinding
@@ -21,7 +21,6 @@ import id.co.edtslib.uikit.poinku.databinding.LayoutIcouponDetailBinding
 import id.co.edtslib.uikit.poinku.tray.BottomSheetTray
 import id.co.edtslib.uikit.poinku.tray.BottomTrayDelegate
 import id.co.edtslib.uikit.poinku.utils.MarginItem
-import id.co.edtslib.uikit.poinku.utils.attachLinearMarginItemDecoration
 import id.co.edtslib.uikit.poinku.utils.color
 import id.co.edtslib.uikit.poinku.utils.deviceWidth
 import id.co.edtslib.uikit.poinku.utils.inflater

@@ -89,6 +89,7 @@ dependencies {
     implementation(libs.shimmer)
 
     implementation(libs.material)
+    implementation(libs.androidx.pallete)
     implementation(libs.glide)
     kapt(libs.glide.compiler)
 

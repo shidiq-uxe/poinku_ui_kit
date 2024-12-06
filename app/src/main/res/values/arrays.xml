@@ -6,6 +6,7 @@
         <item>Colors</item>
         <item>Progress Bar</item>
         <item>I-Kupon List</item>
+        <item>I-Kupon List Overlay</item>
     </string-array>
 
     <string-array name="array_guidelines_font">

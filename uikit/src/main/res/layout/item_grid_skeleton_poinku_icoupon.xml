@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.facebook.shimmer.ShimmerFrameLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    app:shimmer_auto_start="true"
+    tools:layout_width="175dp">
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/skeletonCv"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/xxs"
+        app:shapeAppearanceOverlay="@style/ShapeAppearance.EDTS.UIKit.Poinku.MediumComponent"
+        app:strokeWidth="@dimen/dimen_0"
+        app:cardElevation="@dimen/xxxs"
+        android:elevation="@dimen/xxxs"
+        android:clipChildren="false">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <!-- Skeleton for ImageView -->
+            <View
+                android:id="@+id/ivSkeleton"
+                android:layout_width="@dimen/dimen_0"
+                android:layout_height="@dimen/dimen_0"
+                android:background="@drawable/shimmer_placeholder_4"
+                app:layout_constraintDimensionRatio="79:60"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent" />
+
+            <!-- Skeleton for Expiry Text -->
+            <View
+                android:id="@+id/tvSkeleton"
+                android:layout_width="@dimen/dimen_0"
+                android:layout_height="@dimen/dimen_14"
+                android:layout_marginVertical="@dimen/xxxs"
+                android:background="@drawable/shimmer_placeholder_4"
+                app:layout_constraintTop_toBottomOf="@id/ivSkeleton"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent" />
+
+            <!-- Skeleton for Coupon Name -->
+            <View
+                android:id="@+id/tvSkeleton2"
+                android:layout_width="@dimen/dimen_0"
+                android:layout_height="@dimen/dimen_14"
+                android:layout_marginTop="@dimen/xxs"
+                android:layout_marginHorizontal="@dimen/xxs"
+                android:background="@drawable/shimmer_placeholder_4"
+                app:layout_constraintTop_toBottomOf="@id/tvSkeleton"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent" />
+
+            <!-- Skeleton for Coupon Name -->
+            <View
+                android:id="@+id/tvSkeleton2p1"
+                android:layout_width="@dimen/dimen_0"
+                android:layout_height="@dimen/dimen_14"
+                android:layout_marginTop="@dimen/xxxs"
+                android:layout_marginStart="@dimen/xxs"
+                android:background="@drawable/shimmer_placeholder_4"
+                app:layout_constraintWidth_percent="0.7"
+                app:layout_constraintTop_toBottomOf="@id/tvSkeleton2"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"/>
+
+            <!-- Skeleton for Chip -->
+            <View
+                android:id="@+id/tvSkeleton3"
+                android:layout_width="@dimen/dimen_0"
+                android:layout_height="@dimen/m1"
+                android:layout_marginTop="@dimen/xs"
+                android:layout_marginStart="@dimen/xxs"
+                android:background="@drawable/shimmer_placeholder_4"
+                app:layout_constraintWidth_percent="0.5"
+                app:layout_constraintTop_toBottomOf="@id/tvSkeleton2p1"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"/>
+
+            <!-- Skeleton for Button -->
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/m3"
+                android:layout_margin="@dimen/xxs"
+                android:background="@drawable/shimmer_placeholder_4"
+                app:layout_constraintTop_toBottomOf="@id/tvSkeleton3"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </com.google.android.material.card.MaterialCardView>
+
+
+</com.facebook.shimmer.ShimmerFrameLayout>

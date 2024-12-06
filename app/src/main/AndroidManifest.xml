@@ -15,6 +15,10 @@
         android:theme="@style/Theme.EDTS.UIKit.ActionBar"
         tools:targetApi="31">
         <activity
+            android:name=".ikupon_guidelines.GuidelinesHomeCouponActivity"
+            android:exported="false"
+            android:label="Home - Reward Widget"/>
+        <activity
             android:name=".MainActivity"
             android:exported="true">
             <intent-filter>
@@ -23,7 +27,6 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
         <activity
             android:name=".GuidelinesButtonActivity"
             android:exported="false" />
@@ -40,9 +43,10 @@
             android:name=".WIPActivity"
             android:exported="false" />
         <activity
-            android:name=".GuidelinesIkuponActivity"
+            android:name=".ikupon_guidelines.GuidelinesIkuponActivity"
             android:exported="false"
-            android:theme="@style/Theme.EDTS.UIKit"/>
+            android:label="i-Kupon Ribbon"
+            android:theme="@style/Theme.EDTS.UIKit" />
     </application>
 
 </manifest>

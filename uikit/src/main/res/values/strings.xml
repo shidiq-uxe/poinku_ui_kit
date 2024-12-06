@@ -7,6 +7,7 @@
     <string name="see_coupon">Lihat Kupon</string>
     <string name="copy_code">Salin Kode</string>
     <string name="use_code_in">Gunakan Kode di Sini</string>
+    <string name="see_all">Lihat Semua</string>
 
     <string name="ikupon_until">Hingga $s</string>
     <string name="ikupon_expired_in">Berakhir $s hari lagi</string>

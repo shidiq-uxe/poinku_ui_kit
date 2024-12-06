@@ -1,23 +1,20 @@
-package id.co.edtslib.poinkuuikit
+package id.co.edtslib.poinkuuikit.ikupon_guidelines
 
 import android.annotation.SuppressLint
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
-import android.transition.AutoTransition
-import android.transition.TransitionManager
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.transition.addListener
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.RecycledViewPool
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.bumptech.glide.Glide
+import id.co.edtslib.poinkuuikit.R
 import id.co.edtslib.poinkuuikit.databinding.ActivityGuidelinesIkuponBinding
 import id.co.edtslib.uikit.poinku.adapter.AnimationType
 import id.co.edtslib.uikit.poinku.adapter.AnimationWrapperAdapter
@@ -27,7 +24,6 @@ import id.co.edtslib.uikit.poinku.databinding.ItemListPoinkuIcouponBinding
 import id.co.edtslib.uikit.poinku.ribbon.Ribbon
 import id.co.edtslib.uikit.poinku.searchbar.SearchBar
 import id.co.edtslib.uikit.poinku.utils.addViewTransition
-import id.co.edtslib.uikit.poinku.utils.dimen
 import id.co.edtslib.uikit.poinku.utils.dp
 import id.co.edtslib.uikit.poinku.utils.setLightStatusBar
 import id.co.edtslib.uikit.poinku.utils.viewBinding
@@ -189,6 +185,7 @@ class GuidelinesIkuponActivity : AppCompatActivity() {
         }
     ).apply { items = List(12) {
         DummyItem(
+            id = it.toString(),
             image = images.random(),
             title = titles.random(),
             availability = availabilities.random(),
@@ -196,8 +193,9 @@ class GuidelinesIkuponActivity : AppCompatActivity() {
             codeType = codeType.random(),
             point = (1..1000).random(),
             ribbonVisibility = Pair(randomVisibilityState.random(), randomVisibilityState.random()),
-            childItems = List((1..10).random()) {
+            childItems = List((1..10).random()) { childIndex ->
                 DummyItem.DummyChildClass(
+                    couponId = childIndex.toString(),
                     couponImage = images.random(),
                     couponName = titles.random(),
                     code = List(16) { (('A'..'Z') + ('0'..'9')).random() }.joinToString("")
@@ -314,6 +312,7 @@ class GuidelinesIkuponActivity : AppCompatActivity() {
     }
 
     data class DummyItem(
+        val id: String,
         val image: String,
         val title: String,
         val availability: Pair<Int, Int>,
@@ -324,6 +323,7 @@ class GuidelinesIkuponActivity : AppCompatActivity() {
         val childItems: List<DummyChildClass>
     ) {
         data class DummyChildClass(
+            val couponId: String,
             val couponName: String,
             val code: String,
             val couponImage: Any,

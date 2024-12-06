@@ -10,6 +10,7 @@ import android.graphics.Path
 import android.graphics.RectF
 import android.graphics.Shader
 import android.graphics.Typeface
+import android.os.Trace
 import android.util.AttributeSet
 import android.util.Log
 import android.view.View
@@ -19,6 +20,9 @@ import androidx.annotation.Dimension
 import androidx.annotation.StyleRes
 import androidx.core.content.res.use
 import androidx.core.view.doOnLayout
+import com.google.android.material.shape.CornerFamily
+import com.google.android.material.shape.ShapeAppearanceModel
+import com.google.android.material.shape.ShapeAppearancePathProvider
 import id.co.edtslib.uikit.poinku.R
 import id.co.edtslib.uikit.poinku.utils.color
 import id.co.edtslib.uikit.poinku.utils.dimen
@@ -140,6 +144,21 @@ class Ribbon @JvmOverloads constructor(
     private val trianglePath = Path()
     private val rectF = RectF()
 
+    private val startContainerShapeAppearance = ShapeAppearanceModel.Builder()
+        .setTopLeftCorner(CornerFamily.ROUNDED, cornerRadius)
+        .setTopRightCorner(CornerFamily.ROUNDED, cornerRadius)
+        .setBottomRightCorner(CornerFamily.ROUNDED, cornerRadius)
+        .build()
+
+    private val endContainerShapeAppearance = ShapeAppearanceModel.Builder()
+        .setTopLeftCorner(CornerFamily.ROUNDED, cornerRadius)
+        .setTopRightCorner(CornerFamily.ROUNDED, cornerRadius)
+        .setBottomLeftCorner(CornerFamily.ROUNDED, cornerRadius)
+        .build()
+
+    private val materialPathProvider = ShapeAppearancePathProvider()
+
+
     init {
         context.theme.obtainStyledAttributes(attrs, R.styleable.Ribbon, 0, 0).use {
             triangleColor = it.getColor(R.styleable.Ribbon_triangleColor, triangleColor)
@@ -209,48 +228,26 @@ class Ribbon @JvmOverloads constructor(
 
     fun drawStartContainer(): Path {
         containerPath.reset()
-        return containerPath.apply {
-            moveTo(0f, cornerRadius)
-            lineTo(0f, textContainerHeight)
-            lineTo(textWidth - cornerRadius, textContainerHeight)
+        materialPathProvider.calculatePath(
+            startContainerShapeAppearance,
+            1f,
+            rectF,
+            containerPath
+        )
 
-            rectF.set(textWidth - 2 * cornerRadius,textContainerHeight - 2 * cornerRadius, textWidth,textContainerHeight)
-            arcTo(rectF, 90f, -90f)
-
-            lineTo(textWidth, cornerRadius)
-            rectF.set(textWidth - 2 * cornerRadius, 0f, textWidth, 2 * cornerRadius)
-            arcTo(rectF, 0f, -90f)
-
-            lineTo(cornerRadius, 0f)
-            rectF.set(0f, 0f, 2 * cornerRadius, 2 * cornerRadius)
-            arcTo(rectF, 270f, -90f)
-
-            this.close()
-        }
+        return containerPath.also { it.close() }
     }
 
     fun drawEndContainer(): Path {
         containerPath.reset()
-        return containerPath.apply {
-            moveTo(0f, cornerRadius)
-            lineTo(0f, textContainerHeight)
+        materialPathProvider.calculatePath(
+            endContainerShapeAppearance,
+            1f,
+            rectF,
+            containerPath
+        )
 
-            rectF.set(0f, textContainerHeight - 2 * cornerRadius, 2 * cornerRadius, textContainerHeight)
-            arcTo(rectF, 180f, -90f)
-
-            lineTo(textWidth, textContainerHeight)
-            lineTo(textWidth, cornerRadius)
-
-            rectF.set(textWidth - 2 * cornerRadius, 0f, textWidth, 2 * cornerRadius)
-            arcTo(rectF, 0f, -90f)
-
-            lineTo(cornerRadius, 0f)
-
-            rectF.set(0f, 0f, 2 * cornerRadius, 2 * cornerRadius)
-            arcTo(rectF, 270f, -90f)
-
-            this.close()
-        }
+        return containerPath.also { it.close() }
     }
 
     private fun drawTriangle(canvas: Canvas) {
@@ -377,5 +374,7 @@ class Ribbon @JvmOverloads constructor(
         textWidth = textPaint.measureText(ribbonText) + textHorizontalPadding.dp
         textHeight = textPaint.fontMetrics.descent - textPaint.fontMetrics.ascent
         textContainerHeight = textHeight + textLineHeight.sp + textVerticalPadding
+
+        rectF.set(0f, 0f, textWidth, textContainerHeight)
     }
 }
