@@ -9,6 +9,7 @@ import android.util.Log
 import android.view.ViewGroup
 import android.widget.FrameLayout
 import android.widget.ImageView
+import androidx.annotation.ColorInt
 import androidx.annotation.Dimension
 import androidx.core.content.res.use
 import androidx.core.view.doOnLayout
@@ -36,6 +37,7 @@ class ImageParallaxOverlayLayout @JvmOverloads constructor(
 ) : FrameLayout(context, attrs) {
 
     private var overlayImageView: ShapeableImageView? = null
+
     var imageUrl: String? = null
         set(value) {
             field = value
@@ -59,7 +61,9 @@ class ImageParallaxOverlayLayout @JvmOverloads constructor(
         set(value) {
             field = value
 
-            if (overlayType == OverlayType.BackgroundOnly) {
+            overlayBackgroundColor = overlayBackgroundColor
+
+            if (value == OverlayType.BackgroundOnly) {
                 initImageView()
             } else {
                 if (imageUrl == null) {
@@ -85,12 +89,25 @@ class ImageParallaxOverlayLayout @JvmOverloads constructor(
             }
         }
 
+    @ColorInt
+    var overlayBackgroundColor: Int = context.color(R.color.primary_30)
+        set(value) {
+            field = value
+
+            if (overlayType == OverlayType.IllustrationWithBackground || overlayType == OverlayType.BackgroundOnly) {
+                this.setBackgroundColor(value)
+            } else {
+                this.setBackgroundColor(Color.TRANSPARENT)
+            }
+        }
+
 
     init {
-        context.theme.obtainStyledAttributes(attrs, R.styleable.ImageOverlayLayout, 0, 0).use {
-            drawableWidth = it.getDimension(R.styleable.ImageOverlayLayout_drawableWidth, 0f)
-            overlayType = OverlayType.values()[it.getInt(R.styleable.ImageOverlayLayout_overlayType, 1)]
-            gradientColor = GradientColor.values()[it.getInt(R.styleable.ImageOverlayLayout_gradientColor, 0)]
+        context.theme.obtainStyledAttributes(attrs, R.styleable.ImageParallaxOverlayLayout, 0, 0).use {
+            drawableWidth = it.getDimension(R.styleable.ImageParallaxOverlayLayout_drawableWidth, 0f)
+            gradientColor = GradientColor.values()[it.getInt(R.styleable.ImageParallaxOverlayLayout_gradientColor, 0)]
+            overlayBackgroundColor = it.getColor(R.styleable.ImageParallaxOverlayLayout_overlayBackgroundColor, context.color(R.color.primary_30))
+            overlayType = OverlayType.values().getOrNull(it.getInt(R.styleable.ImageParallaxOverlayLayout_overlayType, 10)) ?: overlayType
         }
     }
 
@@ -133,7 +150,7 @@ class ImageParallaxOverlayLayout @JvmOverloads constructor(
                             val offsetFromPadding = recyclerViewPaddingStart - viewLeftPosition
                             overlayImageView?.alpha = viewLeftPosition / maxAlphaDistance
 
-                            if (overlayType == OverlayType.IllustrationWithBackground) {
+                            if (overlayType == OverlayType.IllustrationWithFullBackground) {
                                 extractDominantColorAndSetBackground()
                             }
 
@@ -237,6 +254,20 @@ class ImageParallaxOverlayLayout @JvmOverloads constructor(
 
                 OverlayType.IllustrationWithBackground -> {
                     imageView.updateLayoutParams<ViewGroup.LayoutParams> {
+                        width = illustrationWidth
+                    }
+
+                    this.setBackgroundColor(overlayBackgroundColor)
+
+                    carouselView?.apply {
+                        setPaddingRelative(illustrationWidthWithIntrinsicsBounds, carouselView.paddingTop, carouselView.paddingEnd, carouselView.paddingBottom)
+
+                        scrollBy(-illustrationWidthWithIntrinsicsBounds, 0)
+                    }
+                }
+
+                OverlayType.IllustrationWithFullBackground -> {
+                    imageView.updateLayoutParams<ViewGroup.LayoutParams> {
                         width = LayoutParams.MATCH_PARENT
                     }
 
@@ -266,13 +297,6 @@ class ImageParallaxOverlayLayout @JvmOverloads constructor(
         return paddingTop + paddingBottom
     }
 
-
-    enum class OverlayType {
-        IllustrationOnly,
-        IllustrationWithBackground,
-        BackgroundOnly,
-    }
-
     enum class GradientColor(
         val startColor: Int,
         val endColor: Int,
@@ -285,5 +309,12 @@ class ImageParallaxOverlayLayout @JvmOverloads constructor(
         Yellow(Color.parseColor("#FAC714"), Color.parseColor("#FA9E14"), 40f, 12f, 120f, 12f),
         Black(Color.parseColor("#6A6D77"), Color.parseColor("#171924"), 40f, 12f, 120f, 12f),
         Red(Color.parseColor("#D41111"), Color.parseColor("#FC6C6C"), 40f, 12f, 120f, 12f)
+    }
+
+    enum class OverlayType {
+        IllustrationOnly,
+        IllustrationWithBackground,
+        IllustrationWithFullBackground,
+        BackgroundOnly
     }
 }

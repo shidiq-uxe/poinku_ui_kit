@@ -325,19 +325,21 @@
         <attr name="itemSpacing" format="dimension" />
     </declare-styleable>
 
-    <declare-styleable name="ImageOverlayLayout">
+    <declare-styleable name="ImageParallaxOverlayLayout">
         <attr name="drawableWidth" format="dimension" />
-        <attr name="overlayType" format="enum" >
-            <enum name="illustrationOnly" value="0" />
-            <enum name="illustrationWithBackground" value="1" />
-            <enum name="backgroundOnly" value="2" />
-        </attr>
         <attr name="gradientColor" format="enum">
             <enum name="blue" value="0"/>
             <enum name="yellow" value="1"/>
             <enum name="black" value="2"/>
             <enum name="red" value="3"/>
         </attr>
+        <attr name="overlayType" format="enum" >
+            <enum name="illustrationOnly" value="0" />
+            <enum name="illustrationWithBackground" value="1" />
+            <enum name="illustrationWithFullBackground" value="2" />
+            <enum name="backgroundOnly" value="3" />
+        </attr>
+        <attr name="overlayBackgroundColor" format="color"/>
     </declare-styleable>
 
 </resources>
