@@ -20,9 +20,12 @@ dependencies {
 3. [Ribbon](docs/Ribbon.md)
 4. [AnimationWrapperAdapter](docs/AnimationWrapperAdapter.md)
 5. [Interpolator](docs/Interpolator.md)
+6. [Liquid Refresh Layout](docs/LiquidRefreshLayout.md)
+7. [ImageParallaxOverlayLayout](docs/ImageParallaxOverlayLayout.md)
 
 ## Pages Reference
 1. [I-Kupon Page](docs/pages/IkuponPage.md)
+1. [Homepage Reward Widget /w Parallax](docs/pages/HomePageRewardWidget.md)
 
 ## Basic setup and initialization :
 

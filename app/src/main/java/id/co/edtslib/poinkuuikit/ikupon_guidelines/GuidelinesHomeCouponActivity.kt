@@ -86,17 +86,17 @@ class GuidelinesHomeCouponActivity : AppCompatActivity() {
                 data = dummyItems
             ),
             HomeSectionType.FavoritePromo(
-                imageUrl = "https://res.cloudinary.com/dmduc9apd/image/upload/v1732853293/Image%20Illustration/fn8vxqpbldeqjsbibszi.png",
+                imageUrl = "https://picsum.photos/${120}",
                 title = "Kupon Favorit Minggu Ini!",
                 description = "Tukarkan stamp jadi kupon.",
-                type = ImageParallaxOverlayLayout.OverlayType.IllustrationOnly,
+                type = ImageParallaxOverlayLayout.OverlayType.IllustrationWithBackground,
                 data = dummyItems
             ),
             HomeSectionType.NearlyExpirePromo(
                 imageUrl = dummyPics,
                 title = "Kupon Kamu Mau Berakhir!",
                 description = "Gunakan kupon di merchant atau Indomaret.",
-                type = ImageParallaxOverlayLayout.OverlayType.IllustrationWithBackground,
+                type = ImageParallaxOverlayLayout.OverlayType.BackgroundOnly,
                 data = dummyItems.take(9)
             )
         )
