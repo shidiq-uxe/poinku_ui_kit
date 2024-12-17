@@ -20,15 +20,18 @@ GuidelinesHomeCouponActivity is an Android Activity that displays a dynamic list
 ### Key XML Attributes:
 
 ```xml
-<androidx.recyclerview.widget.RecyclerView
-    android:id="@+id/rvMain"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content" />
 
-<com.package.LiquidRefreshLayout
-    android:id="@+id/main"
+<edts.poinku.uikit.LiquidRefreshLayout
+    android:id="@+id/lpr"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content" />
+    android:layout_height="wrap_content" >
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rvMain"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+</edts.poinku.uikit.LiquidRefreshLayout>
 ```
 
 ## Transition Implementations
