@@ -166,7 +166,7 @@ class GuidelinesIkuponActivity : AppCompatActivity() {
                         ribbonNew.apply {
                             this.elevation = 6.dp
                             this.ribbonText = "Baru!"
-                            this.textAppearanceRes = UIKitR.style.TextAppearance_Rubik_Semibold_H4
+                            this.textAppearanceRes = UIKitR.style.TextAppearance_Rubik_H4_Heavy
                         }.anchorToView(
                             rootParent = itemBinding.root,
                             targetView = itemBinding.cv,
@@ -183,21 +183,21 @@ class GuidelinesIkuponActivity : AppCompatActivity() {
         onViewDetachedFromWindow = { holder ->
             holder.itemView.clearAnimation()
         }
-    ).apply { items = List(12) {
+    ).apply { items = List(50) {
         DummyItem(
             id = it.toString(),
-            image = images.random(),
-            title = titles.random(),
-            availability = availabilities.random(),
-            voucherType = voucherType.random(),
-            codeType = codeType.random(),
-            point = (1..1000).random(),
-            ribbonVisibility = Pair(randomVisibilityState.random(), randomVisibilityState.random()),
-            childItems = List((1..10).random()) { childIndex ->
+            image = images.first(),
+            title = titles.first(),
+            availability = availabilities.first(),
+            voucherType = voucherType.first(),
+            codeType = codeType.first(),
+            point = (1..1000).first(),
+            ribbonVisibility = Pair(randomVisibilityState.first(), randomVisibilityState.first()),
+            childItems = List((1..10).first()) { childIndex ->
                 DummyItem.DummyChildClass(
                     couponId = childIndex.toString(),
-                    couponImage = images.random(),
-                    couponName = titles.random(),
+                    couponImage = images.first(),
+                    couponName = titles.first(),
                     code = List(16) { (('A'..'Z') + ('0'..'9')).random() }.joinToString("")
                 )
             }
@@ -283,7 +283,7 @@ class GuidelinesIkuponActivity : AppCompatActivity() {
     }
 
     private fun setupSearchBar() {
-        binding.sbSearchCoupon.placeholderAnimationType = SearchBar.PlaceholderAnimationType.TypeWriterWithPrefix
+        /*binding.sbSearchCoupon.placeholderAnimationType = SearchBar.PlaceholderAnimationType.TypeWriterWithPrefix
         binding.sbSearchCoupon.searchBarDelegate = object : SearchBarDelegate {
             override fun onCloseIconClicked(view: View) {
                 binding.sbSearchCoupon.text = ""
@@ -294,17 +294,14 @@ class GuidelinesIkuponActivity : AppCompatActivity() {
             override fun onTextChange(text: String) {}
         }
 
-        binding.sbSearchCoupon.searchBarType = SearchBar.SearchBarType.BORDERLESS
+        binding.sbSearchCoupon.searchBarType = SearchBar.SearchBarType.BORDERLESS*/
     }
 
     private fun setupRecyclerView() {
         val animationAdapter = AnimationWrapperAdapter(adapter, AnimationType.Scale()).apply {
-            shouldAnimateDuringScroll(false)
+            shouldAnimateDuringScroll(true)
         }
-
-        adapter.setHasStableIds(true)
-        binding.rvIKupon.setRecycledViewPool(viewPool)
-        binding.rvIKupon.adapter = adapter
+        binding.rvIKupon.adapter = animationAdapter
     }
 
     enum class LayoutViewType {

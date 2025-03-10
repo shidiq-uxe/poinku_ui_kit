@@ -23,76 +23,232 @@
         <item name="lineHeight">@dimen/m1</item>
     </style>
 
-    <style name="TextAppearance.Rubik.Semibold.H1" parent="Base.TextAppearance.AppCompat">
+    <!--Headline-->
+    <style name="TextAppearance.Rubik.H1.Heavy" parent="Base.TextAppearance.AppCompat">
         <item name="fontFamily">@font/rubik_semibold</item>
         <item name="android:fontFamily">@font/rubik_semibold</item>
         <item name="android:textSize">@dimen/h1_text_size</item>
         <item name="lineHeight">@dimen/dimen_18</item>
     </style>
 
-    <style name="TextAppearance.Rubik.Semibold.H2" parent="Base.TextAppearance.AppCompat">
+    <style name="TextAppearance.Rubik.H1.Medium" parent="Base.TextAppearance.AppCompat">
+        <item name="fontFamily">@font/rubik_medium</item>
+        <item name="android:fontFamily">@font/rubik_medium</item>
+        <item name="android:textSize">@dimen/h1_text_size</item>
+        <item name="lineHeight">@dimen/dimen_18</item>
+    </style>
+
+    <style name="TextAppearance.Rubik.H2.Heavy" parent="Base.TextAppearance.AppCompat">
         <item name="fontFamily">@font/rubik_semibold</item>
         <item name="android:fontFamily">@font/rubik_semibold</item>
         <item name="android:textSize">@dimen/h2_text_size</item>
         <item name="lineHeight">@dimen/dimen_16</item>
     </style>
 
-    <style name="TextAppearance.Rubik.Semibold.H3" parent="Base.TextAppearance.AppCompat">
+    <style name="TextAppearance.Rubik.H2.Medium" parent="Base.TextAppearance.AppCompat">
+        <item name="fontFamily">@font/rubik_medium</item>
+        <item name="android:fontFamily">@font/rubik_medium</item>
+        <item name="android:textSize">@dimen/h2_text_size</item>
+        <item name="lineHeight">@dimen/dimen_16</item>
+    </style>
+
+    <style name="TextAppearance.Rubik.H3.Heavy" parent="Base.TextAppearance.AppCompat">
         <item name="fontFamily">@font/rubik_semibold</item>
         <item name="android:fontFamily">@font/rubik_semibold</item>
         <item name="android:textSize">@dimen/h3_text_size</item>
         <item name="lineHeight">@dimen/dimen_14</item>
     </style>
 
-    <style name="TextAppearance.Rubik.Semibold.H4" parent="Base.TextAppearance.AppCompat">
+    <style name="TextAppearance.Rubik.H3.Medium" parent="Base.TextAppearance.AppCompat">
+        <item name="fontFamily">@font/rubik_medium</item>
+        <item name="android:fontFamily">@font/rubik_medium</item>
+        <item name="android:textSize">@dimen/h3_text_size</item>
+        <item name="lineHeight">@dimen/dimen_14</item>
+    </style>
+
+    <style name="TextAppearance.Rubik.H4.Heavy" parent="Base.TextAppearance.AppCompat">
         <item name="fontFamily">@font/rubik_semibold</item>
         <item name="android:fontFamily">@font/rubik_semibold</item>
         <item name="android:textSize">@dimen/h4_text_size</item>
         <item name="lineHeight">@dimen/dimen_14</item>
     </style>
 
+    <style name="TextAppearance.Rubik.H4.Medium" parent="Base.TextAppearance.AppCompat">
+        <item name="fontFamily">@font/rubik_medium</item>
+        <item name="android:fontFamily">@font/rubik_medium</item>
+        <item name="android:textSize">@dimen/h4_text_size</item>
+        <item name="lineHeight">@dimen/dimen_14</item>
+    </style>
+
     <!--Body-->
-    <style name="TextAppearance.Rubik.Regular.B1" parent="Base.TextAppearance.AppCompat">
+    <style name="TextAppearance.Rubik.B1.Semibold" parent="Base.TextAppearance.AppCompat">
+        <item name="fontFamily">@font/rubik_semibold</item>
+        <item name="android:fontFamily">@font/rubik_semibold</item>
+        <item name="android:textSize">@dimen/b1_text_size</item>
+        <item name="lineHeight">@dimen/dimen_18</item>
+    </style>
+
+    <style name="TextAppearance.Rubik.B1.Medium" parent="Base.TextAppearance.AppCompat">
+        <item name="fontFamily">@font/rubik_medium</item>
+        <item name="android:fontFamily">@font/rubik_medium</item>
+        <item name="android:textSize">@dimen/b1_text_size</item>
+        <item name="lineHeight">@dimen/dimen_18</item>
+    </style>
+
+    <style name="TextAppearance.Rubik.B1.Light" parent="Base.TextAppearance.AppCompat">
         <item name="fontFamily">@font/rubik</item>
         <item name="android:fontFamily">@font/rubik</item>
         <item name="android:textSize">@dimen/b1_text_size</item>
         <item name="lineHeight">@dimen/dimen_18</item>
     </style>
 
-    <style name="TextAppearance.Rubik.Regular.B2" parent="Base.TextAppearance.AppCompat">
+    <style name="TextAppearance.Rubik.B2.Bulk" parent="Base.TextAppearance.AppCompat">
+        <item name="fontFamily">@font/rubik_bold</item>
+        <item name="android:fontFamily">@font/rubik</item>
+        <item name="android:textSize">@dimen/b2_text_size</item>
+        <item name="lineHeight">@dimen/dimen_16</item>
+    </style>
+
+    <style name="TextAppearance.Rubik.B2.Heavy" parent="Base.TextAppearance.AppCompat">
+        <item name="fontFamily">@font/rubik_semibold</item>
+        <item name="android:fontFamily">@font/rubik_semibold</item>
+        <item name="android:textSize">@dimen/b2_text_size</item>
+        <item name="lineHeight">@dimen/dimen_16</item>
+    </style>
+
+    <style name="TextAppearance.Rubik.B2.Medium" parent="Base.TextAppearance.AppCompat">
+        <item name="fontFamily">@font/rubik_medium</item>
+        <item name="android:fontFamily">@font/rubik_medium</item>
+        <item name="android:textSize">@dimen/b2_text_size</item>
+        <item name="lineHeight">@dimen/dimen_16</item>
+    </style>
+
+    <style name="TextAppearance.Rubik.B2.Light" parent="Base.TextAppearance.AppCompat">
         <item name="fontFamily">@font/rubik</item>
         <item name="android:fontFamily">@font/rubik</item>
         <item name="android:textSize">@dimen/b2_text_size</item>
         <item name="lineHeight">@dimen/dimen_16</item>
     </style>
 
-    <style name="TextAppearance.Rubik.Regular.B3" parent="Base.TextAppearance.AppCompat">
+    <style name="TextAppearance.Rubik.B3.Heavy" parent="Base.TextAppearance.AppCompat">
+        <item name="fontFamily">@font/rubik_semibold</item>
+        <item name="android:fontFamily">@font/rubik_semibold</item>
+        <item name="android:textSize">@dimen/b3_text_size</item>
+        <item name="lineHeight">@dimen/dimen_16</item>
+    </style>
+
+    <style name="TextAppearance.Rubik.B3.Medium" parent="Base.TextAppearance.AppCompat">
+        <item name="fontFamily">@font/rubik_medium</item>
+        <item name="android:fontFamily">@font/rubik_medium</item>
+        <item name="android:textSize">@dimen/b3_text_size</item>
+        <item name="lineHeight">@dimen/dimen_16</item>
+    </style>
+
+    <style name="TextAppearance.Rubik.B3.Light" parent="Base.TextAppearance.AppCompat">
         <item name="fontFamily">@font/rubik</item>
         <item name="android:fontFamily">@font/rubik</item>
         <item name="android:textSize">@dimen/b3_text_size</item>
         <item name="lineHeight">@dimen/dimen_16</item>
     </style>
 
-    <style name="TextAppearance.Rubik.Regular.B4" parent="Base.TextAppearance.AppCompat">
-        <item name="fontFamily">@font/rubik</item>
-        <item name="android:fontFamily">@font/rubik</item>
-        <item name="android:textSize">@dimen/b3_text_size</item>
+    <style name="TextAppearance.Rubik.B4.Heavy" parent="Base.TextAppearance.AppCompat">
+        <item name="fontFamily">@font/rubik_semibold</item>
+        <item name="android:fontFamily">@font/rubik_semibold</item>
+        <item name="android:textSize">@dimen/b4_text_size</item>
         <item name="lineHeight">@dimen/dimen_14</item>
     </style>
 
+    <style name="TextAppearance.Rubik.B4.Medium" parent="Base.TextAppearance.AppCompat">
+        <item name="fontFamily">@font/rubik_medium</item>
+        <item name="android:fontFamily">@font/rubik_medium</item>
+        <item name="android:textSize">@dimen/b4_text_size</item>
+        <item name="lineHeight">@dimen/dimen_14</item>
+    </style>
+
+    <style name="TextAppearance.Rubik.B4.Light" parent="Base.TextAppearance.AppCompat">
+        <item name="fontFamily">@font/rubik</item>
+        <item name="android:fontFamily">@font/rubik</item>
+        <item name="android:textSize">@dimen/b4_text_size</item>
+        <item name="lineHeight">@dimen/dimen_14</item>
+    </style>
+
+    <style name="TextAppearance.Rubik.B5.Medium" parent="Base.TextAppearance.AppCompat">
+        <item name="fontFamily">@font/rubik_medium</item>
+        <item name="android:fontFamily">@font/rubik_medium</item>
+        <item name="android:textSize">@dimen/b5_text_size</item>
+        <item name="lineHeight">@dimen/dimen_12</item>
+    </style>
+
+    <style name="TextAppearance.Rubik.B5.Light" parent="Base.TextAppearance.AppCompat">
+        <item name="fontFamily">@font/rubik</item>
+        <item name="android:fontFamily">@font/rubik</item>
+        <item name="android:textSize">@dimen/b5_text_size</item>
+        <item name="lineHeight">@dimen/dimen_12</item>
+    </style>
+
     <!--Paragraph-->
-    <style name="TextAppearance.Rubik.Regular.P1" parent="Base.TextAppearance.AppCompat">
+    <style name="TextAppearance.Rubik.P1.Heavy" parent="Base.TextAppearance.AppCompat">
+        <item name="fontFamily">@font/rubik_semibold</item>
+        <item name="android:fontFamily">@font/rubik_semibold</item>
+        <item name="android:textSize">@dimen/b2_text_size</item>
+        <item name="lineHeight">@dimen/dimen_20</item>
+    </style>
+
+    <style name="TextAppearance.Rubik.P1.Light" parent="Base.TextAppearance.AppCompat">
         <item name="fontFamily">@font/rubik</item>
         <item name="android:fontFamily">@font/rubik</item>
         <item name="android:textSize">@dimen/b2_text_size</item>
-        <item name="lineHeight">@dimen/dimen_21</item>
+        <item name="lineHeight">@dimen/dimen_20</item>
     </style>
 
-    <style name="TextAppearance.Rubik.Regular.P2" parent="Base.TextAppearance.AppCompat">
+    <style name="TextAppearance.Rubik.P2.Heavy" parent="Base.TextAppearance.AppCompat">
+        <item name="fontFamily">@font/rubik_semibold</item>
+        <item name="android:fontFamily">@font/rubik_semibold</item>
+        <item name="android:textSize">@dimen/b2_text_size</item>
+        <item name="lineHeight">@dimen/dimen_18</item>
+    </style>
+
+    <style name="TextAppearance.Rubik.P2.Light" parent="Base.TextAppearance.AppCompat">
         <item name="fontFamily">@font/rubik</item>
         <item name="android:fontFamily">@font/rubik</item>
         <item name="android:textSize">@dimen/b2_text_size</item>
         <item name="lineHeight">@dimen/dimen_18</item>
+    </style>
+
+    <style name="TextAppearance.Rubik.P3.Heavy" parent="Base.TextAppearance.AppCompat">
+        <item name="fontFamily">@font/rubik_semibold</item>
+        <item name="android:fontFamily">@font/rubik_semibold</item>
+        <item name="android:textSize">@dimen/p3_text_size</item>
+        <item name="lineHeight">@dimen/dimen_10</item>
+    </style>
+
+    <style name="TextAppearance.Rubik.P3.Light" parent="Base.TextAppearance.AppCompat">
+        <item name="fontFamily">@font/rubik</item>
+        <item name="android:fontFamily">@font/rubik</item>
+        <item name="android:textSize">@dimen/p3_text_size</item>
+        <item name="lineHeight">@dimen/dimen_10</item>
+    </style>
+
+    <!--Button-->
+    <style name="TextAppearance.Rubik.Button.Large" parent="Base.TextAppearance.AppCompat">
+        <item name="fontFamily">@font/rubik_semibold</item>
+        <item name="android:fontFamily">@font/rubik_semibold</item>
+        <item name="android:textSize">@dimen/button_large_text_size</item>
+        <item name="lineHeight">@dimen/dimen_24</item>
+    </style>
+
+    <style name="TextAppearance.Rubik.Button.Medium" parent="Base.TextAppearance.AppCompat">
+        <item name="fontFamily">@font/rubik_semibold</item>
+        <item name="android:fontFamily">@font/rubik_semibold</item>
+        <item name="android:textSize">@dimen/button_medium_text_size</item>
+        <item name="lineHeight">@dimen/dimen_16</item>
+    </style>
+
+    <style name="TextAppearance.Rubik.Button.Small" parent="Base.TextAppearance.AppCompat">
+        <item name="fontFamily">@font/rubik_semibold</item>
+        <item name="android:fontFamily">@font/rubik_semibold</item>
+        <item name="android:textSize">@dimen/button_small_text_size</item>
+        <item name="lineHeight">@dimen/dimen_16</item>
     </style>
 
     <!--Other-->

@@ -61,6 +61,7 @@
     <attr name="icon" format="reference"/>
     <attr name="strokeWidth"/>
     <attr name="shouldAnimate" format="boolean"/>
+    <attr name="textColor" format="color"/>
 
     <attr name="cornerRadius" format="dimension"/>
     <attr name="topRightCornerRadius" format="dimension"/>
@@ -107,8 +108,8 @@
         <attr name="containerColor" format="color"/>
         <attr name="containerStartColor" format="color"/>
         <attr name="containerEndColor" format="color"/>
-        <attr name="textColor" format="color"/>
         <attr name="text"/>
+        <attr name="textColor"/>
         <attr name="gravity" format="enum">
             <enum name="start" value="0" />
             <enum name="end" value="1" />
@@ -340,6 +341,11 @@
             <enum name="backgroundOnly" value="3" />
         </attr>
         <attr name="overlayBackgroundColor" format="color"/>
+    </declare-styleable>
+
+    <declare-styleable name="BucketChip">
+        <attr name="stampCount" format="integer"/>
+        <attr name="textColor"/>
     </declare-styleable>
 
 </resources>

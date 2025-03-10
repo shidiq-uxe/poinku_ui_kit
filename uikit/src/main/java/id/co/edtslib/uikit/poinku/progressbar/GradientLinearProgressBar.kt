@@ -85,7 +85,7 @@ class GradientLinearProgressBar @JvmOverloads constructor(
         }
 
     @ColorInt
-    var trackColor: Int = context.color(R.color.black_20)
+    var trackColor: Int = context.color(R.color.grey_20)
         set(value) {
             field = value
             invalidate()

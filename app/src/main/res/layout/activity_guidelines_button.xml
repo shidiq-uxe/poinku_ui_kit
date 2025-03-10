@@ -115,7 +115,7 @@
         android:elevation="@dimen/xxxs"
         app:gravity="start"
         app:text="999x"
-        app:textAppearance="@style/TextAppearance.Rubik.Semibold.H2"
+        app:textAppearance="@style/TextAppearance.Rubik.H2.Heavy"
         app:layout_constraintTop_toTopOf="@id/btnDisabled"
         app:layout_constraintStart_toStartOf="@id/btnTextButton"/>
 
@@ -131,7 +131,7 @@
         app:triangleColor="@color/secondary_50"
         app:gravity="start"
         app:text="Baru!"
-        app:textAppearance="@style/TextAppearance.Rubik.Semibold.H2"
+        app:textAppearance="@style/TextAppearance.Rubik.H2.Heavy"
         app:layout_constraintTop_toTopOf="@id/btnSecondaryOutlinedMedium"
         app:layout_constraintStart_toStartOf="@id/btnTextButton"/>
 

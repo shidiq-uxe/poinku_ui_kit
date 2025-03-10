@@ -13,7 +13,7 @@
         android:layout_height="@dimen/xxxs"
         android:layout_marginTop="@dimen/xxs"
         android:minHeight="@dimen/dimen_1"
-        android:background="@color/black_30"
+        android:background="@color/grey_30"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"/>
@@ -36,7 +36,7 @@
                 android:layout_height="@dimen/l"
                 android:layout_marginStart="@dimen/xs"
                 app:icon="@drawable/ic_arrow_left"
-                app:iconTint="@color/black_50"
+                app:iconTint="@color/grey_60"
                 app:iconGravity="textEnd"
                 app:iconSize="@dimen/m2"
                 app:layout_constraintTop_toTopOf="@id/tvTitle"
@@ -48,8 +48,8 @@
                 android:layout_width="@dimen/dimen_0"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="@dimen/xs"
-                android:textColor="@color/black_70"
-                android:textAppearance="@style/TextAppearance.Rubik.Semibold.H1"
+                android:textColor="@color/grey_80"
+                android:textAppearance="@style/TextAppearance.Rubik.H1.Heavy"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintStart_toEndOf="@id/btnNavigation"
                 app:layout_constraintEnd_toStartOf="@id/btnClose"
@@ -65,7 +65,7 @@
                 android:layout_height="@dimen/l"
                 android:layout_marginEnd="@dimen/xs"
                 app:icon="@drawable/ic_cancel_24"
-                app:iconTint="@color/black_50"
+                app:iconTint="@color/grey_60"
                 app:iconGravity="textEnd"
                 app:iconSize="@dimen/m2"
                 app:shapeAppearanceOverlay="@style/ShapeAppearance.EDTS.UIKit.Poinku.MediumComponent"
@@ -82,7 +82,7 @@
         android:layout_width="match_parent"
         android:layout_height="@dimen/dimen_1"
         android:layout_marginTop="@dimen/s"
-        app:dividerColor="@color/black_30"
+        app:dividerColor="@color/grey_30"
         app:layout_constraintTop_toBottomOf="@id/flTitle"/>
 
     <FrameLayout

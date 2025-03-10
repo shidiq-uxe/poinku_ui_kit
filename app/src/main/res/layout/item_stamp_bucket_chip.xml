@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    app:strokeColor="@color/primary_30"
+    app:cardCornerRadius="@dimen/xxs"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:layout_margin="@dimen/xxs">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+        <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/ivBucketImage"
+            android:layout_width="@dimen/dimen_0"
+            android:layout_height="@dimen/dimen_0"
+            android:layout_marginHorizontal="@dimen/xxxs"
+            android:layout_marginVertical="@dimen/dimen_2"
+            app:layout_constraintDimensionRatio="1:1"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            tools:src="@drawable/ic_placeholder_medium_24"
+            tools:tint="@color/primary_30"/>
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/tvBucketStampCount"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dimen_6"
+            android:layout_marginHorizontal="@dimen/xxs"
+            android:textAppearance="@style/TextAppearance.Rubik.H1.Heavy"
+            android:textColor="@color/primary_30"
+            app:layout_constrainedWidth="true"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toEndOf="@id/ivBucketImage"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            tools:text="32"/>
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/tvBucketStamp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/xxs"
+            android:layout_marginBottom="@dimen/dimen_6"
+            android:textAppearance="@style/TextAppearance.Rubik.B3.Light"
+            android:textColor="@color/primary_30"
+            app:layout_constrainedWidth="true"
+            app:layout_constraintTop_toBottomOf="@id/tvBucketStampCount"
+            app:layout_constraintStart_toEndOf="@id/ivBucketImage"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintVertical_bias="0.0"
+            app:layout_constraintHorizontal_bias="0.0"
+            tools:text="Stamp"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</com.google.android.material.card.MaterialCardView>

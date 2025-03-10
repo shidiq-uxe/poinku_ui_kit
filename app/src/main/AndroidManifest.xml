@@ -15,9 +15,15 @@
         android:theme="@style/Theme.EDTS.UIKit.ActionBar"
         tools:targetApi="31">
         <activity
+            android:name=".stamp_exchange_guidelines.GuidelinesBucketStampActivitty"
+            android:theme="@style/Theme.EDTS.UIKit.ActionBar.NoElevation"
+            android:exported="false"
+            android:label="Tukarkan Stamp"
+            android:hardwareAccelerated="true"/>
+        <activity
             android:name=".ikupon_guidelines.GuidelinesHomeCouponActivity"
             android:exported="false"
-            android:label="Home - Reward Widget"/>
+            android:label="Home - Reward Widget" />
         <activity
             android:name=".MainActivity"
             android:exported="true">

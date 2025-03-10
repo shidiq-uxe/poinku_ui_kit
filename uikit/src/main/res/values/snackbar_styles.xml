@@ -14,7 +14,7 @@
     </style>
 
     <style name="ThemeOverlay.EDTS.UIKit.Poinku.Snackbar" parent="">
-        <item name="backgroundTint">@color/black_60</item>
+        <item name="backgroundTint">@color/grey_70</item>
         <item name="shapeAppearanceOverlay">@style/ShapeAppearance.EDTS.UIKit.Poinku.MediumComponent</item>
         <item name="android:layout_margin">@dimen/xxs</item>
     </style>

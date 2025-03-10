@@ -93,7 +93,7 @@ class Ribbon @JvmOverloads constructor(
     var textHorizontalPadding = context.dimen(R.dimen.xxxs)
 
     @StyleRes
-    var textAppearanceRes = R.style.TextAppearance_Rubik_Semibold_H3
+    var textAppearanceRes = R.style.TextAppearance_Rubik_H3_Heavy
         set(value) {
             field = value
             requestLayout()
@@ -137,7 +137,7 @@ class Ribbon @JvmOverloads constructor(
         private set
     var triangleHeight = 8f * resources.displayMetrics.density // Height of the triangle
         private set
-    var textContainerHeight = textWidth + textVerticalPadding
+    var textContainerHeight = textHeight + textVerticalPadding
         private set
 
     private val containerPath = Path()
@@ -157,9 +157,11 @@ class Ribbon @JvmOverloads constructor(
         .build()
 
     private val materialPathProvider = ShapeAppearancePathProvider()
-
+    private var cachedContainerPath: Path? = null
 
     init {
+        setLayerType(LAYER_TYPE_HARDWARE, null)
+
         context.theme.obtainStyledAttributes(attrs, R.styleable.Ribbon, 0, 0).use {
             triangleColor = it.getColor(R.styleable.Ribbon_triangleColor, triangleColor)
             containerColor = it.getColor(R.styleable.Ribbon_containerColor, containerColor)
@@ -193,6 +195,7 @@ class Ribbon @JvmOverloads constructor(
     override fun onSizeChanged(w: Int, h: Int, oldw: Int, oldh: Int) {
         super.onSizeChanged(w, h, oldw, oldh)
         updateGradientShader()
+        updateContainerPath()
     }
 
     override fun onDraw(canvas: Canvas) {
@@ -214,8 +217,6 @@ class Ribbon @JvmOverloads constructor(
 
 
     private fun drawContainer(canvas: Canvas) {
-        val containerPath = if (gravity == Gravity.START) drawStartContainer()  else drawEndContainer()
-
         if (gradientShader != null) {
             containerPaint.shader = gradientShader
         } else {
@@ -225,6 +226,14 @@ class Ribbon @JvmOverloads constructor(
 
         canvas.drawPath(containerPath, containerPaint)
     }
+
+    private fun updateContainerPath() {
+        cachedContainerPath = when(gravity) {
+            Gravity.START -> drawStartContainer()
+            Gravity.END -> drawEndContainer()
+        }
+    }
+
 
     fun drawStartContainer(): Path {
         containerPath.reset()

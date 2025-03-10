@@ -3,15 +3,10 @@ package id.co.edtslib.uikit.poinku.searchbar
 import android.animation.AnimatorSet
 import android.animation.ObjectAnimator
 import android.content.Context
-import android.graphics.Color
-import android.graphics.Outline
-import android.graphics.drawable.ColorDrawable
 import android.os.Build
 import android.text.InputFilter
 import android.util.AttributeSet
-import android.util.Log
 import android.view.View
-import android.view.ViewOutlineProvider
 import android.view.animation.AlphaAnimation
 import android.view.animation.Animation
 import android.view.animation.AnimationSet
@@ -63,13 +58,13 @@ class SearchBar @JvmOverloads constructor(
         this.setFactory {
             TextView(context).apply {
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-                    setTextAppearance(R.style.TextAppearance_Rubik_Regular_P1)
+                    setTextAppearance(R.style.TextAppearance_Rubik_P1_Light)
                 } else {
-                    setTextAppearance(context, R.style.TextAppearance_Rubik_Regular_P1)
+                    setTextAppearance(context, R.style.TextAppearance_Rubik_P1_Light)
                 }
 
                 post {
-                    setTextColor(context.color(R.color.black_40))
+                    setTextColor(context.color(R.color.grey_50))
                 }
             }
         }
@@ -358,7 +353,7 @@ class SearchBar @JvmOverloads constructor(
                 fieldInputType = InputType.values()[getInt(R.styleable.SearchBar_fieldInputType, 0)]
 
                 prefixText = getString(R.styleable.SearchBar_prefixText)
-                placeholderTextAppearance = getResourceId(R.styleable.SearchBar_placeholderTextAppearance, placeholderTextAppearance ?: R.style.TextAppearance_Rubik_Regular_B2)
+                placeholderTextAppearance = getResourceId(R.styleable.SearchBar_placeholderTextAppearance, placeholderTextAppearance ?: R.style.TextAppearance_Rubik_B2_Light)
 
                 val startIconColorRes = getResourceId(R.styleable.SearchBar_startIcon, 0)
 
@@ -492,7 +487,7 @@ class SearchBar @JvmOverloads constructor(
 
     private fun setShadowColor() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
-            this.outlineSpotShadowColor = context.color(R.color.black_40)
+            this.outlineSpotShadowColor = context.color(R.color.grey_50)
         }
     }
 

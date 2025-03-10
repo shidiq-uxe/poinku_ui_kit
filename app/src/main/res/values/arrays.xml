@@ -7,6 +7,7 @@
         <item>Progress Bar</item>
         <item>I-Kupon List</item>
         <item>I-Kupon List Overlay</item>
+        <item>Stamp Bucket</item>
     </string-array>
 
     <string-array name="array_guidelines_font">
@@ -49,5 +50,19 @@
         <item>Onigiri</item>
         <item>Flakes</item>
         <item>Xbox</item>
+    </string-array>
+
+    <string-array name="stamp_bucket_coachmark_titles">
+        <item>Cek Jumlah Stamp yang Kamu Punya</item>
+        <item>Ini Stamp Punya Kamu di Masing-Masing Brand</item>
+        <item>Bisa Langsung Tukar Stamp jadi i-Kupon</item>
+        <item>Lihat Penukaran pada Brand Selengkapnya</item>
+    </string-array>
+
+    <string-array name="stamp_bucket_coachmark_descriptions">
+        <item>Tap pada brand yang ada untuk langsung menuju kumpulan kupon yang kamu inginkan.</item>
+        <item>Masing-masing brand punya Stampnya sendiri. Ini adalah jumlah Stamp yang kamu punya pada brand terkait.</item>
+        <item>Ayo langsung tukar Stamp jadi i-Kupon dari sini. Kalau mau lihat lebih lengkap, coba tap pada gambar kupon.</item>
+        <item>Lihat syarat, ketentuan, dan semua i-Kupon yang ditawarkan oleh setiap brand lewat sini.</item>
     </string-array>
 </resources>

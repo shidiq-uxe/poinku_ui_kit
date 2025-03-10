@@ -24,7 +24,7 @@ The `ImageParallaxOverlayLayout` is a customizable Android component for creatin
 ### Add to Layout
 Include `ImageParallaxOverlayLayout` in your XML layout file:
 - You could either set the image width with static value using `drawableWidth` or dynamically using `drawableWidthPercentage` (Choose 1)
-- You could ignore and remove the `gradientColor` since it's not used anymore. and use `overlayBackgroundColor` instead for background color
+- You could ignore and remove the `gradientColor` since it's not used anymore. a nd use `overlayBackgroundColor` instead for background color
 
 ```xml
 <id.co.edtslib.uikit.poinku.overlay.ImageParallaxOverlayLayout

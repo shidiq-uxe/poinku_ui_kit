@@ -1,3 +1,6 @@
 <resources>
     <string name="app_name">Poinku UI Kit</string>
+
+    <string name="stamp_chip_group_title">Stamp yang kamu miliki</string>
+    <string name="redeem_stamp">Tukar Stamp</string>
 </resources>

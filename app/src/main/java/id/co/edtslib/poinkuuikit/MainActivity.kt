@@ -10,6 +10,7 @@ import id.co.edtslib.poinkuuikit.databinding.ActivityMainBinding
 import id.co.edtslib.poinkuuikit.databinding.ItemGuidelinesParentBinding
 import id.co.edtslib.poinkuuikit.ikupon_guidelines.GuidelinesHomeCouponActivity
 import id.co.edtslib.poinkuuikit.ikupon_guidelines.GuidelinesIkuponActivity
+import id.co.edtslib.poinkuuikit.stamp_exchange_guidelines.GuidelinesBucketStampActivitty
 import id.co.edtslib.uikit.poinku.adapter.SingleItemViewTypeAdapter
 import id.co.edtslib.uikit.poinku.adapter.singleItemViewTypeAdapter
 import id.co.edtslib.uikit.poinku.utils.setLightStatusBar
@@ -61,6 +62,7 @@ class MainActivity : AppCompatActivity() {
                         3 -> Intent(this, GuidelinesProgressActivity::class.java)
                         4 -> Intent(this, GuidelinesIkuponActivity::class.java)
                         5 -> Intent(this, GuidelinesHomeCouponActivity::class.java)
+                        6 -> Intent(this, GuidelinesBucketStampActivitty::class.java)
                         else -> Intent(this, WIPActivity::class.java)
                     },
                     binding.sharedElementOptions

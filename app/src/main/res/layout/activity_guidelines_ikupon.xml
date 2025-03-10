@@ -6,7 +6,7 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/black_10"
+    android:background="@color/grey_10"
     tools:context=".ikupon_guidelines.GuidelinesIkuponActivity">
 
     <com.google.android.material.appbar.AppBarLayout
@@ -21,15 +21,15 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:title="I-Kupon Saya"
-            app:titleTextAppearance="@style/TextAppearance.Rubik.Semibold.H1"
+            app:titleTextAppearance="@style/TextAppearance.Rubik.H1.Heavy"
             app:menu="@menu/menu_i_kupon"/>
 
         <com.google.android.material.divider.MaterialDivider
             android:layout_width="wrap_content"
-            app:dividerColor="@color/black_20"
+            app:dividerColor="@color/grey_20"
             android:layout_height="@dimen/dimen_1"/>
 
-        <id.co.edtslib.uikit.poinku.searchbar.SearchBar
+       <!-- <id.co.edtslib.uikit.poinku.searchbar.SearchBar
             android:id="@+id/sbSearchCoupon"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -39,7 +39,7 @@
             app:searchBarType="borderless"
             android:layout_marginVertical="@dimen/xs"
             android:layout_marginHorizontal="@dimen/s"
-            app:layout_scrollFlags="exitUntilCollapsed"/>
+            app:layout_scrollFlags="exitUntilCollapsed"/>-->
 
     </com.google.android.material.appbar.AppBarLayout>
 

@@ -47,19 +47,19 @@ class BottomSheetTray : BottomSheetDialogFragment() {
 
     // Title View Override
     @StyleRes
-    var titleTextAppearance: Int? = R.style.TextAppearance_Rubik_Semibold_H1
+    var titleTextAppearance: Int? = R.style.TextAppearance_Rubik_H1_Heavy
     @ColorRes
-    var titleTextColor: Int? = R.color.black_70
+    var titleTextColor: Int? = R.color.grey_80
     @DrawableRes
     var endIcon: Int? = R.drawable.ic_cancel_24
     @ColorRes
-    var endIconTint: Int? = R.color.black_50
+    var endIconTint: Int? = R.color.grey_60
     @StringRes
     var endIconText: Int? = null
     @DrawableRes
     var navigationIcon: Int? = R.drawable.ic_arrow_left
     @ColorRes
-    var navigationIconTint: Int? = R.color.black_50
+    var navigationIconTint: Int? = R.color.grey_60
 
     private var bottomSheetBehavior: BottomSheetBehavior<View>? = null
 

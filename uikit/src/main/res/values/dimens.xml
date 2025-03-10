@@ -36,9 +36,22 @@
     <dimen name="b2_text_size">14sp</dimen>
     <dimen name="b3_text_size">12sp</dimen>
     <dimen name="b4_text_size">10sp</dimen>
+    <dimen name="b5_text_size">8sp</dimen>
+
+    <!--Stroke Width-->
+    <dimen name="stroke_width_normal">1dp</dimen>
+    <dimen name="stroke_width_medium">1.5dp</dimen>
+    <dimen name="stroke_width_bold">2dp</dimen>
 
     <!--Paragraph-->
     <dimen name="p1_text_size">14sp</dimen>
+    <dimen name="p2_text_size">12sp</dimen>
+    <dimen name="p3_text_size">10sp</dimen>
+
+    <!--Button-->
+    <dimen name="button_large_text_size">16sp</dimen>
+    <dimen name="button_medium_text_size">14sp</dimen>
+    <dimen name="button_small_text_size">12sp</dimen>
 
     <!--Text Link-->
     <dimen name="tl_text_size">@dimen/p1_text_size</dimen>
@@ -57,16 +70,19 @@
     <dimen name="dimen_1">1dp</dimen>
     <dimen name="dimen_2">2dp</dimen>
     <dimen name="dimen_6">6dp</dimen>
+    <dimen name="dimen_8">8dp</dimen>
     <dimen name="dimen_10">10dp</dimen>
+    <dimen name="dimen_12">12dp</dimen>
     <dimen name="dimen_14">14dp</dimen>
     <dimen name="dimen_16">16dp</dimen>
     <dimen name="dimen_18">18dp</dimen>
+    <dimen name="dimen_20">20dp</dimen>
     <dimen name="dimen_21">21dp</dimen>
+    <dimen name="dimen_24">24dp</dimen>
     <dimen name="dimen_26">26dp</dimen>
     <dimen name="dimen_28">28dp</dimen>
     <dimen name="dimen_30">30dp</dimen>
     <dimen name="dimen_36">36dp</dimen>
     <dimen name="dimen_48">48dp</dimen>
-
 
 </resources>

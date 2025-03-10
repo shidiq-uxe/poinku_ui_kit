@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    app:shapeAppearanceOverlay="@style/ShapeAppearance.EDTS.UIKit.Poinku.MediumComponent"
+    app:strokeColor="@color/primary_30"
+    app:cardElevation="@dimen/dimen_0"
+    android:clipChildren="false"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:layout_width="175dp"
+    tools:layout_marginEnd="@dimen/xs">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/cl"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:id="@+id/ivCouponImage"
+            android:layout_width="@dimen/dimen_0"
+            android:layout_height="@dimen/dimen_0"
+            android:contentDescription="Coupon Image"
+            app:layout_constraintDimensionRatio="79:60"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            tools:src="@drawable/ic_placeholder_medium_24"/>
+
+        <com.google.android.material.chip.Chip
+            android:id="@+id/tvExpiredIn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/secondary_30"
+            android:textAppearance="@style/TextAppearance.Rubik.B4.Light"
+            app:shapeAppearance="@style/ShapeAppearance.EDTS.UIKit.Poinku.Flat.Corner.Start.Extra"
+            android:maxLines="1"
+            android:ellipsize="end"
+            android:drawablePadding="@dimen/xxxs"
+            app:chipMinHeight="0dp"
+            android:paddingVertical="@dimen/dimen_6"
+            app:textStartPadding="@dimen/xxxs"
+            app:textEndPadding="@dimen/xxxs"
+            app:ensureMinTouchTargetSize="false"
+            app:chipIcon="@drawable/ic_timer_16"
+            app:chipIconTint="@color/secondary_30"
+            app:drawableTint="@color/secondary_30"
+            app:chipBackgroundColor="@color/warning_background"
+            app:chipStrokeWidth="@dimen/dimen_0"
+            app:layout_constrainedWidth="true"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toBottomOf="@id/ivCouponImage"
+            app:layout_constraintHorizontal_bias="0.0"
+            tools:text="Kuota mau habis"/>
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/tvCouponName"
+            android:layout_width="@dimen/dimen_0"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/xxs"
+            android:maxLines="2"
+            android:ellipsize="end"
+            android:textAppearance="@style/TextAppearance.Rubik.B3.Light"
+            android:textColor="@color/grey_70"
+            app:layout_constraintTop_toBottomOf="@id/tvExpiredIn"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            tools:text="Diskon Rp5.000 Kelloggs Frosted Flakes 300gr"/>
+
+        <com.google.android.material.chip.Chip
+            android:id="@+id/chipCouponCategory"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:chipMinHeight="@dimen/dimen_0"
+            android:paddingVertical="@dimen/xxxs"
+            android:layout_marginTop="@dimen/xxs"
+            android:layout_marginHorizontal="@dimen/xxs"
+            android:textColor="@color/secondary_30"
+            android:textAppearance="@style/TextAppearance.Rubik.B4.Light"
+            app:shapeAppearance="@style/ShapeAppearance.EDTS.UIKit.Poinku.ExtraLargeComponent"
+            app:ensureMinTouchTargetSize="false"
+            app:chipMinTouchTargetSize="0dp"
+            app:chipStrokeWidth="@dimen/dimen_1"
+            app:chipBackgroundColor="#FEFBF5"
+            app:chipStartPadding="@dimen/dimen_0"
+            app:chipEndPadding="@dimen/dimen_0"
+            app:chipStrokeColor="@color/secondary_30"
+            android:maxLines="1"
+            android:ellipsize="end"
+            app:layout_constraintTop_toBottomOf="@id/tvCouponName"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constrainedWidth="true"
+            app:layout_constraintHorizontal_bias="0.0"
+            tools:text="50 Stamp"/>
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnUseCoupon"
+            style="@style/Widget.EDTS.UIKit.Poinku.Button.Filled"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/xxs"
+            android:paddingHorizontal="@dimen/dimen_0"
+            android:text="Tukar Stamp"
+            android:maxLines="1"
+            android:ellipsize="end"
+            android:textAppearance="@style/TextAppearance.Rubik.Button.Small"
+            app:shapeAppearanceOverlay="@style/ShapeAppearance.EDTS.UIKit.Poinku.SmallComponent"
+            app:layout_constraintTop_toBottomOf="@id/chipCouponCategory"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintVertical_bias="0.0"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</com.google.android.material.card.MaterialCardView>

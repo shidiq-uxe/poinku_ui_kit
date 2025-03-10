@@ -11,8 +11,17 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Work In Progerss"
-        android:textAppearance="@style/TextAppearance.Rubik.Semibold.H2"
+        android:textAppearance="@style/TextAppearance.Rubik.H2.Heavy"
         android:layout_gravity="center"
         tools:ignore="HardcodedText" />
+
+    <id.co.edtslib.uikit.poinku.chip.BucketChip
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:stampCount="24"/>
+
+    <id.co.edtslib.uikit.poinku.chip.BucketChipGroup
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
 
 </FrameLayout>

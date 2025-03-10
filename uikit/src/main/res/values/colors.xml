@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <!--Application Colors-->
+    <!--Neutral-->
+    <color name="white">#FFFFFF</color>
+    <color name="black">#000000</color>
+
     <!--Primary-->
     <color name="primary_50">#044B95</color>
     <color name="primary_40">#0958AA</color>
@@ -22,14 +26,14 @@
     <color name="red_10">#FFEDEE</color>
 
     <!--Neutral-->
-    <color name="black_70">#151823</color>
-    <color name="black_60">#434755</color>
-    <color name="black_50">#70727D</color>
-    <color name="black_40">#9C9DA6</color>
-    <color name="black_30">#DCDEE3</color>
-    <color name="black_20">#EFF3F6</color>
-    <color name="black_10">#F8FBFC</color>
-    <color name="white">#FFFFFF</color>
+    <color name="grey_80">#151823</color>
+    <color name="grey_70">#434755</color>
+    <color name="grey_60">#70727D</color>
+    <color name="grey_50">#9C9DA6</color>
+    <color name="grey_40">#C3C7CF</color>
+    <color name="grey_30">#DCDEE3</color>
+    <color name="grey_20">#EFF3F6</color>
+    <color name="grey_10">#F8FBFC</color>
 
     <!--Support - Alert-->
     <color name="alert_primary">@color/red_30</color>
@@ -54,9 +58,9 @@
     <color name="info_border">@color/primary_30</color>
 
     <!--Support - Light - Alert-->
-    <color name="light_primary">@color/black_50</color>
-    <color name="light_background">@color/black_10</color>
-    <color name="light_border">@color/black_30</color>
+    <color name="light_primary">@color/grey_60</color>
+    <color name="light_background">@color/grey_10</color>
+    <color name="light_border">@color/grey_30</color>
 
     <!--Support Others-->
     <color name="support_others">#FAAD24</color>
@@ -66,5 +70,25 @@
     <color name="transparent">#00000000</color>
 
     <color name="spotlightBackground">#BF000000</color>
+
+    <!--Gradient-->
+    <!--Blue Gradient-->
+    <color name="gradient_blue_start">#1178D4</color>
+    <color name="gradient_blue_end">#6CB8FC</color>
+    <!--Blue 2 Gradient-->
+    <color name="gradient_blue_2_start">#6CB8FC</color>
+    <color name="gradient_blue_2_end">#1178D4</color>
+    <!--Gold Gradient-->
+    <color name="gradient_gold_start">#FAC714</color>
+    <color name="gradient_gold_end">#FA9E14</color>
+    <!--Silver Gradient-->
+    <color name="gradient_silver_start">#A4A7B3</color>
+    <color name="gradient_silver_end">#4F5158</color>
+    <!--Diamond Gradient-->
+    <color name="gradient_diamond_start">#575C70</color>
+    <color name="gradient_diamond_end">#11152A</color>
+    <!--Red Gradient-->
+    <color name="gradient_red_start">#FC6C6C</color>
+    <color name="gradient_red_end">#D41111</color>
 
 </resources>

@@ -7,6 +7,9 @@ plugins {
     id("maven-publish")
 }
 
+group = "id.co.edtslib.uikit.poinku"
+version = "0.2.0"
+
 afterEvaluate {
 
     publishing {
@@ -15,10 +18,10 @@ afterEvaluate {
                 from(components["release"])
                 groupId = "id.co.edtslib.uikit.poinku"
                 artifactId = "poinkuuikit"
-                version = "0.1.10"
+                version = "0.2.0"
 
                 pom {
-                    name.set("EDTS UI Kit")
+                    name.set("Poinku UI Kit")
                     description.set("A Library with sets of UI components for Android")
                     url.set("https://github.com/shidiq-uxe/poinku-ui-kit")
 

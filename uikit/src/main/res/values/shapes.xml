@@ -44,6 +44,22 @@
         <item name="cornerSizeBottomLeft">@dimen/dimen_0</item>
     </style>
 
+    <style name="ShapeAppearance.EDTS.UIKit.Poinku.Flat.Corner.Start.Extra" parent="">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSizeTopLeft">@dimen/dimen_0</item>
+        <item name="cornerSizeBottomLeft">@dimen/dimen_0</item>
+        <item name="cornerSizeTopRight">@dimen/xs</item>
+        <item name="cornerSizeBottomRight">@dimen/xs</item>
+    </style>
+
+    <style name="ShapeAppearance.EDTS.UIKit.Poinku.Flat.Corner.End.Extra" parent="">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSizeTopLeft">@dimen/dimen_0</item>
+        <item name="cornerSizeBottomLeft">@dimen/dimen_0</item>
+        <item name="cornerSizeTopRight">@dimen/xs</item>
+        <item name="cornerSizeBottomRight">@dimen/xs</item>
+    </style>
+
     <style name="ShapeAppearance.EDTS.UIKit.Poinku.Flat.Corner.Bottom" parent="">
         <item name="cornerFamily">rounded</item>
         <item name="cornerSizeBottomRight">@dimen/dimen_0</item>

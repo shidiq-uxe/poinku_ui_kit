@@ -22,10 +22,13 @@ dependencies {
 5. [Interpolator](docs/Interpolator.md)
 6. [Liquid Refresh Layout](docs/LiquidRefreshLayout.md)
 7. [ImageParallaxOverlayLayout](docs/ImageParallaxOverlayLayout.md)
+8. [Coachmark](docs/Coachmark.md)
+9. [BucketChipGroup](docs/BucketChipGroup.md)
 
 ## Pages Reference
 1. [I-Kupon Page](docs/pages/IkuponPage.md)
-1. [Homepage Reward Widget /w Parallax](docs/pages/HomePageRewardWidget.md)
+2. [Homepage Reward Widget /w Parallax](docs/pages/HomePageRewardWidget.md)
+3. [Bucket Stamp Page](docs/pages/BucketStampPage.md)
 
 ## Basic setup and initialization :
 

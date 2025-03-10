@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    app:strokeWidth="@dimen/dimen_0"
+    app:shapeAppearance="@style/ShapeAppearance.EDTS.UIKit.Poinku.MediumComponent"
+    app:cardCornerRadius="@dimen/xxs"
+    app:cardElevation="@dimen/dimen_2"
+    tools:layout_marginBottom="@dimen/m2">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <!--Barrier Placeholder for the 2nd Coachmark Target-->
+        <androidx.constraintlayout.widget.Barrier
+            android:id="@+id/coachmarkBarrier"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:barrierDirection="end"
+            app:constraint_referenced_ids="tvBucketStampName, tvBucketStampOwnedCount"/>
+
+        <!--Placeholder for the 2nd Coachmark Target-->
+        <View
+            android:id="@+id/coachMarkPlaceholder2"
+            android:layout_width="@dimen/dimen_0"
+            android:layout_height="@dimen/dimen_0"
+            app:layout_constraintTop_toTopOf="@id/ivBucketStampImage"
+            app:layout_constraintStart_toStartOf="@id/ivBucketStampImage"
+            app:layout_constraintEnd_toEndOf="@id/coachmarkBarrier"
+            app:layout_constraintBottom_toBottomOf="@id/ivBucketStampImage"/>
+
+        <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/ivBucketStampImage"
+            android:layout_width="@dimen/dimen_0"
+            android:layout_height="@dimen/dimen_0"
+            android:layout_marginTop="@dimen/xxs"
+            android:layout_marginStart="@dimen/xs"
+            android:padding="@dimen/dimen_1"
+            app:strokeWidth="@dimen/dimen_1"
+            app:strokeColor="@color/grey_30"
+            app:shapeAppearance="@style/ShapeAppearance.EDTS.UIKit.Poinku.MediumComponent"
+            app:layout_constraintDimensionRatio="1:1"
+            app:layout_constraintWidth_percent="0.11"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            tools:src="@drawable/ic_placeholder_medium_24"/>
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/tvBucketStampName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/xxs"
+            android:layout_marginStart="@dimen/xxs"
+            android:maxLines="1"
+            android:ellipsize="end"
+            android:textAppearance="@style/TextAppearance.Rubik.H2.Heavy"
+            android:textColor="@color/grey_80"
+            app:layout_constrainedWidth="true"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toEndOf="@id/ivBucketStampImage"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            tools:text="Indomaret Festival"/>
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/tvBucketStampOwnedPrefix"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/xxs"
+            android:maxLines="1"
+            android:ellipsize="end"
+            android:text="Kamu Punya:"
+            android:textColor="@color/grey_50"
+            android:textAppearance="@style/TextAppearance.Rubik.B3.Light"
+            app:layout_constraintTop_toBottomOf="@id/tvBucketStampName"
+            app:layout_constraintStart_toEndOf="@id/ivBucketStampImage"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/tvBucketStampOwnedCount"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/dimen_2"
+            android:maxLines="1"
+            android:ellipsize="end"
+            android:textColor="@color/secondary_30"
+            android:textAppearance="@style/TextAppearance.Rubik.H3.Heavy"
+            app:layout_constraintTop_toBottomOf="@id/tvBucketStampName"
+            app:layout_constraintStart_toEndOf="@id/tvBucketStampOwnedPrefix"
+            app:layout_constraintHorizontal_bias="0.0"
+            tools:text="30 Stamp"/>
+        
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/tvInfo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/s"
+            android:layout_marginStart="@dimen/xs"
+            android:text="Kupon yang bisa ditukar:"
+            android:textColor="@color/grey_80"
+            android:textAppearance="@style/TextAppearance.Rubik.B3.Light"
+            app:layout_constraintTop_toBottomOf="@id/ivBucketStampImage"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/tvSeeAll"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/s"
+            android:layout_marginEnd="@dimen/xs"
+            android:text="Lihat Semua"
+            android:textColor="@color/primary_30"
+            android:textAppearance="@style/TextAppearance.Rubik.B3.Light"
+            app:layout_constraintTop_toBottomOf="@id/ivBucketStampImage"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rvStamps"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/xxs"
+            android:paddingVertical="@dimen/xxs"
+            android:paddingHorizontal="@dimen/xs"
+            android:clipToPadding="false"
+            android:orientation="horizontal"
+            android:background="#E7F1FD"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            app:layout_constraintTop_toBottomOf="@id/tvSeeAll"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            tools:listitem="@layout/item_grid_poinku_stamp"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</com.google.android.material.card.MaterialCardView>
