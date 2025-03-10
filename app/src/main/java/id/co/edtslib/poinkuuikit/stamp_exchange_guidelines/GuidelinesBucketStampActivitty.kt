@@ -95,8 +95,6 @@ class GuidelinesBucketStampActivitty : GuidelinesBaseActivity() {
         showCoachmark()
     }
 
-    private var isProgrammaticScroll = false
-
     private fun bindBucketChipItems() {
         binding.cgBucket.items = dummyList
 
@@ -111,17 +109,10 @@ class GuidelinesBucketStampActivitty : GuidelinesBaseActivity() {
     }
 
     private fun scrollBucketItemToPosition(position: Int) {
-        isProgrammaticScroll = true
-
         val layoutManager = binding.rvBucket.layoutManager as? LinearLayoutManager
         layoutManager?.let {
             val smoothScroller = object : LinearSmoothScroller(this) {
                 override fun getVerticalSnapPreference(): Int = SNAP_TO_START
-
-                override fun onStop() {
-                    super.onStop()
-                    isProgrammaticScroll = false
-                }
             }
             smoothScroller.targetPosition = position
             layoutManager.startSmoothScroll(smoothScroller)
@@ -165,21 +156,11 @@ class GuidelinesBucketStampActivitty : GuidelinesBaseActivity() {
 
         binding.rvBucket.addOnScrollListener(object : RecyclerView.OnScrollListener() {
             override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
-                if (!binding.cgBucket.isUserScrolling) {
-                    val firstVisiblePosition = (recyclerView.layoutManager as LinearLayoutManager)
-                        .findFirstVisibleItemPosition()
+                val firstVisiblePosition = (recyclerView.layoutManager as LinearLayoutManager)
+                    .findFirstVisibleItemPosition()
 
-                    binding.cgBucket.setSelectedPosition(firstVisiblePosition, fromScroll = true)
-                }
+                binding.cgBucket.setSelectedPosition(firstVisiblePosition, fromScroll = binding.cgBucket.isUserScrolling)
             }
-
-
-            override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
-                if (!isProgrammaticScroll) {
-                    binding.cgBucket.isUserScrolling = newState != RecyclerView.SCROLL_STATE_IDLE
-                }
-            }
-
         })
     }
 

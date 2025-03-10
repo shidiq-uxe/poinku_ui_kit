@@ -1,4 +1,4 @@
-Stamp Exchange Guidelines UI
+Stamp Exchange UX Guideline
 ============================
 
 This document describes the UI layout and components used in `GuidelinesBucketStampActivity`. The layout is structured using `ConstraintLayout` with an `AppBarLayout`, a `BucketChipGroup`, and a `RecyclerView`.
@@ -99,5 +99,12 @@ RecyclerView Item Preview
 -----------------------------
 
 The layout used for individual RecyclerView items is defined in `item_stamp_bucket.xml`. Below is a placeholder preview:
-- [View item_stamp_bucket.xml](https://github.com/shidiq-uxe/poinku_ui_kit/blob/main/app/src/main/res/layout/item_bucket_stamp.xml)
-- [View item_grid_poinku_stamp.xml](https://github.com/shidiq-uxe/poinku_ui_kit/blob/main/uikit/src/main/res/layout/item_grid_poinku_stamp)
+- [item_stamp_bucket.xml](https://github.com/shidiq-uxe/poinku_ui_kit/blob/main/app/src/main/res/layout/item_stamp_bucket.xml)
+- [item_grid_poinku_stamp.xml](https://github.com/shidiq-uxe/poinku_ui_kit/blob/main/uikit/src/main/res/layout/item_grid_poinku_stamp.xml)
+
+Pages Interaction
+-----------------------------
+This section show how the interactions work.
+- Activity Class Implementation : [GuidelinesBucketStampActivity](https://github.com/shidiq-uxe/poinku_ui_kit/blob/main/app/src/main/java/id/co/edtslib/poinkuuikit/stamp_exchange_guidelines/GuidelinesBucketStampActivitty.kt)
+
+- ![Page Interaction](https://res.cloudinary.com/dmduc9apd/image/upload/v1741592154/Stamp%20Exchange/ofsqxcsjh2dftukpd1ii.gif)

@@ -27,6 +27,7 @@ import id.co.edtslib.uikit.poinku.utils.dimenPixelSize
 import id.co.edtslib.uikit.poinku.utils.dp
 import id.co.edtslib.uikit.poinku.utils.drawable
 
+// Not Used
 @SuppressLint("UseCompatTextViewDrawableApis")
 class BucketListHorizontalCarousel @JvmOverloads constructor(
     context: Context,
