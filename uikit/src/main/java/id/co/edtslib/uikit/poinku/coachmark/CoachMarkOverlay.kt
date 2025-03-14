@@ -130,11 +130,16 @@ class CoachMarkOverlay @JvmOverloads constructor(
     private fun updateCoachMarkContent() {
         if (coachMarkItems.isEmpty()) return
         val currentItem = coachMarkItems[currentCoachMarkIndex]
-        coachmarkBinding.tvTiTle.text = currentItem.title
-        coachmarkBinding.tvDescription.text = currentItem.description
-        coachmarkBinding.tvCoachmarkCount.text = "${currentCoachMarkIndex + 1}/${coachMarkItems.size}"
-        coachmarkBinding.btnNext.text =
-            if (currentCoachMarkIndex == coachMarkItems.size - 1) "Tutup" else "Berikutnya"
+
+        val isOnTheLastIndex = (currentCoachMarkIndex == coachMarkItems.size.minus(1))
+
+        with(coachmarkBinding) {
+            tvTiTle.text = currentItem.title
+            tvDescription.text = currentItem.description
+            tvCoachmarkCount.text = "${currentCoachMarkIndex.plus(1)}/${coachMarkItems.size}"
+            btnNext.text = if (isOnTheLastIndex) "Tutup" else "Berikutnya"
+            btnSkip.isVisible = !isOnTheLastIndex
+        }
     }
 
     /**
@@ -257,54 +262,48 @@ class CoachMarkOverlay @JvmOverloads constructor(
         val newRect = calculateTargetRect(newTarget)
         val currentRect = targetRect ?: newRect
 
-        val currentPos = computeCoachmarkPosition(currentRect)
-        val finalPos = computeCoachmarkPosition(newRect)
+        val (currentX, currentY) = computeCoachmarkPosition(currentRect)
+        val (finalX, finalY) = computeCoachmarkPosition(newRect)
 
         val targetCenterX = newRect.centerX()
-        val isEdgeAtTop = finalPos.second > newRect.bottom
+        val isEdgeAtTop = finalY > newRect.bottom
+        val gravity = when {
+            targetCenterX < width / 3f -> CoachMarkHorizontalGravity.START
+            targetCenterX > width * 2 / 3f -> CoachMarkHorizontalGravity.END
+            else -> CoachMarkHorizontalGravity.CENTER
+        }
 
-        // Adjust the coach mark shape appearance based on position
-        coachmarkBinding.cardContainer.shapeAppearanceModel = coachMarkShapeAppearanceEdge(
-            gravity = when {
-                targetCenterX < this.width / 3f -> CoachMarkHorizontalGravity.START
-                targetCenterX > this.width * 2 / 3f -> CoachMarkHorizontalGravity.END
-                else -> CoachMarkHorizontalGravity.CENTER
-            },
-            isEdgeAtTop = isEdgeAtTop
-        )
+        coachmarkBinding.cardContainer.shapeAppearanceModel = coachMarkShapeAppearanceEdge(gravity, isEdgeAtTop)
 
         currentCoachMarkIndex++
         updateCoachMarkContent()
 
-        val animator = ValueAnimator.ofFloat(0f, 1f).apply {
+        ValueAnimator.ofFloat(0f, 1f).apply {
             duration = SPOTLIGHT_ENTER_EXIT_DURATION
             interpolator = EaseInterpolator.EaseInOutQubicInterpolator
             addUpdateListener { animation ->
                 val fraction = animation.animatedFraction
-                val left = lerp(currentRect.left, newRect.left, fraction)
-                val top = lerp(currentRect.top, newRect.top, fraction)
-                val right = lerp(currentRect.right, newRect.right, fraction)
-                val bottom = lerp(currentRect.bottom, newRect.bottom, fraction)
-                targetRect = RectF(left, top, right, bottom)
+
+                targetRect?.set(
+                    lerp(currentRect.left, newRect.left, fraction),
+                    lerp(currentRect.top, newRect.top, fraction),
+                    lerp(currentRect.right, newRect.right, fraction),
+                    lerp(currentRect.bottom, newRect.bottom, fraction)
+                )
                 spotlightScale = 1f
 
-                val newY = lerp(currentPos.second, finalPos.second, fraction)
-                val newX = lerp(currentPos.first, finalPos.first, fraction)
-                coachmarkView.translationY = newY
-                coachmarkView.translationX = newX
+                coachmarkView.translationX = lerp(currentX, finalX, fraction)
+                coachmarkView.translationY = lerp(currentY, finalY, fraction)
 
                 invalidate()
             }
             addListener(object : AnimatorListenerAdapter() {
-                override fun onAnimationEnd(animation: Animator) {
-                    coachmarkView.translationY = finalPos.second
-                    coachmarkView.translationX = finalPos.first
-                    onTransitionEnd()
-                }
+                override fun onAnimationEnd(animation: Animator) = onTransitionEnd()
             })
+            start()
         }
-        animator.start()
     }
+
 
 
     /**

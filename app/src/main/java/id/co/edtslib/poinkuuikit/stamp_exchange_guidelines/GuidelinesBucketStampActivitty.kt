@@ -218,8 +218,11 @@ class GuidelinesBucketStampActivitty : GuidelinesBaseActivity() {
                 }
 
                 // Target 3 - Stamp Card
-                itemView.findViewById<View>(R.id.rvStamps).let {
-                    placeholderTargets.add(it)
+                itemView.findViewById<RecyclerView>(R.id.rvStamps).let { child ->
+                    placeholderTargets.add(child)
+                    child.findViewHolderForAdapterPosition(0)?.itemView?.let { stampCard ->
+
+                    }
                 }
 
                 // Target 4 - Bucket RecyclerView See All

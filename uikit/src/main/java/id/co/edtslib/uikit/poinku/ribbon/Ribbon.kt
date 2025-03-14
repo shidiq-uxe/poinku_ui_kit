@@ -169,7 +169,7 @@ class Ribbon @JvmOverloads constructor(
             containerStartColor = it.getColor(R.styleable.Ribbon_containerStartColor, containerStartColor)
             containerEndColor = it.getColor(R.styleable.Ribbon_containerEndColor, containerEndColor)
 
-            textColor = it.getColor(R.styleable.Ribbon_textColor, textColor)
+            textColor = it.getColor(R.styleable.Ribbon_ribbonTextColor, textColor)
             gravity = Gravity.values()[it.getInt(R.styleable.Ribbon_gravity, gravity.ordinal)]
             ribbonText = it.getString(R.styleable.Ribbon_text) ?: ribbonText
 

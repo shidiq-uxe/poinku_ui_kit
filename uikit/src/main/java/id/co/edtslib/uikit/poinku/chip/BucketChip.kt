@@ -77,7 +77,7 @@ class BucketChip @JvmOverloads constructor(
     init {
         context.obtainStyledAttributes(attrs, R.styleable.BucketChip, 0, 0).use {
             stampCount = it.getInt(R.styleable.BucketChip_stampCount, 0)
-            textColor = it.getColor(R.styleable.BucketChip_textColor, textColor)
+            textColor = it.getColor(R.styleable.BucketChip_chipTextColor, textColor)
         }
     }
 
