@@ -53,6 +53,9 @@
         <item name="colorDisableFill">@color/grey_30</item>
         <item name="colorFocusBorder">@color/primary_30</item>
 
+        <!--Status Bar-->
+        <item name="android:windowLightStatusBar" tools:targetApi="m">true</item>
+
         <!--Button-->
         <item name="buttonStyle">@style/Widget.EDTS.UIKit.Poinku.Button.Filled</item>
 
@@ -61,6 +64,9 @@
 
         <!--Action Bar-->
         <item name="actionBarStyle">@style/Widget.EDTS.UIKit.Poinku.ActionBar</item>
+
+        <!--Toolbar-->
+        <item name="toolbarStyle">@style/Widget.EDTS.UIKit.Poinku.Toolbar</item>
 
         <!--Tray/BottomSheet Theme-->
         <item name="bottomSheetDialogTheme">@style/ThemeOverlay.EDTS.UIKit.Poinku.BottomSheetDialog</item>

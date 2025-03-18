@@ -6,12 +6,14 @@ import android.content.Context
 import android.os.Build
 import android.text.InputFilter
 import android.util.AttributeSet
+import android.util.Log
 import android.view.View
 import android.view.animation.AlphaAnimation
 import android.view.animation.Animation
 import android.view.animation.AnimationSet
 import android.view.animation.ScaleAnimation
 import android.view.animation.TranslateAnimation
+import android.widget.EditText
 import android.widget.FrameLayout
 import android.widget.TextView
 import androidx.annotation.ColorRes
@@ -46,7 +48,7 @@ class SearchBar @JvmOverloads constructor(
     private var placeholderIndex = 0
     private var placeholderJobHelper: Job = Job()
 
-    private val endIconRes = R.drawable.ic_cancel_rounded_16
+    private val endIconRes = R.drawable.ic_x_close_rounded
 
     private val binding = SearchBarBinding.inflate(context.inflater, this, true)
 
@@ -82,7 +84,8 @@ class SearchBar @JvmOverloads constructor(
             field = value
 
             if (value == SearchBarType.BORDER) {
-                binding.inputBackground.background = context.drawable(R.drawable.bg_search_bar_border_default)
+                binding.inputBackground.background = context.drawable(R.drawable.bg_search_bar_border)
+                elevation = 0f
             } else {
                 binding.inputBackground.background = context.drawable(R.drawable.bg_search_bar_borderless)
                 elevation = 4.dp
@@ -207,66 +210,68 @@ class SearchBar @JvmOverloads constructor(
         set(value) {
             field = value
 
-            when(value) {
-                PlaceholderAnimationType.SlideUp -> {
-                    textSwitcher.inAnimation = TranslateAnimation(
-                        Animation.RELATIVE_TO_PARENT, 0.0f,
-                        Animation.RELATIVE_TO_PARENT, 0.0f,
-                        Animation.RELATIVE_TO_PARENT, 1.0f,
-                        Animation.RELATIVE_TO_PARENT, 0.0f
-                    ).apply {
-                        duration = 300
-                    }
+            if (placeholderTexts.isNotEmpty()) {
+                when(value) {
+                    PlaceholderAnimationType.SlideUp -> {
+                        textSwitcher.inAnimation = TranslateAnimation(
+                            Animation.RELATIVE_TO_PARENT, 0.0f,
+                            Animation.RELATIVE_TO_PARENT, 0.0f,
+                            Animation.RELATIVE_TO_PARENT, 1.0f,
+                            Animation.RELATIVE_TO_PARENT, 0.0f
+                        ).apply {
+                            duration = 300
+                        }
 
-                    textSwitcher.outAnimation = TranslateAnimation(
-                        Animation.RELATIVE_TO_PARENT, 0.0f,
-                        Animation.RELATIVE_TO_PARENT, 0.0f,
-                        Animation.RELATIVE_TO_PARENT, 0.0f,
-                        Animation.RELATIVE_TO_PARENT, -1.0f
-                    ).apply {
-                        duration = 300
-                    }
+                        textSwitcher.outAnimation = TranslateAnimation(
+                            Animation.RELATIVE_TO_PARENT, 0.0f,
+                            Animation.RELATIVE_TO_PARENT, 0.0f,
+                            Animation.RELATIVE_TO_PARENT, 0.0f,
+                            Animation.RELATIVE_TO_PARENT, -1.0f
+                        ).apply {
+                            duration = 300
+                        }
 
-                    slideUpAnimation()
-                }
-                PlaceholderAnimationType.TypeWriter -> {
-                    textSwitcher.inAnimation = AlphaAnimation(0f, 1f).apply {
-                        duration = 300
+                        slideUpAnimation()
                     }
-                    textSwitcher.outAnimation = AlphaAnimation(1f, 0f).apply {
-                        duration = 300
+                    PlaceholderAnimationType.TypeWriter -> {
+                        textSwitcher.inAnimation = AlphaAnimation(0f, 1f).apply {
+                            duration = 300
+                        }
+                        textSwitcher.outAnimation = AlphaAnimation(1f, 0f).apply {
+                            duration = 300
+                        }
+
+                        typeWriterAnimation()
                     }
+                    PlaceholderAnimationType.TypeWriterWithPrefix -> {
+                        this.post {
+                            if (prefixText.isNullOrEmpty()) throw IllegalAccessException("You Should Set Prefix Text by using prefixText attribute")
+                        }
 
-                    typeWriterAnimation()
-                }
-                PlaceholderAnimationType.TypeWriterWithPrefix -> {
-                    this.post {
-                        if (prefixText.isNullOrEmpty()) throw IllegalAccessException("You Should Set Prefix Text by using prefixText attribute")
+                        val scaleUp = ScaleAnimation(
+                            1.0f, 1.025f,  // Scale up from 100% to 102.5% in X-axis
+                            1.0f, 1.025f,  // Scale up from 100% to 102.5% in Y-axis
+                        ).apply {
+                            duration = 150  // First phase duration
+                        }
+
+                        val scaleDown = ScaleAnimation(
+                            1.025f, 1.0f,  // Scale down from 102.5% to 100% in X-axis
+                            1.025f, 1.0f,  // Scale down from 102.5% to 100% in Y-axis
+                        ).apply {
+                            duration = 150  // Second phase duration
+                            startOffset = 150  // Start after the scale up finishes
+                        }
+
+                        val scaleAnimationSet = AnimationSet(true).apply {
+                            addAnimation(scaleUp)
+                            addAnimation(scaleDown)
+                        }
+
+                        textSwitcher.outAnimation = scaleAnimationSet
+
+                        typeWriterAnimation(300)
                     }
-
-                    val scaleUp = ScaleAnimation(
-                        1.0f, 1.025f,  // Scale up from 100% to 102.5% in X-axis
-                        1.0f, 1.025f,  // Scale up from 100% to 102.5% in Y-axis
-                    ).apply {
-                        duration = 150  // First phase duration
-                    }
-
-                    val scaleDown = ScaleAnimation(
-                        1.025f, 1.0f,  // Scale down from 102.5% to 100% in X-axis
-                        1.025f, 1.0f,  // Scale down from 102.5% to 100% in Y-axis
-                    ).apply {
-                        duration = 150  // Second phase duration
-                        startOffset = 150  // Start after the scale up finishes
-                    }
-
-                    val scaleAnimationSet = AnimationSet(true).apply {
-                        addAnimation(scaleUp)
-                        addAnimation(scaleDown)
-                    }
-
-                    textSwitcher.outAnimation = scaleAnimationSet
-
-                    typeWriterAnimation(300)
                 }
             }
         }
@@ -330,6 +335,7 @@ class SearchBar @JvmOverloads constructor(
 
     init {
         initAttrs(attrs, defStyleAttr)
+        enableHardwareAcceleration()
 
         editText.maxLines = 1
 
@@ -367,16 +373,23 @@ class SearchBar @JvmOverloads constructor(
                     placeholderTexts = resources.getStringArray(itemsArrayId)
                 }
 
-                searchBarType = SearchBarType.values()[getInt(R.styleable.SearchBar_searchBarType, 0)]
+                searchBarType = SearchBarType.values()[getInt(R.styleable.SearchBar_searchBarType, searchBarType.ordinal)]
 
                 recycle()
             }
         }
     }
 
+    private fun enableHardwareAcceleration() {
+        textSwitcher.setLayerType(LAYER_TYPE_HARDWARE, null)
+        textSwitcher.currentView?.setLayerType(LAYER_TYPE_HARDWARE, null)
+    }
+
     private fun onEditTextFocusChangeListener() {
         editText.setOnFocusChangeListener { view, hasFocus ->
             searchBarDelegate?.onFocusChange(view, hasFocus)
+
+            binding.inputBackground.isActivated = hasFocus
 
             if (hasFocus) {
                 if (shouldAnimatePlaceholder) {
@@ -492,7 +505,7 @@ class SearchBar @JvmOverloads constructor(
     }
 
     enum class SearchBarType {
-        BORDERLESS, BORDER
+        BORDER, BORDERLESS
     }
 
     override fun onDetachedFromWindow() {

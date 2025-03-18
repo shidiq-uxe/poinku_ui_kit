@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.motion.widget.MotionLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:id="@+id/main"
+    android:background="@color/white"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    app:layoutDescription="@xml/view_search_toolbar_scene"
+    android:theme="@style/Theme.EDTS.UIKit">
+
+    <com.google.android.material.checkbox.MaterialCheckBox
+        android:id="@+id/ivBack"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/s"
+        android:minWidth="0dp"
+        android:minHeight="0dp"
+        android:button="@drawable/ic_arrow_left_toolbar"
+        app:buttonTint="@color/grey_60"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"/>
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/tvTitle"
+        android:layout_width="@dimen/dimen_0"
+        android:layout_height="wrap_content"
+        android:layout_marginVertical="@dimen/s"
+        android:layout_marginHorizontal="@dimen/xxs"
+        android:text="Tukarkan Poin Loyalty"
+        android:textColor="@color/grey_80"
+        android:textAppearance="@style/TextAppearance.Rubik.H1.Heavy"
+        android:maxLines="1"
+        android:ellipsize="end"
+        app:layout_constraintHorizontal_chainStyle="packed"
+        app:layout_constraintStart_toEndOf="@id/ivBack"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/ivSearch"
+        app:layout_constraintBottom_toBottomOf="parent"/>
+
+    <com.google.android.material.checkbox.MaterialCheckBox
+        android:id="@+id/ivSearch"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:minWidth="0dp"
+        android:minHeight="0dp"
+        android:layout_marginEnd="@dimen/xxs"
+        android:layout_marginStart="@dimen/s"
+        android:button="@drawable/ic_search_toolbar"
+        app:buttonTint="@color/grey_60"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toEndOf="@id/tvTitle"
+        app:layout_constraintEnd_toStartOf="@id/ivHelp"
+        app:layout_constraintBottom_toBottomOf="parent"/>
+
+    <com.google.android.material.checkbox.MaterialCheckBox
+        android:id="@+id/ivHelp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:minWidth="0dp"
+        android:minHeight="0dp"
+        android:layout_marginEnd="@dimen/s"
+        android:button="@drawable/ic_help_toolbar"
+        app:buttonTint="@color/grey_60"
+        android:text="@null"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toEndOf="@id/ivSearch"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"/>
+
+    <id.co.edtslib.uikit.poinku.searchbar.SearchBar
+        android:id="@+id/sbSearch"
+        android:layout_width="@dimen/dimen_0"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/xxs"
+        android:layout_marginEnd="@dimen/xs"
+        android:alpha="0"
+        app:startIcon="@drawable/ic_search_toolbar"
+        app:searchBarType="border"
+        app:prefixText="Cari Kupon"
+        app:layout_constraintStart_toEndOf="@id/ivBack"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"/>
+
+</androidx.constraintlayout.motion.widget.MotionLayout>

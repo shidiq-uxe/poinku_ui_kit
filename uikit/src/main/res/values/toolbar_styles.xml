@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="Widget.EDTS.UIKit.Poinku.Toolbar" parent="Widget.Material3.Toolbar">
+        <item name="titleTextAppearance">@style/TextAppearance.Rubik.H1.Heavy</item>
+        <item name="subtitleTextAppearance">@style/TextAppearance.Rubik.H3.Medium</item>
+    </style>
+</resources>

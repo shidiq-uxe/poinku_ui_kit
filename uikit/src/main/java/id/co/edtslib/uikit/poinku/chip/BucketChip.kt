@@ -1,6 +1,7 @@
 package id.co.edtslib.uikit.poinku.chip
 
 import android.content.Context
+import android.os.Build
 import android.util.AttributeSet
 import android.widget.FrameLayout
 import androidx.core.content.res.use
@@ -23,6 +24,26 @@ class BucketChip @JvmOverloads constructor(
     private val binding = ChipStampBucketBinding.inflate(context.inflater, this, true)
 
     val chipCard = binding.root
+
+    var titleTextAppearance = R.style.TextAppearance_Rubik_B1_Medium
+        set(value) {
+            field = value
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                binding.tvBucketStampCount.setTextAppearance(value)
+            } else {
+                binding.tvBucketStampCount.setTextAppearance(context, value)
+            }
+        }
+
+    var descriptionTextAppearance = R.style.TextAppearance_Rubik_B4_Light
+        set(value) {
+            field = value
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                binding.tvBucketStamp.setTextAppearance(value)
+            } else {
+                binding.tvBucketStamp.setTextAppearance(context, value)
+            }
+        }
 
     var textColor: Int = context.color(R.color.grey_60)
         set(value) {

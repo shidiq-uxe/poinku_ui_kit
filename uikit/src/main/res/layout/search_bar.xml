@@ -9,7 +9,7 @@
         android:id="@+id/inputBackground"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/bg_search_bar_border_default"
+        android:background="@drawable/bg_search_bar_border"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"/>
 
@@ -20,11 +20,11 @@
         android:layout_height="@dimen/m2"
         android:layout_marginVertical="@dimen/xxxs"
         android:layout_marginHorizontal="@dimen/xxs"
+        android:src="@drawable/ic_search_toolbar"
         android:visibility="gone"
         app:layout_constraintTop_toTopOf="@id/inputBackground"
         app:layout_constraintStart_toStartOf="@id/inputBackground"
-        app:layout_constraintBottom_toBottomOf="@id/inputBackground"
-        tools:src="@drawable/ic_placeholder_medium_24"/>
+        app:layout_constraintBottom_toBottomOf="@id/inputBackground"/>
 
     <EditText
         android:id="@+id/etInput"
@@ -69,9 +69,10 @@
 
     <ImageView
         android:id="@+id/ivEndIcon"
-        android:layout_width="@dimen/s"
-        android:layout_height="@dimen/s"
-        android:layout_margin="@dimen/xxs"
+        android:layout_width="@dimen/m2"
+        android:layout_height="@dimen/m2"
+        android:layout_marginVertical="@dimen/xxxs"
+        android:layout_marginHorizontal="@dimen/xxs"
         app:layout_constraintTop_toTopOf="@id/inputBackground"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintBottom_toBottomOf="@id/inputBackground"

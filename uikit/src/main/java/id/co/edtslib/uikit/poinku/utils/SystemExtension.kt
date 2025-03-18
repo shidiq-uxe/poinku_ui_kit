@@ -10,6 +10,9 @@ import android.view.View
 import android.view.Window
 import android.view.WindowInsetsController
 import android.view.WindowManager
+import android.view.inputmethod.InputMethodManager
+import android.widget.EditText
+import androidx.fragment.app.FragmentActivity
 import id.co.edtslib.uikit.poinku.R
 import id.co.edtslib.uikit.poinku.utils.hapticfeedback.HapticFeedback
 
@@ -63,4 +66,14 @@ fun Window.resetScreenBrightness() {
     attributes = attributes.apply {
         screenBrightness = WindowManager.LayoutParams.BRIGHTNESS_OVERRIDE_NONE
     }
+}
+
+fun View.showKeyboard() {
+    val imm = context.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+    imm.showSoftInput(this, InputMethodManager.SHOW_IMPLICIT)
+}
+
+fun View.hideKeyboard() {
+    val imm = context.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+    imm.hideSoftInputFromWindow(this.windowToken, 0)
 }

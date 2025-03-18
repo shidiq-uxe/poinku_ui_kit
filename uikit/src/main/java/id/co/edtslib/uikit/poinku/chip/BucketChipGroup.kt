@@ -38,6 +38,8 @@ class BucketChipGroup @JvmOverloads constructor(
     private var isSnapping = false
     var isUserScrolling = false
 
+    var chipTitleTextAppearance = R.style.TextAppearance_Rubik_B1_Medium
+    var chipDescriptionTextAppearance = R.style.TextAppearance_Rubik_B4_Light
 
     init {
         initView()
@@ -64,8 +66,6 @@ class BucketChipGroup @JvmOverloads constructor(
             snapToPosition(position)
         }
     }
-
-
 
 
     fun snapToPosition(position: Int) {
@@ -127,6 +127,9 @@ class BucketChipGroup @JvmOverloads constructor(
         inner class ViewHolder(private val chip: BucketChip) : RecyclerView.ViewHolder(chip) {
             fun bind(item: BucketData, isSelected: Boolean) {
                 chip.apply {
+                    this.titleTextAppearance = chipTitleTextAppearance
+                    this.descriptionTextAppearance = chipDescriptionTextAppearance
+
                     stampCount = item.bucketStampCount
                     image = item.bucketImage
                     toggleSelected(isSelected)
