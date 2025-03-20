@@ -85,7 +85,9 @@ class CoachMarkOverlay @JvmOverloads constructor(
         }
         btnSkip.setOnClickListener {
             coachMarkDelegate?.onSkipClickListener()
-            finishSpotlight { }
+            finishSpotlight {
+                coachMarkDelegate?.onDismissListener()
+            }
         }
     }
 
@@ -316,8 +318,9 @@ class CoachMarkOverlay @JvmOverloads constructor(
                 coachMarkDelegate?.onNextClickClickListener()
             }
         } else {
-            coachMarkDelegate?.onFinishClickListener()
-            finishSpotlight { }
+            finishSpotlight {
+                coachMarkDelegate?.onDismissListener()
+            }
         }
     }
 
