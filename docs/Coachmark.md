@@ -78,8 +78,9 @@ private fun showCoachmark() {
         // 1 Second Delay before showing Coachmark & Spotlight or after loading all the API
         Handler(Looper.getMainLooper()).postDelayed({
             CoachMarkOverlay.Builder(this)
+                .setDismissibleOnBack(true)
                 .setCoachMarkItems(coachmarkItems)
-                .setCoachMarkDelegate(delegate) // Optional 
+                .setCoachMarkDelegate(coachMarkDelegate)
                 .build()
         }, 1000L)
     }
@@ -98,6 +99,15 @@ private fun showCoachmark() {
 -   **RecyclerView Targets**: Ensure that views inside `RecyclerView` are fetched after it is fully loaded using `post {}`.
 
 -   `**Handler**` **with Delay**: Used to make sure the coachmark appears after API loading or UI updates.
+
+| Builder Functions                                       | Description                                                    |
+|---------------------------------------------------------|----------------------------------------------------------------|
+| `fun setDismissibleOnBack(isDismissible: Boolean)`      | Sets whether the overlay can be dismissed via the back button. |
+| `fun setCoachMarkItems(items: List<CoachMarkData>)`     | Sets the coach mark items using a list.                        |
+| `fun setCoachMarkItems(vararg items: CoachMarkData)`    | Sets the coach mark items using varargs.                       |
+| `fun setContainer(container: ViewGroup)`                | Specifies the parent container to attach the overlay.          |
+| `fun setCoachMarkDelegate(delegate: CoachmarkDelegate)` | Sets the delegate to handle coachmark callback actions.        |
+
 
 Notes
 -----

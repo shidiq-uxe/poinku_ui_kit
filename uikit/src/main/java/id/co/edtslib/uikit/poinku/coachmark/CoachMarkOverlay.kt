@@ -14,10 +14,11 @@ import android.graphics.PorterDuff
 import android.graphics.PorterDuffXfermode
 import android.graphics.RectF
 import android.util.AttributeSet
+import android.view.KeyEvent
+import android.view.MotionEvent
 import android.view.View
 import android.view.ViewGroup
 import android.widget.FrameLayout
-import androidx.core.view.doOnLayout
 import androidx.core.view.doOnPreDraw
 import androidx.core.view.isVisible
 import androidx.core.view.updateLayoutParams
@@ -58,6 +59,8 @@ class CoachMarkOverlay @JvmOverloads constructor(
     private var coachMarkItems: List<CoachMarkData> = emptyList()
     private var currentCoachMarkIndex: Int = 0
 
+    private var isDismissible = false
+
     private val coachmarkBinding: ViewCoachmarkBinding =
         ViewCoachmarkBinding.inflate(context.inflater, this, false).apply {
             setOnButtonClickListener()
@@ -85,9 +88,7 @@ class CoachMarkOverlay @JvmOverloads constructor(
         }
         btnSkip.setOnClickListener {
             coachMarkDelegate?.onSkipClickListener()
-            finishSpotlight {
-                coachMarkDelegate?.onDismissListener()
-            }
+            dismiss {}
         }
     }
 
@@ -318,9 +319,7 @@ class CoachMarkOverlay @JvmOverloads constructor(
                 coachMarkDelegate?.onNextClickClickListener()
             }
         } else {
-            finishSpotlight {
-                coachMarkDelegate?.onDismissListener()
-            }
+            dismiss {}
         }
     }
 
@@ -364,6 +363,30 @@ class CoachMarkOverlay @JvmOverloads constructor(
         super.dispatchDraw(canvas)
     }
 
+    @SuppressLint("ClickableViewAccessibility")
+    override fun onTouchEvent(event: MotionEvent?): Boolean {
+        return true
+    }
+
+    override fun onAttachedToWindow() {
+        super.onAttachedToWindow()
+        isFocusableInTouchMode = true
+        requestFocus()
+
+        setOnKeyListener { _, keyCode, event ->
+            if (keyCode == KeyEvent.KEYCODE_BACK && event.action == KeyEvent.ACTION_UP) {
+                if (!isDismissible) {
+                    return@setOnKeyListener true
+                } else {
+                    dismiss {}
+                    return@setOnKeyListener true
+                }
+            }
+            false
+        }
+    }
+
+
     /**
      * Animates the entrance of the spotlight and fades in the coach mark.
      */
@@ -391,7 +414,7 @@ class CoachMarkOverlay @JvmOverloads constructor(
      *
      * @param onAnimationEnd callback when animation is finished.
      */
-    fun finishSpotlight(onAnimationEnd: () -> Unit) {
+    fun dismiss(onAnimationEnd: () -> Unit) {
         fadeOutAndRemove { }
         ValueAnimator.ofFloat(spotlightScale, 0f).apply {
             duration = SPOTLIGHT_ENTER_EXIT_DURATION
@@ -403,6 +426,7 @@ class CoachMarkOverlay @JvmOverloads constructor(
             addListener(object : AnimatorListenerAdapter() {
                 override fun onAnimationEnd(animation: Animator) {
                     this@CoachMarkOverlay.isVisible = false
+                    coachMarkDelegate?.onDismissListener()
                     onAnimationEnd()
                 }
             })
@@ -446,8 +470,13 @@ class CoachMarkOverlay @JvmOverloads constructor(
      */
     class Builder(private val context: FragmentActivity) {
         private var coachMarkItems: List<CoachMarkData> = emptyList()
+        private var dismissibleOnBack: Boolean = false
         private var container: ViewGroup? = context.window?.decorView as? ViewGroup
         private var delegate: CoachmarkDelegate? = null
+
+        fun setDismissibleOnBack(isDismissible: Boolean) = apply {
+            this.dismissibleOnBack = isDismissible
+        }
 
         /**
          * Sets the coach mark items.
@@ -490,6 +519,7 @@ class CoachMarkOverlay @JvmOverloads constructor(
             overlay.coachMarkDelegate = delegate
             overlay.setCoachMarkItems(coachMarkItems)
             container?.let { overlay.setContainer(it) }
+            overlay.isDismissible = dismissibleOnBack
             return overlay
         }
     }
