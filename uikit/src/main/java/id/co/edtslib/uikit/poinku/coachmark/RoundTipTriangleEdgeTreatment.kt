@@ -6,7 +6,6 @@ import com.google.android.material.shape.ShapePath
 class RoundTipTriangleEdgeTreatment(
     private val triangleWidth: Float,
     private val triangleHeight: Float,
-    private val triangleOffset: Float,
     private val roundedCornerRadius: Float,
     private val isEdgeAtTop: Boolean = true
 ) : EdgeTreatment() {
@@ -19,30 +18,30 @@ class RoundTipTriangleEdgeTreatment(
     ) {
         val halfWidth = triangleWidth / 2f
 
-        val notchStart = (triangleOffset - halfWidth).coerceAtLeast(0f)
-        val notchEnd = (triangleOffset + halfWidth).coerceAtMost(length)
+        val notchStart = (center - halfWidth).coerceAtLeast(0f)
+        val notchEnd = (center + halfWidth).coerceAtMost(length)
 
         shapePath.lineTo(notchStart, 0f)
 
         if (isEdgeAtTop) {
             shapePath.cubicToPoint(
                 notchStart + roundedCornerRadius, 0f,
-                triangleOffset - roundedCornerRadius, -triangleHeight,
-                triangleOffset, -triangleHeight
+                center - roundedCornerRadius, -triangleHeight,
+                center, -triangleHeight
             )
             shapePath.cubicToPoint(
-                triangleOffset + roundedCornerRadius, -triangleHeight,
+                center + roundedCornerRadius, -triangleHeight,
                 notchEnd - roundedCornerRadius, 0f,
                 notchEnd, 0f
             )
         } else {
             shapePath.cubicToPoint(
                 notchStart + roundedCornerRadius, 0f,
-                triangleOffset - roundedCornerRadius, triangleHeight,
-                triangleOffset, triangleHeight
+                center - roundedCornerRadius, -triangleHeight,
+                center, -triangleHeight
             )
             shapePath.cubicToPoint(
-                triangleOffset + roundedCornerRadius, triangleHeight,
+                center + roundedCornerRadius, -triangleHeight,
                 notchEnd - roundedCornerRadius, 0f,
                 notchEnd, 0f
             )
@@ -51,3 +50,4 @@ class RoundTipTriangleEdgeTreatment(
         shapePath.lineTo(length, 0f)
     }
 }
+

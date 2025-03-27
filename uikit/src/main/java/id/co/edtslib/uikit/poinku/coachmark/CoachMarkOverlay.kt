@@ -14,16 +14,22 @@ import android.graphics.PorterDuff
 import android.graphics.PorterDuffXfermode
 import android.graphics.RectF
 import android.util.AttributeSet
+import android.util.Log
 import android.view.KeyEvent
 import android.view.MotionEvent
 import android.view.View
 import android.view.ViewGroup
 import android.widget.FrameLayout
+import androidx.core.view.doOnLayout
+import androidx.core.view.doOnNextLayout
 import androidx.core.view.doOnPreDraw
 import androidx.core.view.isVisible
 import androidx.core.view.updateLayoutParams
 import androidx.fragment.app.FragmentActivity
+import com.google.android.material.shape.MarkerEdgeTreatment
+import com.google.android.material.shape.OffsetEdgeTreatment
 import com.google.android.material.shape.ShapeAppearanceModel
+import com.google.android.material.shape.TriangleEdgeTreatment
 import id.co.edtslib.uikit.poinku.databinding.ViewCoachmarkBinding
 import id.co.edtslib.uikit.poinku.utils.deviceHeight
 import id.co.edtslib.uikit.poinku.utils.deviceWidth
@@ -179,42 +185,40 @@ class CoachMarkOverlay @JvmOverloads constructor(
      * @return a Pair where first is the horizontal translation (translationX) and second is the vertical translation (translationY).
      */
     private fun computeCoachmarkPosition(rect: RectF): Pair<Float, Float> {
-        val screenHeight = context.deviceHeight
+        val screenHeight = context.deviceHeight.toFloat()
         val spaceAbove = rect.top
         val spaceBelow = screenHeight - rect.bottom
         val vertical = if (spaceBelow > spaceAbove) {
-            rect.bottom.toInt() + 8.dp.toInt()
+            rect.bottom + 8.dp
         } else {
-            rect.top.toInt() - coachmarkView.height - 8.dp.toInt()
-        }.toFloat()
+            rect.top - coachmarkView.height - 8.dp
+        }
 
         val overlayWidth = this.width.toFloat()
         val targetCenterX = rect.centerX()
-        val horizontal = when {
-            targetCenterX < overlayWidth / 3f -> 8.dp.toFloat()
-            targetCenterX > overlayWidth * 2 / 3f -> overlayWidth - coachmarkView.width - 8.dp.toFloat()
-            else -> targetCenterX - coachmarkView.width / 2f
-        }
+
+        // Calculate a centered horizontal position then clamp it between left and right bounds
+        val centeredPosition = targetCenterX - coachmarkView.width / 2f
+        val horizontal = centeredPosition.coerceIn(8.dp, overlayWidth - coachmarkView.width - 8.dp)
+
         return Pair(horizontal, vertical)
     }
 
-    private fun coachMarkShapeAppearanceEdge(
+
+    private fun updateCoachMarkShapeAppearanceEdge(
         gravity: CoachMarkHorizontalGravity,
         isEdgeAtTop: Boolean
-    ): ShapeAppearanceModel {
+    ) {
         val placement = when (gravity) {
-            CoachMarkHorizontalGravity.START -> 16.dp
-            CoachMarkHorizontalGravity.CENTER -> coachmarkBinding.cardContainer.width.div(2).toFloat()
-            CoachMarkHorizontalGravity.END -> coachmarkBinding.cardContainer.width.minus(32.dp).toFloat()
+            CoachMarkHorizontalGravity.START -> coachmarkBinding.cardContainer.width.div(2).minus(20.dp).toFloat()
+            CoachMarkHorizontalGravity.CENTER -> 0f
+            CoachMarkHorizontalGravity.END -> -coachmarkBinding.cardContainer.width.div(2).minus(20.dp).toFloat()
         }
 
-        return RoundTipTriangleEdgeTreatment(
-            triangleWidth = 12.dp,
-            triangleHeight = 8.dp,
-            triangleOffset = placement,
-            roundedCornerRadius = 1.dp,
-            isEdgeAtTop = true
-        ).let {
+        val markerEdgeTreatment = RoundTipTriangleEdgeTreatment(12.dp, 8.dp, (1.5).toInt().dp, isEdgeAtTop)
+        val offsetEdgeTreatment = OffsetEdgeTreatment(markerEdgeTreatment, if (isEdgeAtTop) placement else -placement)
+
+        coachmarkBinding.cardContainer.shapeAppearanceModel = offsetEdgeTreatment.let {
             ShapeAppearanceModel().toBuilder()
                 .setAllCornerSizes(8.dp)
                 .apply {
@@ -231,7 +235,7 @@ class CoachMarkOverlay @JvmOverloads constructor(
      * @param rect the target rectangle.
      */
     private fun updateCoachmarkPosition(rect: RectF) {
-        coachmarkView.doOnPreDraw {
+        coachmarkView.post {
             val (newX, newY) = computeCoachmarkPosition(rect)
             coachmarkView.translationX = newX
             coachmarkView.translationY = newY
@@ -243,14 +247,13 @@ class CoachMarkOverlay @JvmOverloads constructor(
 
             val edgeIsAtTop = spaceBelow > spaceAbove
 
-            coachmarkBinding.cardContainer.shapeAppearanceModel = coachMarkShapeAppearanceEdge(
-                gravity = when {
-                    targetCenterX < this.width / 3f -> CoachMarkHorizontalGravity.START
-                    targetCenterX > this.width * 2 / 3f -> CoachMarkHorizontalGravity.END
-                    else -> CoachMarkHorizontalGravity.CENTER
-                },
-                isEdgeAtTop = edgeIsAtTop
-            )
+            val horizontalGravity =  when {
+                targetCenterX < this.width / 3f -> CoachMarkHorizontalGravity.START
+                targetCenterX > this.width * 2 / 3f -> CoachMarkHorizontalGravity.END
+                else -> CoachMarkHorizontalGravity.CENTER
+            }
+
+            updateCoachMarkShapeAppearanceEdge(horizontalGravity, edgeIsAtTop)
         }
     }
 
@@ -274,9 +277,11 @@ class CoachMarkOverlay @JvmOverloads constructor(
             targetCenterX < width / 3f -> CoachMarkHorizontalGravity.START
             targetCenterX > width * 2 / 3f -> CoachMarkHorizontalGravity.END
             else -> CoachMarkHorizontalGravity.CENTER
+        }.also {
+            Log.e("Coachmark Position", "A : $it")
         }
 
-        coachmarkBinding.cardContainer.shapeAppearanceModel = coachMarkShapeAppearanceEdge(gravity, isEdgeAtTop)
+        updateCoachMarkShapeAppearanceEdge(gravity, isEdgeAtTop)
 
         currentCoachMarkIndex++
         updateCoachMarkContent()
