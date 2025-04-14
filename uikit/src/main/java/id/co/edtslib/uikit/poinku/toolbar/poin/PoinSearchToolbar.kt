@@ -2,11 +2,13 @@ package id.co.edtslib.uikit.poinku.toolbar.poin
 
 import android.content.Context
 import android.content.ContextWrapper
+import android.os.Build
 import android.util.AttributeSet
 import android.util.Log
 import android.view.KeyEvent
 import android.view.View
 import android.widget.FrameLayout
+import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.constraintlayout.motion.widget.MotionLayout
 import androidx.core.view.doOnLayout
@@ -29,14 +31,32 @@ class PoinSearchToolbar @JvmOverloads constructor(
 
     private val motionLayout = binding.root
 
+    val titleTextView = binding.tvTitle
     val searchBar = binding.sbSearch
     var shouldOverrideBack = false
 
+    var titleTextAppearance = R.style.TextAppearance_Rubik_H1_Heavy
+        set(value) {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                titleTextView.setTextAppearance(value)
+            } else {
+                titleTextView.setTextAppearance(context, value)
+            }
+        }
+
     init {
+        initAttrs(attrs, defStyleAttr)
         setTransitionListener()
         setOnNavigationClickListener()
         bindSearchbarDelegate()
+    }
 
+    private fun initAttrs(attrs: AttributeSet?, defStyleAttr: Int) {
+        if (attrs != null) {
+            context.theme.obtainStyledAttributes(attrs, R.styleable.PoinSearchToolbar, defStyleAttr, 0).apply {
+                titleTextAppearance = getResourceId(R.styleable.PoinSearchToolbar_titleTextAppearance, titleTextAppearance)
+            }
+        }
     }
 
     private fun bindSearchbarDelegate() {

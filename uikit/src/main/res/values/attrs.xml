@@ -360,4 +360,8 @@
         <attr name="assistChipIcon" format="reference" />
     </declare-styleable>
 
+    <declare-styleable name="PoinSearchToolbar">
+        <attr name="titleTextAppearance"/>
+    </declare-styleable>
+
 </resources>
