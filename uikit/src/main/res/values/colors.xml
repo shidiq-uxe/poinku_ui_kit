@@ -34,6 +34,10 @@
     <color name="grey_30">#DCDEE3</color>
     <color name="grey_20">#EFF3F6</color>
     <color name="grey_10">#F8FBFC</color>
+    
+    <!--Support Primary-->
+    <color name="primary_highlight_strong">@color/primary_30</color>
+    <color name="primary_highlight_weak">#E7F1FD</color>
 
     <!--Support - Alert-->
     <color name="alert_primary">@color/red_30</color>

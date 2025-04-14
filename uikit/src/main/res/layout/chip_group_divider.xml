@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:background="@color/white"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:theme="@style/Theme.EDTS.UIKit">
+
+    <com.google.android.material.chip.Chip
+        android:id="@+id/assistChip"
+        style="@style/Widget.EDTS.UIKit.Chip.Assist"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/s"
+        android:layout_marginTop="@dimen/xxs"
+        android:layout_marginBottom="@dimen/xs"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        tools:text="Chip"
+        tools:chipIcon="@drawable/ic_placeholder_medium_24"/>
+    
+    <com.google.android.material.divider.MaterialDivider
+        android:id="@+id/assistChipDivider"
+        android:layout_width="@dimen/dimen_1"
+        android:layout_height="@dimen/dimen_0"
+        android:layout_marginTop="@dimen/xxs"
+        android:layout_marginHorizontal="@dimen/xxs"
+        android:layout_marginBottom="@dimen/xs"
+        app:dividerColor="@color/grey_30"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toEndOf="@id/assistChip"/>
+
+    <HorizontalScrollView
+        android:layout_width="@dimen/dimen_0"
+        android:layout_height="wrap_content"
+        android:paddingHorizontal="@dimen/xxs"
+        android:clipToPadding="false"
+        android:scrollbars="none"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toEndOf="@id/assistChipDivider"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent">
+
+        <com.google.android.material.chip.ChipGroup
+            android:id="@+id/cgChips"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:singleLine="true"
+            app:singleSelection="true"
+            app:selectionRequired="true"/>
+
+    </HorizontalScrollView>
+
+    <ImageView
+        android:contentDescription="@null"
+        android:layout_width="@dimen/xxs"
+        android:layout_height="@dimen/dimen_0"
+        android:src="@drawable/bg_divider_fade"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toEndOf="@id/assistChipDivider"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -2,11 +2,13 @@ package id.co.edtslib.uikit.poinku.ribbon
 
 import android.annotation.SuppressLint
 import android.content.Context
+import android.graphics.Bitmap
 import android.graphics.Canvas
 import android.graphics.Color
 import android.graphics.LinearGradient
 import android.graphics.Paint
 import android.graphics.Path
+import android.graphics.PorterDuff
 import android.graphics.RectF
 import android.graphics.Shader
 import android.graphics.Typeface
@@ -29,6 +31,12 @@ import id.co.edtslib.uikit.poinku.utils.dimen
 import id.co.edtslib.uikit.poinku.utils.font
 import id.co.edtslib.uikit.poinku.utils.dp
 import id.co.edtslib.uikit.poinku.utils.sp
+import androidx.core.graphics.createBitmap
+import com.google.android.material.bottomappbar.BottomAppBarTopEdgeTreatment
+import com.google.android.material.shape.MarkerEdgeTreatment
+import com.google.android.material.shape.OffsetEdgeTreatment
+import com.google.android.material.shape.TriangleEdgeTreatment
+import id.co.edtslib.uikit.poinku.coachmark.RoundTipTriangleEdgeTreatment
 
 class Ribbon @JvmOverloads constructor(
     context: Context,
@@ -40,14 +48,14 @@ class Ribbon @JvmOverloads constructor(
     var triangleColor = context.color(R.color.primary_50)
         set(value) {
             field = value
-            invalidate()
+            markDirty()
         }
 
     @ColorInt
     var containerColor = context.color(R.color.primary_30)
         set(value) {
             field = value
-            invalidate()
+            markDirty()
         }
 
     @ColorInt
@@ -55,7 +63,7 @@ class Ribbon @JvmOverloads constructor(
         set(value) {
             field = value
             updateGradientShader()
-            invalidate()
+            markDirty()
         }
 
     @ColorInt
@@ -63,7 +71,7 @@ class Ribbon @JvmOverloads constructor(
         set(value) {
             field = value
             updateGradientShader()
-            invalidate()
+            markDirty()
         }
 
     private var gradientShader: Shader? = null
@@ -73,7 +81,7 @@ class Ribbon @JvmOverloads constructor(
         set(value) {
             field = value
             textPaint.color = value
-            invalidate()
+            markDirty()
         }
 
     // Gravity for positioning the triangle and container
@@ -81,7 +89,7 @@ class Ribbon @JvmOverloads constructor(
         set(value) {
             field = value
             requestLayout()
-            invalidate()
+            markDirty()
         }
 
     @Dimension
@@ -93,11 +101,11 @@ class Ribbon @JvmOverloads constructor(
     var textHorizontalPadding = context.dimen(R.dimen.xxxs)
 
     @StyleRes
-    var textAppearanceRes = R.style.TextAppearance_Rubik_H3_Heavy
+    var textAppearanceRes = R.style.TextAppearance_Rubik_B3_Medium
         set(value) {
             field = value
             requestLayout()
-            invalidate()
+            markDirty()
         }
 
     private val trianglePaint = Paint().apply {
@@ -127,19 +135,21 @@ class Ribbon @JvmOverloads constructor(
             field = value
             updateTextMeasurements()
             requestLayout()
+            markDirty()
         }
 
     private var textWidth: Float = 0f
     private var textHeight: Float = 0f
     private var textLineHeight: Float = 0f
 
-    var triangleWidth = 6f * resources.displayMetrics.density // Widiuth of the triangle
+    var triangleWidth = 6f * resources.displayMetrics.density // Width of the triangle
         private set
     var triangleHeight = 8f * resources.displayMetrics.density // Height of the triangle
         private set
-    var textContainerHeight = textHeight + textVerticalPadding
+    var textContainerHeight = textWidth + textVerticalPadding
         private set
 
+    // Preallocate reusable objects
     private val containerPath = Path()
     private val trianglePath = Path()
     private val rectF = RectF()
@@ -157,29 +167,73 @@ class Ribbon @JvmOverloads constructor(
         .build()
 
     private val materialPathProvider = ShapeAppearancePathProvider()
-    private var cachedContainerPath: Path? = null
+
+    // Bitmap caching properties
+    private var cachedBitmap: Bitmap? = null
+    // Reuse the same Canvas to draw into the bitmap
+    private val cachedCanvas = Canvas()
+    private var needsBitmapUpdate = true
+
+    private var prevTriangleColor: Int? = null
+    private var prevContainerColor: Int? = null
+    private var prevContainerStartColor: Int? = null
+    private var prevContainerEndColor: Int? = null
+    private var prevTextColor: Int? = null
+    private var prevGravity: Gravity? = null
+    private var prevRibbonText: String? = null
+    private var prevTextAppearanceRes: Int? = null
+
 
     init {
-        setLayerType(LAYER_TYPE_HARDWARE, null)
-
         context.theme.obtainStyledAttributes(attrs, R.styleable.Ribbon, 0, 0).use {
-            triangleColor = it.getColor(R.styleable.Ribbon_triangleColor, triangleColor)
-            containerColor = it.getColor(R.styleable.Ribbon_containerColor, containerColor)
+            val newTriangleColor = it.getColor(R.styleable.Ribbon_triangleColor, triangleColor)
+            val newContainerColor = it.getColor(R.styleable.Ribbon_containerColor, containerColor)
+            val newContainerStartColor = it.getColor(R.styleable.Ribbon_containerStartColor, containerStartColor)
+            val newContainerEndColor = it.getColor(R.styleable.Ribbon_containerEndColor, containerEndColor)
+            val newTextColor = it.getColor(R.styleable.Ribbon_ribbonTextColor, textColor)
+            val newGravity = Gravity.values()[it.getInt(R.styleable.Ribbon_gravity, gravity.ordinal)]
+            val newRibbonText = it.getString(R.styleable.Ribbon_text) ?: ribbonText
+            val newTextAppearanceRes = it.getResourceId(R.styleable.Ribbon_textAppearance, textAppearanceRes)
 
-            containerStartColor = it.getColor(R.styleable.Ribbon_containerStartColor, containerStartColor)
-            containerEndColor = it.getColor(R.styleable.Ribbon_containerEndColor, containerEndColor)
-
-            textColor = it.getColor(R.styleable.Ribbon_ribbonTextColor, textColor)
-            gravity = Gravity.values()[it.getInt(R.styleable.Ribbon_gravity, gravity.ordinal)]
-            ribbonText = it.getString(R.styleable.Ribbon_text) ?: ribbonText
-
-            textAppearanceRes = it.getResourceId(R.styleable.Ribbon_textAppearance, textAppearanceRes)
-            if (textAppearanceRes != NO_ID) {
-                applyTextAppearance(context, textAppearanceRes)
+            // Apply only if changed
+            if (newTriangleColor != prevTriangleColor) {
+                triangleColor = newTriangleColor
+                prevTriangleColor = newTriangleColor
+            }
+            if (newContainerColor != prevContainerColor) {
+                containerColor = newContainerColor
+                prevContainerColor = newContainerColor
+            }
+            if (newContainerStartColor != prevContainerStartColor) {
+                containerStartColor = newContainerStartColor
+                prevContainerStartColor = newContainerStartColor
+            }
+            if (newContainerEndColor != prevContainerEndColor) {
+                containerEndColor = newContainerEndColor
+                prevContainerEndColor = newContainerEndColor
+            }
+            if (newTextColor != prevTextColor) {
+                textColor = newTextColor
+                prevTextColor = newTextColor
+            }
+            if (newGravity != prevGravity) {
+                gravity = newGravity
+                prevGravity = newGravity
+            }
+            if (newRibbonText != prevRibbonText) {
+                ribbonText = newRibbonText
+                prevRibbonText = newRibbonText
+            }
+            if (newTextAppearanceRes != prevTextAppearanceRes) {
+                textAppearanceRes = newTextAppearanceRes
+                prevTextAppearanceRes = newTextAppearanceRes
+                if (textAppearanceRes != NO_ID) {
+                    applyTextAppearance(context, textAppearanceRes)
+                }
             }
         }
 
-        outlineProvider = RibbonOutlineProvider(this)
+        // outlineProvider = RibbonOutlineProvider(this)
     }
 
     override fun onMeasure(widthMeasureSpec: Int, heightMeasureSpec: Int) {
@@ -195,28 +249,38 @@ class Ribbon @JvmOverloads constructor(
     override fun onSizeChanged(w: Int, h: Int, oldw: Int, oldh: Int) {
         super.onSizeChanged(w, h, oldw, oldh)
         updateGradientShader()
-        updateContainerPath()
+        // When size changes, allocate a new bitmap if needed and update our cached canvas.
+        if (w > 0 && h > 0) {
+            if (cachedBitmap == null || cachedBitmap!!.width != w || cachedBitmap!!.height != h) {
+                cachedBitmap = createBitmap(w, h)
+            }
+            cachedCanvas.setBitmap(cachedBitmap)
+            needsBitmapUpdate = true
+        }
     }
 
     override fun onDraw(canvas: Canvas) {
-        super.onDraw(canvas)
-
-        canvas.save()
-        drawContainer(canvas)
-        drawText(canvas)
-        drawTriangle(canvas)
-        canvas.restore()
+        // Update the bitmap cache if needed
+        if (needsBitmapUpdate && width > 0 && height > 0) {
+            // Instead of allocating a new Canvas, reuse the preallocated one.
+            cachedCanvas.drawColor(Color.TRANSPARENT, PorterDuff.Mode.CLEAR)
+            drawContainer(cachedCanvas)
+            drawText(cachedCanvas)
+            drawTriangle(cachedCanvas)
+            needsBitmapUpdate = false
+        }
+        cachedBitmap?.let { canvas.drawBitmap(it, 0f, 0f, null) }
     }
 
     private fun drawText(canvas: Canvas) {
-        val x = (textWidth) / 2
+        val x = textWidth / 2
         val y = (textContainerHeight + textHeight) / 2 - textPaint.fontMetrics.descent
-
         ribbonText?.let { canvas.drawText(it, x, y, textPaint) }
     }
 
-
     private fun drawContainer(canvas: Canvas) {
+        val containerPath = if (gravity == Gravity.START) drawStartContainer() else drawEndContainer()
+
         if (gradientShader != null) {
             containerPaint.shader = gradientShader
         } else {
@@ -227,15 +291,7 @@ class Ribbon @JvmOverloads constructor(
         canvas.drawPath(containerPath, containerPaint)
     }
 
-    private fun updateContainerPath() {
-        cachedContainerPath = when(gravity) {
-            Gravity.START -> drawStartContainer()
-            Gravity.END -> drawEndContainer()
-        }
-    }
-
-
-    fun drawStartContainer(): Path {
+    internal fun drawStartContainer(): Path {
         containerPath.reset()
         materialPathProvider.calculatePath(
             startContainerShapeAppearance,
@@ -243,11 +299,11 @@ class Ribbon @JvmOverloads constructor(
             rectF,
             containerPath
         )
-
-        return containerPath.also { it.close() }
+        containerPath.close()
+        return containerPath
     }
 
-    fun drawEndContainer(): Path {
+    internal fun drawEndContainer(): Path {
         containerPath.reset()
         materialPathProvider.calculatePath(
             endContainerShapeAppearance,
@@ -255,61 +311,69 @@ class Ribbon @JvmOverloads constructor(
             rectF,
             containerPath
         )
-
-        return containerPath.also { it.close() }
+        containerPath.close()
+        return containerPath
     }
 
     private fun drawTriangle(canvas: Canvas) {
-       val trianglePath = if (gravity == Gravity.START) { drawStartTriangle() } else drawEndTriangle()
-
-        canvas.drawPath(trianglePath, trianglePaint.apply { this.color = triangleColor })
+        val trianglePath = if (gravity == Gravity.START) drawStartTriangle() else drawEndTriangle()
+        trianglePaint.color = triangleColor
+        canvas.drawPath(trianglePath, trianglePaint)
     }
 
     private fun drawStartTriangle(): Path {
         trianglePath.reset()
-        return trianglePath.apply {
-            moveTo(0f, textContainerHeight)
-            lineTo(triangleWidth, textContainerHeight)
-            lineTo(triangleWidth, textContainerHeight + triangleHeight)
-            close()
-        }
+        trianglePath.moveTo(0f, textContainerHeight)
+        trianglePath.lineTo(triangleWidth, textContainerHeight)
+        trianglePath.lineTo(triangleWidth, textContainerHeight + triangleHeight)
+        trianglePath.close()
+        return trianglePath
     }
 
     private fun drawEndTriangle(): Path {
         trianglePath.reset()
-        return trianglePath.apply {
-            moveTo(textWidth, textContainerHeight)
-            lineTo(textWidth - triangleWidth, textContainerHeight)
-            lineTo(textWidth - triangleWidth, textContainerHeight + triangleHeight)
-            close()
-        }
+        trianglePath.moveTo(textWidth, textContainerHeight)
+        trianglePath.lineTo(textWidth - triangleWidth, textContainerHeight)
+        trianglePath.lineTo(textWidth - triangleWidth, textContainerHeight + triangleHeight)
+        trianglePath.close()
+        return trianglePath
     }
 
     @SuppressLint("CustomViewStyleable", "ResourceType")
     private fun applyTextAppearance(context: Context, resId: Int) {
         context.obtainStyledAttributes(resId, androidx.appcompat.R.styleable.TextAppearance).use { typedArray ->
-            textPaint.textSize = typedArray.getDimension(androidx.appcompat.R.styleable.TextAppearance_android_textSize, textPaint.textSize)
-
-            if (typedArray.hasValue(androidx.appcompat.R.styleable.TextAppearance_android_fontFamily) || typedArray.hasValue(androidx.appcompat.R.styleable.TextAppearance_fontFamily)) {
-                val fontResId = typedArray.getResourceId(androidx.appcompat.R.styleable.TextAppearance_android_fontFamily, NO_ID)
-                    .takeIf { it != NO_ID } ?: typedArray.getResourceId(androidx.appcompat.R.styleable.TextAppearance_fontFamily, R.font.rubik_medium)
-
+            textPaint.textSize = typedArray.getDimension(
+                androidx.appcompat.R.styleable.TextAppearance_android_textSize,
+                textPaint.textSize
+            )
+            if (typedArray.hasValue(androidx.appcompat.R.styleable.TextAppearance_android_fontFamily) ||
+                typedArray.hasValue(androidx.appcompat.R.styleable.TextAppearance_fontFamily)
+            ) {
+                val fontResId = typedArray.getResourceId(
+                    androidx.appcompat.R.styleable.TextAppearance_android_fontFamily,
+                    NO_ID
+                ).takeIf { it != NO_ID } ?: typedArray.getResourceId(
+                    androidx.appcompat.R.styleable.TextAppearance_fontFamily,
+                    R.font.rubik_medium
+                )
                 if (!isInEditMode) {
                     textPaint.typeface = context.font(fontResId)
                 }
             }
-
             if (typedArray.hasValue(androidx.appcompat.R.styleable.TextAppearance_android_textStyle)) {
-                val textStyle = typedArray.getInt(androidx.appcompat.R.styleable.TextAppearance_android_textStyle, Typeface.NORMAL)
+                val textStyle = typedArray.getInt(
+                    androidx.appcompat.R.styleable.TextAppearance_android_textStyle,
+                    Typeface.NORMAL
+                )
                 textPaint.typeface = Typeface.create(textPaint.typeface, textStyle)
             }
         }
-
-        context.obtainStyledAttributes(resId, intArrayOf(androidx.appcompat.R.attr.lineHeight, android.R.attr.lineHeight)).use { lineHeightArray ->
-            if (lineHeightArray.hasValue(0) || lineHeightArray.hasValue(1)) {
-                textLineHeight = lineHeightArray.getDimension(0, 0f)
+        context.obtainStyledAttributes(resId, intArrayOf(androidx.appcompat.R.attr.lineHeight, android.R.attr.lineHeight))
+            .use { lineHeightArray ->
+                if (lineHeightArray.hasValue(0) || lineHeightArray.hasValue(1)) {
+                    textLineHeight = lineHeightArray.getDimension(0, 0f)
+                }
             }
-        }
     }
 
     enum class VerticalAlignment {
@@ -317,53 +381,31 @@ class Ribbon @JvmOverloads constructor(
     }
 
     fun anchorToView(
-        rootParent: ViewGroup,
         targetView: View,
         verticalAlignment: VerticalAlignment = VerticalAlignment.Center,
         offsetX: Int = 0,
         offsetY: Int = 0
-    ) = rootParent.post {
-        // Get the screen position of the target view
-        val targetLocation = IntArray(2)
-        targetView.getLocationOnScreen(targetLocation)
-
-        // Get the screen position of the root parent
-        val parentLocation = IntArray(2)
-        rootParent.getLocationOnScreen(parentLocation)
-
-        // Calculate the position of the target view relative to the root parent
+    ) {
+        // Compute the relative X based on the target view's local coordinates.
+        // targetView.left/right are relative to the parent's coordinate system.
         val relativeX = if (gravity == Gravity.START) {
-            (targetLocation[0] - parentLocation[0]).toFloat() - triangleWidth + offsetX
+            targetView.left.toFloat() - triangleWidth + offsetX
         } else {
-            (targetLocation[0] - parentLocation[0]).toFloat() + targetView.width - width + triangleWidth + offsetX
+            targetView.right.toFloat() - width + triangleWidth + offsetX
         }
 
+        // Compute the relative Y based on the target view's local coordinates.
         val relativeY = when (verticalAlignment) {
-            VerticalAlignment.Top -> {
-                (targetLocation[1] - parentLocation[1]).toFloat() - textContainerHeight + offsetY
-            }
-            VerticalAlignment.Center -> {
-                (targetLocation[1] - parentLocation[1]).toFloat() + offsetY
-            }
-            VerticalAlignment.Bottom -> {
-                (targetLocation[1] - parentLocation[1]).toFloat() + targetView.height + offsetY
-            }
+            VerticalAlignment.Top -> targetView.top.toFloat() - textContainerHeight + offsetY
+            VerticalAlignment.Center -> targetView.top.toFloat() + (targetView.height - height) / 2f + offsetY
+            VerticalAlignment.Bottom -> targetView.bottom.toFloat() - height + offsetY
         }
 
-        // Set translation to position the RibbonView correctly
-        this.translationX = relativeX
-        this.translationY = relativeY
-
-        // Detach the RibbonView from any existing parent before adding it to rootParent
-        if (this.parent != null) {
-            (this.parent as ViewGroup).removeView(this)
-        }
-
-        // Add the RibbonView to the rootParent if it's not already added
-        if (rootParent.indexOfChild(this) == -1) {
-            rootParent.addView(this)
-        }
+        // Simply update translation properties.
+        this.x = relativeX
+        this.y = relativeY
     }
+
 
     private fun updateGradientShader() {
         gradientShader = if (containerStartColor != Color.TRANSPARENT && containerEndColor != Color.TRANSPARENT) {
@@ -383,7 +425,16 @@ class Ribbon @JvmOverloads constructor(
         textWidth = textPaint.measureText(ribbonText) + textHorizontalPadding.dp
         textHeight = textPaint.fontMetrics.descent - textPaint.fontMetrics.ascent
         textContainerHeight = textHeight + textLineHeight.sp + textVerticalPadding
-
         rectF.set(0f, 0f, textWidth, textContainerHeight)
     }
+
+    /**
+     * Marks the cached bitmap as dirty so it will be recreated on the next draw.
+     */
+    private fun markDirty() {
+        needsBitmapUpdate = true
+        invalidate()
+    }
 }
+
+

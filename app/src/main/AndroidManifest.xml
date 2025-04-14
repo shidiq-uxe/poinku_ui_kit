@@ -17,6 +17,7 @@
         <activity
             android:name=".poin_guidelines.GuidelinesPoinSearch"
             android:exported="false"
+            android:hardwareAccelerated="true"
             android:theme="@style/Theme.EDTS.UIKit"/>
         <activity
             android:name=".stamp_exchange_guidelines.GuidelinesBucketStampActivitty"

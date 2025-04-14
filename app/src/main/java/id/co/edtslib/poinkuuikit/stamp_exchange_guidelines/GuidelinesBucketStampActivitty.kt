@@ -7,6 +7,7 @@ import android.os.Looper
 import android.util.Log
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
@@ -29,6 +30,7 @@ import id.co.edtslib.uikit.poinku.chip.BucketChipGroupDelegate
 import id.co.edtslib.uikit.poinku.chip.BucketData
 import id.co.edtslib.uikit.poinku.coachmark.CoachMarkData
 import id.co.edtslib.uikit.poinku.coachmark.CoachMarkOverlay
+import id.co.edtslib.uikit.poinku.coachmark.CoachmarkDelegate
 import id.co.edtslib.uikit.poinku.databinding.ItemGridPoinkuStampBinding
 import id.co.edtslib.uikit.poinku.utils.MarginItem
 import id.co.edtslib.uikit.poinku.utils.deviceWidth
@@ -200,6 +202,20 @@ class GuidelinesBucketStampActivitty : GuidelinesBaseActivity() {
         recyclerView.addItemDecoration(spacingItemDecorator)
     }
 
+    private val coachMarkDelegate = object : CoachmarkDelegate {
+        override fun onNextClickClickListener() {
+
+        }
+
+        override fun onSkipClickListener() {
+
+        }
+
+        override fun onDismissListener() {
+            Toast.makeText(this@GuidelinesBucketStampActivitty, "Finished", Toast.LENGTH_SHORT).show()
+        }
+    }
+
     // List of targets
     private val placeholderTargets = mutableListOf<View>()
 
@@ -219,9 +235,8 @@ class GuidelinesBucketStampActivitty : GuidelinesBaseActivity() {
 
                 // Target 3 - Stamp Card
                 itemView.findViewById<RecyclerView>(R.id.rvStamps).let { child ->
-                    placeholderTargets.add(child)
                     child.findViewHolderForAdapterPosition(0)?.itemView?.let { stampCard ->
-
+                        placeholderTargets.add(stampCard)
                     }
                 }
 
@@ -243,7 +258,9 @@ class GuidelinesBucketStampActivitty : GuidelinesBaseActivity() {
             // 1 Second Delay before showing Coachmark & Spotlight or after loading all the api
             Handler(Looper.getMainLooper()).postDelayed({
                 CoachMarkOverlay.Builder(this)
+                    .setDismissibleOnBack(true)
                     .setCoachMarkItems(coachmarkItems)
+                    .setCoachMarkDelegate(coachMarkDelegate)
                     .build()
             }, 1000L)
         }

@@ -6,24 +6,6 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:layout_width="175dp">
 
-    <id.co.edtslib.uikit.poinku.ribbon.Ribbon
-        android:id="@+id/ribbonCouponLeft"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:elevation="@dimen/xxxs"
-        tools:text="99x"/>
-
-    <id.co.edtslib.uikit.poinku.ribbon.Ribbon
-        android:id="@+id/ribbonNew"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:elevation="@dimen/xxxs"
-        app:gravity="end"
-        app:containerStartColor="#FAC714"
-        app:containerEndColor="#FA9E14"
-        app:triangleColor="@color/secondary_50"
-        tools:text="Baru!"/>
-
     <com.google.android.material.card.MaterialCardView
         android:id="@+id/cv"
         android:layout_width="match_parent"
@@ -139,5 +121,23 @@
         </androidx.constraintlayout.widget.ConstraintLayout>
 
     </com.google.android.material.card.MaterialCardView>
+
+    <id.co.edtslib.uikit.poinku.ribbon.Ribbon
+        android:id="@+id/ribbonCouponLeft"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:elevation="@dimen/xxxs"
+        tools:text="99x"/>
+
+    <id.co.edtslib.uikit.poinku.ribbon.Ribbon
+        android:id="@+id/ribbonNew"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:elevation="@dimen/xxxs"
+        app:gravity="end"
+        app:containerStartColor="#FAC714"
+        app:containerEndColor="#FA9E14"
+        app:triangleColor="@color/secondary_50"
+        tools:text="Baru!"/>
 
 </FrameLayout>

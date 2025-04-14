@@ -71,6 +71,9 @@
         <!--Tray/BottomSheet Theme-->
         <item name="bottomSheetDialogTheme">@style/ThemeOverlay.EDTS.UIKit.Poinku.BottomSheetDialog</item>
 
+        <!--Chip-->
+        <item name="chipFilterStyle">@style/Widget.EDTS.UIKit.Chip.Filter</item>
+
         <!--Snackbar-->
         <item name="snackbarStyle">@style/Widget.EDTS.UIKit.Poinku.Snackbar</item>
         <item name="snackbarButtonStyle">@style/Widget.EDTS.UIKit.Poinku.SnackbarButton</item>

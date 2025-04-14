@@ -8,6 +8,7 @@ import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import androidx.core.view.doOnNextLayout
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -71,23 +72,23 @@ class GuidelinesIkuponActivity : AppCompatActivity() {
                         this.tvExpiredIn.text = "Hingga ${(1..30).random()} Nov 2024"
                         this.chipCouponCategory.text = item.voucherType
 
-                        ribbonCouponLeft.apply {
-                            this.elevation = 6.dp
-                            this.ribbonText = "${item.availability.first}x"
-                            this.isVisible = randomVisibilityState.random()
-                        }.anchorToView(
-                            rootParent = itemBinding.root,
-                            targetView = itemBinding.cv,
-                            offsetY = 8.dp.toInt()
-                        )
+                        itemBinding.root.doOnNextLayout {
+                            ribbonCouponLeft.apply {
+                                this.elevation = 6.dp
+                                this.ribbonText = "${item.availability.first}x"
+                                this.isVisible = randomVisibilityState.random()
+                            }.anchorToView(
+                                targetView = itemBinding.cv,
+                                offsetY = 8.dp.toInt()
+                            )
 
-                        ribbonNew.apply {
-                            this.elevation = 6.dp
-                        }.anchorToView(
-                            rootParent = itemBinding.root,
-                            targetView = itemBinding.tvExpiredIn,
-                            verticalAlignment = Ribbon.VerticalAlignment.Top
-                        )
+                            ribbonNew.apply {
+                                this.elevation = 6.dp
+                            }.anchorToView(
+                                targetView = itemBinding.tvExpiredIn,
+                                verticalAlignment = Ribbon.VerticalAlignment.Top
+                            )
+                        }
 
                         itemBinding.btnUseCoupon.setOnClickListener {
                             iKuponDetailTray.apply { this.codeType = item.codeType }.show(item.childItems)
@@ -123,7 +124,6 @@ class GuidelinesIkuponActivity : AppCompatActivity() {
                         ribbonCouponLeft.apply {
                             this.elevation = 6.dp
                         }.anchorToView(
-                            rootParent = itemBinding.root,
                             targetView = itemBinding.cv,
                             offsetY = 8.dp.toInt()
                         )
@@ -131,7 +131,6 @@ class GuidelinesIkuponActivity : AppCompatActivity() {
                         ribbonNew.apply {
                             this.elevation = 6.dp
                         }.anchorToView(
-                            rootParent = itemBinding.root,
                             targetView = itemBinding.tvExpiredIn,
                             verticalAlignment = Ribbon.VerticalAlignment.Top
                         )
@@ -168,7 +167,6 @@ class GuidelinesIkuponActivity : AppCompatActivity() {
                             this.ribbonText = "Baru!"
                             this.textAppearanceRes = UIKitR.style.TextAppearance_Rubik_H4_Heavy
                         }.anchorToView(
-                            rootParent = itemBinding.root,
                             targetView = itemBinding.cv,
                             offsetY = 8.dp.toInt()
                         )

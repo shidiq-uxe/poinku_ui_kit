@@ -29,6 +29,8 @@
     <attr name="searchBarStyle" format="reference"/>
     <attr name="inputSearchBarStyle" format="reference"/>
 
+    <attr name="chipFilterStyle" format="reference"/>
+
     <attr name="startIconGravity" format="enum">
         <enum name="top" value="0" />
         <enum name="center" value="1" />
@@ -345,6 +347,17 @@
     <declare-styleable name="BucketChip">
         <attr name="stampCount" format="integer"/>
         <attr name="chipTextColor" format="color"/>
+    </declare-styleable>
+
+    <declare-styleable name="DividerChipGroup">
+        <attr name="dividerWidth" format="dimension" />
+        <attr name="dividerHeight" format="dimension" />
+        <attr name="dividerColor" format="color" />
+        <attr name="dividerMarginStart" format="dimension" />
+        <attr name="dividerMarginEnd" format="dimension" />
+
+        <attr name="assistChipText" format="string" />
+        <attr name="assistChipIcon" format="reference" />
     </declare-styleable>
 
 </resources>

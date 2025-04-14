@@ -277,8 +277,6 @@ class CoachMarkOverlay @JvmOverloads constructor(
             targetCenterX < width / 3f -> CoachMarkHorizontalGravity.START
             targetCenterX > width * 2 / 3f -> CoachMarkHorizontalGravity.END
             else -> CoachMarkHorizontalGravity.CENTER
-        }.also {
-            Log.e("Coachmark Position", "A : $it")
         }
 
         updateCoachMarkShapeAppearanceEdge(gravity, isEdgeAtTop)
