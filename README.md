@@ -24,11 +24,14 @@ dependencies {
 7. [ImageParallaxOverlayLayout](docs/ImageParallaxOverlayLayout.md)
 8. [Coachmark](docs/Coachmark.md)
 9. [BucketChipGroup](docs/BucketChipGroup.md)
+10. [DividerChipGroup](docs/DividerChipGroup.md)
+11. [PoinSearchToolbar](docs/PoinSearchToolbar.md)
 
 ## Pages Reference
 1. [I-Kupon Page](docs/pages/IkuponPage.md)
 2. [Homepage Reward Widget /w Parallax](docs/pages/HomePageRewardWidget.md)
 3. [Bucket Stamp Page](docs/pages/BucketStampPage.md)
+4. [Poin Search Page](docs/pages/PoinSearchPage.md)
 
 ## Basic setup and initialization :
 
@@ -44,7 +47,6 @@ You could replace your theme under module manifest file for Activity Tag with th
         android:windowSoftInputMode="adjustResize"
         tools:ignore="LockedOrientationActivity"/>
 ```
-
 
 | **Theme**                                                | **Material3**                     | **Description**          |
 |----------------------------------------------------------|-----------------------------------|--------------------------|
