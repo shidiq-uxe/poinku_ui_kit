@@ -49,6 +49,11 @@ class DividerChipGroup @JvmOverloads constructor(
             assistChip.chipIcon = value
         }
 
+    var assistChipAttrs: Chip.() -> Unit = {}
+        set(value) {
+            binding.assistChip.assistChipAttrs()
+        }
+
     val checkedChipId get() = chipGroup.checkedChipId
 
     private var dividerWidth = 1.dp
@@ -78,11 +83,16 @@ class DividerChipGroup @JvmOverloads constructor(
         }
     }
 
-    private fun addBucketItems(chipItems: List<Pair<String, String>>) {
+    fun addBucketItems(
+        chipItems: List<Pair<String, String>>,
+        chipAttrs: Chip.() -> Unit = {}
+    ) {
         chipItems.forEachIndexed { position, (id, text) ->
             val chip = Chip(context, null, R.attr.chipFilterStyle).apply {
                 this.id = generateViewId()
                 this.text = text
+
+                chipAttrs()
 
                 setOnCheckedChangeListener { _, isChecked ->
                     delegate?.onFilterChipChecked(position, this, isChecked)

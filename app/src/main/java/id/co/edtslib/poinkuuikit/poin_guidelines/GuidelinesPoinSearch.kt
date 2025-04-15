@@ -100,12 +100,17 @@ class GuidelinesPoinSearch : GuidelinesBaseActivity() {
 
     private fun initFilterChips() {
         binding.cgFilter.apply {
-            items = listOf(
-                Pair("1", "Semua"),
-                Pair("2", "Food & Beverage"),
-                Pair("3", "Detergent"),
-                Pair("4", "Yummy Choice"),
-                Pair("5", "Diamond"),
+            addBucketItems(
+                chipItems = listOf(
+                    Pair("1", "Semua"),
+                    Pair("2", "Food & Beverage"),
+                    Pair("3", "Detergent"),
+                    Pair("4", "Yummy Choice"),
+                    Pair("5", "Diamond"),
+                ),
+                chipAttrs = {
+
+                }
             )
         }.also {
             binding.cgFilter.checkChipByPosition(0)

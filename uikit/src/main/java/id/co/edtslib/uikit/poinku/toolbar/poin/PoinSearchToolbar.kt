@@ -27,7 +27,7 @@ class PoinSearchToolbar @JvmOverloads constructor(
 ) : FrameLayout(context, attrs, defStyleAttr) {
 
     private val binding = ViewSearchToolbarBinding.inflate(context.inflater, this, true)
-    private var delegate: PoinSearchToolbarDelegate? = null
+    var delegate: PoinSearchToolbarDelegate? = null
 
     private val motionLayout = binding.root
 
