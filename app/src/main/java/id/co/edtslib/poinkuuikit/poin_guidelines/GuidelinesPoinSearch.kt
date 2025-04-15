@@ -7,6 +7,7 @@ import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.view.View
+import android.widget.Toast
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.core.view.isVisible
@@ -20,6 +21,7 @@ import id.co.edtslib.poinkuuikit.ikupon_guidelines.GuidelinesIkuponActivity.Dumm
 import id.co.edtslib.uikit.poinku.adapter.multiTypeAdapter
 import id.co.edtslib.uikit.poinku.databinding.ItemGridPoinkuIcouponBinding
 import id.co.edtslib.uikit.poinku.ribbon.Ribbon
+import id.co.edtslib.uikit.poinku.toolbar.poin.PoinSearchToolbarDelegate
 import id.co.edtslib.uikit.poinku.utils.TextStyle
 import id.co.edtslib.uikit.poinku.utils.buildHighlightedMessage
 import id.co.edtslib.uikit.poinku.utils.color

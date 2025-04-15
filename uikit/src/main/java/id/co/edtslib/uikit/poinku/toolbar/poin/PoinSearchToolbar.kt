@@ -33,6 +33,7 @@ class PoinSearchToolbar @JvmOverloads constructor(
 
     val titleTextView = binding.tvTitle
     val searchBar = binding.sbSearch
+    val helpIcon = binding.ivHelp
     var shouldOverrideBack = false
 
     var titleTextAppearance = R.style.TextAppearance_Rubik_H1_Heavy
@@ -70,6 +71,10 @@ class PoinSearchToolbar @JvmOverloads constructor(
             override fun onTextChange(text: String) {
                 delegate?.onSearchBarType(text)
             }
+        }
+
+        binding.ivHelp.setOnClickListener {
+            delegate?.onHelpClick(it)
         }
     }
 

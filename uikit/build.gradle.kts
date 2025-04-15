@@ -8,7 +8,7 @@ plugins {
 }
 
 group = "id.co.edtslib.uikit.poinku"
-version = "0.3.2"
+version = "0.3.3"
 
 afterEvaluate {
 
@@ -18,7 +18,7 @@ afterEvaluate {
                 from(components["release"])
                 groupId = "id.co.edtslib.uikit.poinku"
                 artifactId = "poinkuuikit"
-                version = "0.3.2"
+                version = "0.3.3"
 
                 pom {
                     name.set("Poinku UI Kit")

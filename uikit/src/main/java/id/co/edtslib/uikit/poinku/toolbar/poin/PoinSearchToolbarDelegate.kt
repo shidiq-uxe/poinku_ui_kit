@@ -5,4 +5,5 @@ import android.view.View
 interface PoinSearchToolbarDelegate {
     fun onBackNavigationClick(view: View)
     fun onSearchBarType(text: String)
+    fun onHelpClick(view: View)
 }
