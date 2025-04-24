@@ -58,6 +58,7 @@
 
         <!--Button-->
         <item name="buttonStyle">@style/Widget.EDTS.UIKit.Poinku.Button.Filled</item>
+        <item name="materialButtonStyle">@style/Widget.EDTS.UIKit.Poinku.Button.Filled</item>
 
         <!--Status Bar Color-->
         <item name="android:statusBarColor">@color/white</item>
@@ -73,6 +74,11 @@
 
         <!--Chip-->
         <item name="chipFilterStyle">@style/Widget.EDTS.UIKit.Chip.Filter</item>
+
+        <!--Textfield-->
+        <item name="textFieldStyle">@style/Widget.EDTS.UIKit.TextInputLayout.LabelInside</item>
+        <item name="textEditTextStyle">@style/Widget.EDTS.UIKit.TextInputEditText.LabelInside</item>
+        <item name="otpEditTextStyle">@style/Widget.EDTS.UIKit.TextInputEditText.Otp</item>
 
         <!--Snackbar-->
         <item name="snackbarStyle">@style/Widget.EDTS.UIKit.Poinku.Snackbar</item>
@@ -90,6 +96,12 @@
     <style name="Theme.EDTS.UIKit" parent="Theme.EDTS.UIKit.ActionBar">
         <item name="windowNoTitle">true</item>
         <item name="windowActionBar">false</item>
+    </style>
+
+    <style name="Theme.EDTS.UIKit.Fullscreen" parent="Theme.EDTS.UIKit.ActionBar">
+        <item name="windowNoTitle">true</item>
+        <item name="windowActionBar">false</item>
+        <item name="android:windowFullscreen">true</item>
     </style>
 
 </resources>

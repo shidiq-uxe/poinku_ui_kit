@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:ns2="http://schemas.android.com/apk/res-auto">
+    <!--Text Field-->
+    <style name="Widget.EDTS.UIKit.TextInputLayout.LabelInside" parent="Widget.Material3.TextInputLayout.FilledBox">
+        <item name="materialThemeOverlay">
+            @style/ThemeOverlay.EDTS.UIKit.TextInputLayout.LabelInside
+        </item>
+        <item name="boxBackgroundColor">@color/transparent</item>
+        <item name="boxStrokeWidth">@dimen/dimen_0</item>
+        <item name="boxStrokeWidthFocused">@dimen/dimen_0</item>
+        <item name="counterOverflowTextAppearance">@style/TextAppearance.Rubik.B4.Light</item>
+        <item name="counterOverflowTextColor">?attr/colorError</item>
+        <item name="counterTextAppearance">@style/TextAppearance.Rubik.B4.Light</item>
+        <item name="counterTextColor">?attr/colorMutedText</item>
+        <item name="endIconTint">@color/slr_icon_tint</item>
+        <item name="errorIconDrawable">@null</item>
+        <item name="errorTextAppearance">@style/TextAppearance.Rubik.Regular.Error</item>
+        <item name="expandedHintEnabled">true</item>
+        <item name="helperTextTextAppearance">@style/TextAppearance.Rubik.B4.Light</item>
+        <item name="hintTextAppearance">@style/TextAppearance.Rubik.H3.Heavy</item>
+        <item name="hintTextColor">?attr/colorMutedText</item>
+        <item name="android:textColorHint">?attr/colorMutedText</item>
+        <!--Could Add Password Toggle Drawable For Password Field
+        <item name="passwordToggleDrawable">@drawable/slr_password_toggle</item>-->
+        <item name="placeholderTextAppearance">@style/TextAppearance.Rubik.B2.Light</item>
+        <item name="placeholderTextColor">?attr/colorPlaceholder</item>
+        <item name="prefixTextAppearance">@style/TextAppearance.Rubik.B2.Light</item>
+        <item name="prefixTextColor">?attr/colorMutedText</item>
+        <item name="shapeAppearanceOverlay">@style/ShapeAppearance.EDTS.UIKit.Poinku.TextInputLayout</item>
+        <item name="startIconTint">@color/slr_icon_tint</item>
+        <item name="suffixTextAppearance">@style/TextAppearance.Rubik.B2.Light</item>
+        <item name="suffixTextColor">?attr/colorMutedText</item>
+        <item name="boxCollapsedPaddingTop">@dimen/xs</item>
+    </style>
+
+    <style name="ThemeOverlay.EDTS.UIKit.TextInputLayout.LabelInside" parent="">
+        <item name="editTextStyle">
+            @style/Widget.EDTS.UIKit.TextInputEditText.LabelInside
+        </item>
+    </style>
+
+    <style name="Widget.EDTS.UIKit.TextInputEditText.LabelInside" parent="Widget.Material3.TextInputEditText.FilledBox">
+        <item name="android:background">@drawable/slr_text_field_background</item>
+        <item name="android:maxLines">1</item>
+        <item name="android:singleLine">true</item>
+        <item name="android:textAppearance">@style/TextAppearance.Rubik.B2.Light</item>
+        <item name="android:paddingTop">@dimen/l</item>
+        <item name="android:paddingBottom">@dimen/xs</item>
+
+        <item name="android:paddingStart" ns2:ignore="NewApi">12dp</item>
+        <item name="android:paddingEnd" ns2:ignore="NewApi">12dp</item>
+        <item name="android:paddingLeft">12dp</item>
+        <item name="android:paddingRight">12dp</item>"
+    </style>
+
+    <style name="Widget.EDTS.UIKit.TextInputLayout.WithoutLabel" parent="Widget.Material3.TextInputLayout.OutlinedBox">
+        <item name="materialThemeOverlay">
+            @style/ThemeOverlay.EDTS.UIKit.TextInputLayout.WithoutLabel
+        </item>
+        <item name="boxStrokeWidth">@dimen/dimen_0</item>
+        <item name="boxStrokeWidthFocused">@dimen/dimen_0</item>
+        <item name="counterOverflowTextAppearance">@style/TextAppearance.Rubik.B4.Light</item>
+        <item name="counterOverflowTextColor">?attr/colorError</item>
+        <item name="counterTextAppearance">@style/TextAppearance.Rubik.B4.Light</item>
+        <item name="counterTextColor">?attr/colorMutedText</item>
+        <item name="endIconTint">@color/slr_icon_tint</item>
+        <item name="errorIconDrawable">@null</item>
+        <item name="errorTextAppearance">@style/TextAppearance.Rubik.Regular.Error</item>
+        <item name="errorTextColor">?attr/colorError</item>
+        <item name="expandedHintEnabled">false</item>
+        <item name="helperTextTextAppearance">@style/TextAppearance.Rubik.B4.Light</item>
+        <item name="hintEnabled">false</item>
+        <!--Could Add Password Toggle Drawable For Password Field
+        <item name="passwordToggleDrawable">@drawable/slr_password_toggle</item>-->
+        <item name="placeholderTextAppearance">@style/TextAppearance.Rubik.B2.Light</item>
+        <item name="placeholderTextColor">?attr/colorMutedText</item>
+        <item name="prefixTextAppearance">@style/TextAppearance.Rubik.B2.Light</item>
+        <item name="prefixTextColor">?attr/colorMutedText</item>
+        <item name="shapeAppearanceOverlay">@style/ShapeAppearance.EDTS.UIKit.Poinku.TextInputLayout</item>
+        <item name="startIconTint">@color/slr_icon_tint</item>
+        <item name="suffixTextAppearance">@style/TextAppearance.Rubik.B2.Light</item>
+        <item name="suffixTextColor">?attr/colorMutedText</item>
+    </style>
+
+    <style name="ThemeOverlay.EDTS.UIKit.TextInputLayout.WithoutLabel" parent="">
+        <item name="editTextStyle">
+            @style/Widget.EDTS.UIKit.TextInputEditText.WithoutLabel
+        </item>
+    </style>
+
+    <style name="Widget.EDTS.UIKit.TextInputEditText.WithoutLabel" parent="Widget.Material3.TextInputEditText.OutlinedBox">
+        <item name="android:background">@drawable/slr_text_field_background</item>
+        <item name="android:maxLines">1</item>
+        <item name="android:singleLine">true</item>
+        <item name="android:textAppearance">@style/TextAppearance.Rubik.B2.Light</item>
+    </style>
+
+    <style name="Widget.EDTS.UIKit.TextInputLayout.Otp" parent="Widget.EDTS.UIKit.TextInputLayout.WithoutLabel">
+        <item name="materialThemeOverlay">
+            @style/ThemeOverlay.EDTS.UIKit.TextInputLayout.Otp
+        </item>
+    </style>
+
+    <style name="ThemeOverlay.EDTS.UIKit.TextInputLayout.Otp" parent="">
+        <item name="editTextStyle">
+            @style/Widget.EDTS.UIKit.TextInputEditText.Otp
+        </item>
+    </style>
+
+    <style name="Widget.EDTS.UIKit.TextInputEditText.Otp" parent="Widget.EDTS.UIKit.TextInputEditText.WithoutLabel">
+        <item name="android:background">@drawable/slr_text_field_otp_background</item>
+        <item name="android:gravity">center</item>
+        <item name="android:inputType">number</item>
+        <item name="android:minHeight">@dimen/box_height</item>
+        <item name="android:padding">@dimen/dimen_0</item>
+        <item name="android:textAppearance">@style/TextAppearance.Rubik.Semibold.D1</item>
+
+        <item name="android:paddingStart" ns2:ignore="NewApi">2dp</item>
+        <item name="android:paddingEnd" ns2:ignore="NewApi">2dp</item>
+        <item name="android:paddingLeft">2dp</item>
+        <item name="android:paddingRight">2dp</item>"
+    </style>
+
+</resources>

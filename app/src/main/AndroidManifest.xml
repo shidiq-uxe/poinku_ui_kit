@@ -15,10 +15,20 @@
         android:theme="@style/Theme.EDTS.UIKit.ActionBar"
         tools:targetApi="31">
         <activity
+            android:name=".auth.VerificationActivity"
+            android:exported="false" />
+        <activity
+            android:name=".auth.RegisterActivity"
+            android:exported="false" />
+        <activity
+            android:name=".boarding.OnBoardingActivity"
+            android:exported="false"
+            android:theme="@style/Theme.EDTS.UIKit"/>
+        <activity
             android:name=".poin_guidelines.GuidelinesPoinSearch"
             android:exported="false"
             android:hardwareAccelerated="true"
-            android:theme="@style/Theme.EDTS.UIKit"/>
+            android:theme="@style/Theme.EDTS.UIKit" />
         <activity
             android:name=".stamp_exchange_guidelines.GuidelinesBucketStampActivitty"
             android:exported="false"

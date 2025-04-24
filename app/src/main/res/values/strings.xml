@@ -4,4 +4,7 @@
     <string name="stamp_chip_group_title">Stamp yang kamu miliki</string>
     <string name="redeem_stamp">Tukar Stamp</string>
     <string name="sort">Urutkan</string>
+    <string name="authentication_terms_n_conditions">Dengan menggunakan aplikasi Indomaret Poinku, saya menyetujui syarat dan ketentuan</string>
+    <string name="terms_n_conditions">syarat dan ketentuan</string>
+    <string name="resend_verification_code"><![CDATA[Kirim ulang kode verifikasi &nbsp;<font color=\'#000\'><b> %s</b></font>]]></string>
 </resources>

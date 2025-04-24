@@ -1,5 +1,6 @@
 package id.co.edtslib.uikit.poinku.button
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.graphics.Canvas
 import android.util.AttributeSet
@@ -34,25 +35,31 @@ class Button @JvmOverloads constructor(
             }
         }
 
-    var buttonType: ButtonType = ButtonType.FILLED
-        set(value) {
-            field = value
+    private var _buttonType: ButtonType = ButtonType.FILLED
 
-            applyStyle(value)
+    var buttonType: ButtonType
+        get() = _buttonType
+        set(value) {
+            _buttonType = value
+            // applyStyle(value)
         }
+
 
     var pressedScale = DEFAULT_SCALE_VALUE
 
     init {
         if (attrs != null) {
             context.obtainStyledAttributes(attrs, R.styleable.Button, defStyleAttr, 0).use {
-                buttonType = ButtonType.values()[it.getInt(R.styleable.Button_buttonType, buttonType.ordinal)]
+                _buttonType = ButtonType.values()[it.getInt(R.styleable.Button_buttonType, buttonType.ordinal)]
                 shouldShowShimmer = it.getBoolean(R.styleable.Button_shouldShowShimmer, shouldShowShimmer)
                 pressedScale = it.getFloat(R.styleable.Button_pressedScale, pressedScale)
             }
+
+            applyStyle(_buttonType)
         }
     }
 
+    @SuppressLint("ClickableViewAccessibility")
     override fun onTouchEvent(event: MotionEvent?): Boolean {
         event?.let { motionEvent ->
             if (isEnabled) {
@@ -62,7 +69,6 @@ class Button @JvmOverloads constructor(
                     }
                     MotionEvent.ACTION_UP -> {
                         this.animate().scaleX(RESET_SCALE_VALUE).scaleY(RESET_SCALE_VALUE).setDuration(100).start()
-                        performClick()
                     }
                     MotionEvent.ACTION_CANCEL -> {
                         this.animate().scaleX(RESET_SCALE_VALUE).scaleY(RESET_SCALE_VALUE).setDuration(100).start()

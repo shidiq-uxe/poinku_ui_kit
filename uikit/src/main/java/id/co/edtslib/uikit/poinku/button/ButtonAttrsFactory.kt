@@ -10,6 +10,7 @@ import androidx.core.content.res.use
 import com.google.android.material.R
 import com.google.android.material.button.MaterialButton
 import com.google.android.material.shape.ShapeAppearanceModel
+import androidx.core.content.withStyledAttributes
 
 // Todo : Refactor needed ASAP, Since some of MaterialButton Attrs is flagged as private.
 object ButtonAttrsFactory {
@@ -22,30 +23,43 @@ object ButtonAttrsFactory {
         attrs: AttributeSet? = null
     ) {
         val themedContext = ContextThemeWrapper(context, styleRes)
-        val styledAttributes = themedContext.obtainStyledAttributes(styleRes, R.styleable.MaterialButton)
+        themedContext.withStyledAttributes(styleRes, R.styleable.MaterialButton) {
 
-        with(button) {
-            backgroundTintList = styledAttributes.getColorStateList(R.styleable.MaterialButton_backgroundTint)
-            iconTint = styledAttributes.getColorStateList(R.styleable.MaterialButton_iconTint)
-            rippleColor = styledAttributes.getColorStateList(R.styleable.MaterialButton_rippleColor)
-            strokeColor = styledAttributes.getColorStateList(R.styleable.MaterialButton_strokeColor)
-            strokeWidth = styledAttributes.getDimensionPixelSize(R.styleable.MaterialButton_strokeWidth, strokeWidth)
-            insetTop = styledAttributes.getDimensionPixelSize(R.styleable.MaterialButton_android_insetTop, insetTop)
-            insetBottom = styledAttributes.getDimensionPixelSize(R.styleable.MaterialButton_android_insetBottom, insetBottom)
-            // insetLeft = styledAttributes.getDimensionPixelSize(R.styleable.MaterialButton_android_insetLeft, insetLeft)
-            // insetRight = styledAttributes.getDimensionPixelSize(R.styleable.MaterialButton_android_insetRight, insetRight)
-            iconPadding = styledAttributes.getDimensionPixelSize(R.styleable.MaterialButton_iconPadding, iconPadding)
-            iconSize = styledAttributes.getDimensionPixelSize(R.styleable.MaterialButton_iconSize, iconSize)
-            cornerRadius = styledAttributes.getDimensionPixelSize(R.styleable.MaterialButton_cornerRadius, cornerRadius)
+            with(button) {
+                backgroundTintList = getColorStateList(R.styleable.MaterialButton_backgroundTint)
+                iconTint = getColorStateList(R.styleable.MaterialButton_iconTint)
+                rippleColor = getColorStateList(R.styleable.MaterialButton_rippleColor)
+                strokeColor = getColorStateList(R.styleable.MaterialButton_strokeColor)
+                strokeWidth =
+                    getDimensionPixelSize(R.styleable.MaterialButton_strokeWidth, strokeWidth)
+                insetTop =
+                    getDimensionPixelSize(R.styleable.MaterialButton_android_insetTop, insetTop)
+                insetBottom = getDimensionPixelSize(
+                    R.styleable.MaterialButton_android_insetBottom,
+                    insetBottom
+                )
+                // insetLeft = styledAttributes.getDimensionPixelSize(R.styleable.MaterialButton_android_insetLeft, insetLeft)
+                // insetRight = styledAttributes.getDimensionPixelSize(R.styleable.MaterialButton_android_insetRight, insetRight)
+                iconPadding =
+                    getDimensionPixelSize(R.styleable.MaterialButton_iconPadding, iconPadding)
+                iconSize = getDimensionPixelSize(R.styleable.MaterialButton_iconSize, iconSize)
+                cornerRadius =
+                    getDimensionPixelSize(R.styleable.MaterialButton_cornerRadius, cornerRadius)
 
-            val shapeAppearanceResId = styledAttributes.getResourceId(R.styleable.MaterialButton_shapeAppearance, 0)
-            val shapeAppearanceOverlayResId = styledAttributes.getResourceId(R.styleable.MaterialButton_shapeAppearanceOverlay, 0)
-            if (shapeAppearanceResId != 0) {
-                shapeAppearanceModel = ShapeAppearanceModel.builder(themedContext, shapeAppearanceResId, shapeAppearanceOverlayResId).build()
+                val shapeAppearanceResId =
+                    getResourceId(R.styleable.MaterialButton_shapeAppearance, 0)
+                val shapeAppearanceOverlayResId =
+                    getResourceId(R.styleable.MaterialButton_shapeAppearanceOverlay, 0)
+                if (shapeAppearanceResId != 0) {
+                    shapeAppearanceModel = ShapeAppearanceModel.builder(
+                        themedContext,
+                        shapeAppearanceResId,
+                        shapeAppearanceOverlayResId
+                    ).build()
+                }
             }
-        }
 
-        styledAttributes.recycle()
+        }
 
         if (attrs != null) {
             themedContext.obtainStyledAttributes(styleRes, intArrayOf(

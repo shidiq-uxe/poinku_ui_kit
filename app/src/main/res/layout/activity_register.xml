@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    tools:context=".auth.RegisterActivity"
+    android:theme="@style/Theme.EDTS.UIKit">
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/tvGreetings"
+        android:layout_width="@dimen/dimen_0"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/s"
+        android:layout_marginHorizontal="@dimen/s"
+        android:textAppearance="@style/TextAppearance.Rubik.Semibold.D2"
+        android:textColor="@color/grey_80"
+        android:text="Halo"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/tvInfo"
+        android:layout_width="@dimen/dimen_0"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/xs"
+        android:layout_marginHorizontal="@dimen/s"
+        android:textAppearance="@style/TextAppearance.Rubik.P1.Light"
+        android:textColor="@color/grey_80"
+        android:text="Silakan masukkan nama lengkap dan nomor handphone untuk registrasi Indomaret Poinku."
+        app:layout_constraintTop_toBottomOf="@id/tvGreetings"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
+    <id.co.edtslib.uikit.textfield.TextField
+        android:id="@+id/tfName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/m2"
+        android:layout_marginHorizontal="@dimen/s"
+        android:hint="Nama Lengkap Sesuai KTP"
+        app:placeholderText="Masukkan Nama Lengkap Sesuai KTP"
+        app:isFieldRequired="true"
+        app:fieldImeOptions="next"
+        app:layout_constraintTop_toBottomOf="@id/tvInfo"/>
+
+    <id.co.edtslib.uikit.textfield.TextField
+        android:id="@+id/tfPhone"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/xs"
+        android:layout_marginHorizontal="@dimen/s"
+        android:hint="Nomor Handphone"
+        app:placeholderText="Masukkan Nomor Handphone"
+        app:isFieldRequired="true"
+        app:fieldImeOptions="next"
+        app:fieldInputType="phone"
+        app:layout_constraintTop_toBottomOf="@id/tfName"/>
+
+    <id.co.edtslib.uikit.textfield.TextField
+        android:id="@+id/tfReferralCode"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/xs"
+        android:layout_marginHorizontal="@dimen/s"
+        android:hint="Kode Referral (opsional)"
+        app:placeholderText="Masukkan Kode Referal"
+        app:isFieldRequired="false"
+        app:fieldImeOptions="done"
+        app:layout_constraintTop_toBottomOf="@id/tfPhone"/>
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/tvTermsAndCondition"
+        android:layout_width="@dimen/dimen_0"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/m2"
+        android:layout_marginHorizontal="@dimen/s"
+        android:textColor="@color/grey_80"
+        android:text="@string/authentication_terms_n_conditions"
+        app:layout_constraintTop_toBottomOf="@id/tfReferralCode"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
+    <FrameLayout
+        android:layout_width="@dimen/dimen_0"
+        android:layout_height="wrap_content"
+        android:background="@drawable/bg_upper_shadow"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" >
+
+        <id.co.edtslib.uikit.poinku.button.Button
+            android:id="@+id/btnAuthenticate"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/dimen_10"
+            android:enabled="false"
+            android:text="Masuk"
+            app:buttonType="filledMedium"/>
+
+    </FrameLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

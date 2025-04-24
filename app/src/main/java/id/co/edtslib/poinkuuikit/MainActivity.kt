@@ -6,6 +6,8 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityOptionsCompat
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import id.co.edtslib.poinkuuikit.auth.RegisterActivity
+import id.co.edtslib.poinkuuikit.boarding.OnBoardingActivity
 import id.co.edtslib.poinkuuikit.databinding.ActivityMainBinding
 import id.co.edtslib.poinkuuikit.databinding.ItemGuidelinesParentBinding
 import id.co.edtslib.poinkuuikit.ikupon_guidelines.GuidelinesHomeCouponActivity
@@ -65,6 +67,8 @@ class MainActivity : AppCompatActivity() {
                         5 -> Intent(this, GuidelinesHomeCouponActivity::class.java)
                         6 -> Intent(this, GuidelinesBucketStampActivitty::class.java)
                         7 -> Intent(this, GuidelinesPoinSearch::class.java)
+                        8 -> Intent(this, OnBoardingActivity::class.java)
+                        9 -> Intent(this, RegisterActivity::class.java)
                         else -> Intent(this, WIPActivity::class.java)
                     },
                     binding.sharedElementOptions

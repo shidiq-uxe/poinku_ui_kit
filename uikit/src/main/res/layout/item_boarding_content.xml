@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <com.google.android.material.imageview.ShapeableImageView
+        android:id="@+id/iv_boarding_ill"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dimen_0"
+        android:contentDescription="@null"
+        android:scaleType="fitXY"
+        app:layout_constraintDimensionRatio="H,2:3"
+        app:layout_constraintBottom_toTopOf="@+id/tv_boarding_title"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_chainStyle="packed"
+        app:layout_constraintVertical_bias="0.0"
+        tools:src="@tools:sample/avatars" />
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/tv_boarding_title"
+        android:layout_width="@dimen/dimen_0"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/s"
+        android:layout_marginHorizontal="@dimen/s"
+        android:textColor="@color/grey_80"
+        android:textAppearance="@style/TextAppearance.Rubik.H1.Medium"
+        app:layout_constraintWidth_percent="0.6"
+        app:layout_constraintBottom_toTopOf="@+id/tv_boarding_description"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/iv_boarding_ill"
+        tools:text="Boarding Title" />
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/tv_boarding_description"
+        android:layout_width="@dimen/dimen_0"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/s"
+        android:layout_marginTop="@dimen/xs"
+        android:textColor="@color/grey_80"
+        android:textAppearance="@style/TextAppearance.Rubik.P2.Light"
+        android:maxLines="3"
+        android:ellipsize="end"
+        app:layout_constraintWidth_percent="0.85"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_boarding_title"
+        app:layout_constraintVertical_bias="0.0"
+        tools:maxLines="3"
+        tools:text="@tools:sample/lorem/random" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

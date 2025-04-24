@@ -78,6 +78,13 @@
     <attr name="foregroundColor" format="color"/>
     <attr name="circleRadius" format="dimension"/>
 
+    <attr name="dividerWidth" format="dimension" />
+    <attr name="dividerHeight" format="dimension" />
+    <attr name="dividerColor" format="color" />
+    <attr name="dividerMarginStart" format="dimension" />
+    <attr name="dividerMarginEnd" format="dimension" />
+    <attr name="dividerInnerPadding" format="dimension" />
+
     <attr name="fieldInputType" format="enum">
         <enum name="text" value="0" />
         <enum name="password" value="1" />
@@ -179,18 +186,26 @@
             <enum name="Right" value="2" />
         </attr>
 
+        <attr name="content_alignment" format="enum">
+            <enum name="Left" value="0" />
+            <enum name="Center" value="1" />
+            <enum name="Right" value="2" />
+        </attr>
+
         <attr name="content_vertical_offset_percentage" format="float"/>
         <attr name="content_horizontal_offset_percentage" format="float"/>
 
     </declare-styleable>
 
+    <attr name="textFieldStyle" format="reference"/>
+    <attr name="textEditTextStyle" format="reference"/>
+    <attr name="otpEditTextStyle" format="reference"/>
+
     <declare-styleable name="TextField">
-        <attr name="textInputStyleEnum" format="enum">
+        <attr name="textFieldType" format="enum">
             <enum name="labelInside" value="0" />
-            <enum name="flatStart" value="1" />
-            <enum name="flatEnd" value="2" />
-            <enum name="withoutLabel" value="3" />
-            <enum name="otp" value="4" />
+            <enum name="withoutLabel" value="1" />
+            <enum name="otp" value="2" />
         </attr>
         <attr name="fieldImeOptions" format="enum">
             <enum name="next" value="0" />
@@ -200,6 +215,7 @@
         </attr>
         <attr name="fieldInputType"/>
         <attr name="fieldMaxLength"/>
+        <attr name="isFieldRequired" format="boolean"/>
     </declare-styleable>
 
     <declare-styleable name="SearchBar">
@@ -350,14 +366,20 @@
     </declare-styleable>
 
     <declare-styleable name="DividerChipGroup">
-        <attr name="dividerWidth" format="dimension" />
-        <attr name="dividerHeight" format="dimension" />
-        <attr name="dividerColor" format="color" />
-        <attr name="dividerMarginStart" format="dimension" />
-        <attr name="dividerMarginEnd" format="dimension" />
+        <attr name="dividerWidth" />
+        <attr name="dividerHeight" />
+        <attr name="dividerColor" />
+        <attr name="dividerMarginStart" />
+        <attr name="dividerMarginEnd" />
 
         <attr name="assistChipText" format="string" />
         <attr name="assistChipIcon" format="reference" />
+    </declare-styleable>
+
+    <declare-styleable name="DividerTextView">
+        <attr name="dividerInnerPadding" />
+        <attr name="dividerColor" />
+        <attr name="dividerHeight" />
     </declare-styleable>
 
     <declare-styleable name="PoinSearchToolbar">
