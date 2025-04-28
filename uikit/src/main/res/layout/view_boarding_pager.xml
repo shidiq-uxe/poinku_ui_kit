@@ -1,30 +1,99 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
     <androidx.viewpager2.widget.ViewPager2
         android:id="@+id/vpContent"
-        android:layout_width="@dimen/dimen_0"
+        android:layout_width="match_parent"
         android:layout_height="@dimen/dimen_0"
-        android:layout_marginBottom="@dimen/m2"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintDimensionRatio="2:3"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toTopOf="@id/indicator_view"/>
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dimen_0"
+        android:translationY="-48dp"
+        android:background="@drawable/bg_boarding_overlay"
+        app:layout_constraintTop_toTopOf="@id/tv_boarding_title"
+        app:layout_constraintBottom_toBottomOf="parent"/>
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/tv_boarding_title"
+        android:layout_width="@dimen/dimen_0"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/s"
+        android:textAppearance="@style/TextAppearance.Rubik.H1.Medium"
+        android:textColor="@color/grey_80"
+        android:gravity="center"
+        app:layout_constraintBottom_toTopOf="@+id/tv_boarding_description"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/vpContent"
+        app:layout_constraintWidth_percent="0.6"
+        app:layout_constraintVertical_bias="1.0"
+        app:layout_constraintVertical_chainStyle="packed"
+        tools:text="Boarding Title" />
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/tv_boarding_description"
+        android:layout_width="@dimen/dimen_0"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/xs"
+        android:layout_marginHorizontal="@dimen/s"
+        android:ellipsize="end"
+        android:maxLines="3"
+        android:textAppearance="@style/TextAppearance.Rubik.P2.Light"
+        android:textColor="@color/grey_80"
+        android:gravity="center"
+        app:layout_constraintBottom_toTopOf="@id/indicator_view"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_boarding_title"
+        app:layout_constraintWidth_percent="0.85"
+        tools:maxLines="3"
+        tools:text="@tools:sample/lorem/random" />
 
     <id.co.edtslib.uikit.poinku.indicator.IndicatorView
         android:id="@+id/indicator_view"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/m2"
         android:layout_marginHorizontal="@dimen/m2"
-        android:layout_marginBottom="@dimen/m1"
+        android:layout_marginBottom="@dimen/m2"
         app:layout_constrainedWidth="true"
-        app:layout_constraintTop_toBottomOf="@id/vpContent"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/btnRegister"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"/>
+        app:layout_constraintTop_toBottomOf="@id/tv_boarding_description" />
+
+    <id.co.edtslib.uikit.poinku.button.Button
+        android:id="@+id/btnRegister"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/dimen_10"
+        android:text="Daftar Sekarang"
+        android:layout_marginHorizontal="@dimen/dimen_10"
+        app:buttonType="filledMedium"
+        app:layout_constraintVertical_bias="1.0"
+        app:layout_constraintTop_toBottomOf="@id/indicator_view"
+        app:layout_constraintBottom_toTopOf="@id/btnLogin" />
+
+    <id.co.edtslib.uikit.poinku.button.Button
+        android:id="@+id/btnLogin"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Login"
+        android:layout_marginHorizontal="@dimen/dimen_10"
+        android:layout_marginBottom="@dimen/dimen_10"
+        app:buttonType="secondaryMedium"
+        app:layout_constraintTop_toBottomOf="@id/btnRegister"
+        app:layout_constraintBottom_toBottomOf="parent"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

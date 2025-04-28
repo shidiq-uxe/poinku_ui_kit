@@ -3,7 +3,11 @@ package id.co.edtslib.uikit.poinku.boarding
 import android.annotation.SuppressLint
 import android.content.Context
 import android.util.AttributeSet
+import android.util.Log
 import android.view.LayoutInflater
+import android.view.animation.AccelerateInterpolator
+import android.view.animation.DecelerateInterpolator
+import android.view.animation.Interpolator
 import android.widget.FrameLayout
 import androidx.core.content.res.use
 import androidx.core.view.doOnLayout
@@ -12,7 +16,7 @@ import androidx.viewpager2.widget.ViewPager2
 import id.co.edtslib.uikit.poinku.R
 import id.co.edtslib.uikit.poinku.boarding.adapter.BoardingAdapter
 import id.co.edtslib.uikit.poinku.databinding.ViewBoardingPagerBinding
-import id.co.edtslib.uikit.poinku.indicator.IndicatorOptions
+import id.co.edtslib.uikit.poinku.indicator.IndicatorDelegate
 import id.co.edtslib.uikit.poinku.indicator.IndicatorSlideMode
 import id.co.edtslib.uikit.poinku.indicator.IndicatorStyle
 import id.co.edtslib.uikit.poinku.utils.dimen
@@ -22,14 +26,13 @@ import id.co.edtslib.uikit.poinku.utils.marginHorizontal
 import id.co.edtslib.uikit.poinku.utils.marginStart
 import id.co.edtslib.uikit.poinku.utils.setCurrentItem
 import id.co.edtslib.uikit.poinku.utils.transformer.ScalePageTransformer
-import kotlin.time.Duration.Companion.seconds
 
 class BoardingPagerView @JvmOverloads constructor(
     context: Context,
     attrs: AttributeSet? = null,
     defStyleAttr: Int = 0
 ) : FrameLayout(context, attrs, defStyleAttr) {
-    private val adapter = BoardingAdapter.boardingAdapter()
+    private val adapter = BoardingAdapter()
     var delegate: BoardingPageListener? = null
 
     private val binding: ViewBoardingPagerBinding =
@@ -39,11 +42,10 @@ class BoardingPagerView @JvmOverloads constructor(
     var autoScrollInterval = 0
     private var runnable: Runnable? = null
 
-    var canBackOnFirstPosition = false
-    var circular = false
+    var canBackOnFirstPosition = true
+    var circular = true
         set(value) {
             field = value
-            BoardingAdapter.circular = value
         }
 
     val root = binding.root
@@ -53,7 +55,6 @@ class BoardingPagerView @JvmOverloads constructor(
     var contentAlignment: ContentAlignment = ContentAlignment.Center()
         set(value) {
             field = value
-            BoardingAdapter.contentAlignment = value
         }
 
     var indicatorAlignment: IndicatorAlignment = IndicatorAlignment.Center()
@@ -91,25 +92,21 @@ class BoardingPagerView @JvmOverloads constructor(
         }
 
     var items: List<Boarding> = emptyList()
-        @SuppressLint("NotifyDataSetChanged")
         set(value) {
             field = value
             if (value.isNotEmpty()) {
-                adapter.items = value.toMutableList()
-                adapter.notifyDataSetChanged()
+                Log.e("Size", "Size of ${value.size}")
 
-                binding.indicatorView.setPageSize(0)
+                indicatorView.setPageSize(value.size)
+                adapter.setItems(value)
+
+                indicatorView.setCurrentPosition(0)
                 if (autoScrollInterval > 0) {
                     startAutoScroll()
                 }
 
-                viewPager.post {
-                    viewPager.setCurrentItem(BoardingAdapter.getInitialPosition(canBackOnFirstPosition), false)
-                }
-            }
-            else {
+            } else {
                 removeAutoScroll()
-                isVisible = false
             }
         }
 
@@ -117,33 +114,26 @@ class BoardingPagerView @JvmOverloads constructor(
         init(attrs)
     }
 
-    private fun removeAutoScroll() {
-        if (runnable != null) {
-            binding.vpContent.removeCallbacks(runnable)
-        }
-        runnable = null
-    }
-
     private fun startAutoScroll() {
         removeAutoScroll()
-        if (items.isNotEmpty()) {
-            runnable = Runnable {
-                val currentItem = binding.vpContent.currentItem
-                if (currentItem == items.size - 1) {
-                    binding.vpContent.setCurrentItem(
-                        item = BoardingAdapter.getInitialPosition(canBackOnFirstPosition),
-                        duration = 300L,
-                    )
-                } else {
-                    binding.vpContent.setCurrentItem(
-                        item = currentItem + 1,
-                        duration = 500L,
-                    )
-                }
 
-                startAutoScroll()
-            }
-            binding.vpContent.postDelayed(runnable, autoScrollInterval.seconds.inWholeSeconds)
+        if (adapter.getRealCount() <= 1) return
+
+        runnable = Runnable {
+            val currentItem = viewPager.currentItem
+            val nextItem = currentItem + 1
+            viewPager.setCurrentItem(nextItem, 500L)
+
+            viewPager.postDelayed(runnable!!, autoScrollInterval.toLong())
+        }
+
+        viewPager.postDelayed(runnable!!, autoScrollInterval.toLong())
+    }
+
+    private fun removeAutoScroll() {
+        runnable?.let {
+            viewPager.removeCallbacks(it)
+            runnable = null
         }
     }
 
@@ -162,21 +152,19 @@ class BoardingPagerView @JvmOverloads constructor(
                     setIndicatorStyle(IndicatorStyle.Companion.CIRCLE)
                     setSlideMode(IndicatorSlideMode.Companion.SCALE)
 
-                    binding.root.doOnLayout {
-                        setupWithViewPager(viewPager)
-                    }
+                    indicatorView.setupWithViewPager(viewPager)
+
                 }
 
-                val defaultWidth = it.getDimension(R.styleable.BoardingPagerView_indicator_default_width, context.dimen(R.dimen.xxxs))
-                val selectedWidth = it.getDimension(R.styleable.BoardingPagerView_indicator_default_width, context.dimen(R.dimen.dimen_6))
+                val defaultWidth = it.getDimension(R.styleable.BoardingPagerView_indicator_default_width, context.dimen(R.dimen.dimen_6))
+                val selectedWidth = it.getDimension(R.styleable.BoardingPagerView_indicator_default_width, context.dimen(R.dimen.xxs))
 
-                val selectedHeight = it.getDimension(R.styleable.BoardingPagerView_indicator_slider_height, context.dimen(R.dimen.xxxs))
 
                 indicatorView.setSliderWidth(defaultWidth, selectedWidth)
 
                 autoScrollInterval = it.getInt(R.styleable.BoardingPagerView_autoScrollInterval, 0)
-                circular = it.getBoolean(R.styleable.BoardingPagerView_circular, false)
-                canBackOnFirstPosition = it.getBoolean(R.styleable.BoardingPagerView_canBackOnFirstPosition, false)
+                circular = it.getBoolean(R.styleable.BoardingPagerView_circular, circular)
+                canBackOnFirstPosition = it.getBoolean(R.styleable.BoardingPagerView_canBackOnFirstPosition, canBackOnFirstPosition)
 
                 val iAlignment = it.getInt(R.styleable.BoardingPagerView_indicator_alignment, 1)
                 indicatorAlignment = IndicatorAlignment.Companion.entries[iAlignment]
@@ -191,47 +179,88 @@ class BoardingPagerView @JvmOverloads constructor(
         }
     }
 
-    private fun setup() {
-        binding.vpContent.adapter = adapter
+    val titleInterpolator = DecelerateInterpolator(1.5f)
+    val descInterpolator = AccelerateInterpolator(1.2f)
+    val delayFactor = 0.2f
 
-        binding.vpContent.setPageTransformer(
+    private fun delayedInterpolation(
+        interpolator: Interpolator,
+        rawOffset: Float,
+        delay: Float,
+        scale: Float = 1f
+    ): Float {
+        val adjusted = ((rawOffset - delay) / (1f - delay)).coerceIn(0f, 1f)
+        return interpolator.getInterpolation(adjusted) * scale
+    }
+
+
+    private fun setup() {
+        viewPager.adapter = adapter
+        viewPager.setPageTransformer(
            ScalePageTransformer(
                 minScale = 1f,
                 minAlpha = 0.7f
             )
         )
 
-
-        // Todo : Click Impl is Postponed due to Indicator View TouchSize is too Small
-        /*binding.indicatorView.delegate = object : BoardingDelegate {
-            override fun onSelected(position: Int) {
-                val fakePosition = adapter.getFakePosition(position)
-                if (binding.vpContent.currentItem != fakePosition) {
-                    binding.vpContent.currentItem = fakePosition
-                }
-            }
-        }*/
-
-        binding.vpContent.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
+        viewPager.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
             override fun onPageSelected(position: Int) {
-                super.onPageSelected(position)
                 delegate?.onPageSelected(position)
-                if (binding.indicatorView.getCurrentPosition() != position) {
-                    binding.indicatorView.setCurrentPosition(BoardingAdapter.getRealPosition(position))
-                }
+
+                if (position == 0) changeSlidingContentDescription(0)
+                indicatorView.setCurrentPosition(adapter.getRealPosition(position))
             }
 
-            override fun onPageScrolled(
-                position: Int,
-                positionOffset: Float,
-                positionOffsetPixels: Int
-            ) {
-                super.onPageScrolled(position, positionOffset, positionOffsetPixels)
-                delegate?.onPageScrolled(position, positionOffset, positionOffsetPixels)
-                if (autoScrollInterval > 0) {
-                    startAutoScroll()
+            override fun onPageScrolled(position: Int, offset: Float, offsetPx: Int) {
+                super.onPageScrolled(position, offset, offsetPx)
+                delegate?.onPageScrolled(position, offset, offsetPx)
+                animateTextsDuringPageScroll(position, offset)
+            }
+
+            override fun onPageScrollStateChanged(state: Int) {
+                if (state == ViewPager2.SCROLL_STATE_IDLE) {
+                    val position = viewPager.currentItem
+                    val lastIndex = adapter.itemCount - 1
+
+                    when (position) {
+                        0 -> viewPager.setCurrentItem(lastIndex - 1, false)
+                        lastIndex -> viewPager.setCurrentItem(1, false)
+                    }
                 }
             }
         })
+    }
+
+    private fun animateTextsDuringPageScroll(position: Int, positionOffset: Float) {
+        if (positionOffset <= 0.15f) return
+
+        val nextIndex = position + 1
+        val nextReal = adapter.getRealPosition(nextIndex)
+
+        val titleEnterProgress = titleInterpolator.getInterpolation(positionOffset)
+        val descEnterProgress = delayedInterpolation(descInterpolator, positionOffset, delayFactor)
+
+        binding.tvBoardingTitle.apply {
+            text = items[nextReal].title
+            translationY = 100 * (1 - titleEnterProgress)
+            alpha = titleEnterProgress
+        }
+        binding.tvBoardingDescription.apply {
+            text = items[nextReal].description
+            translationY = 100 * (1 - descEnterProgress)
+            alpha = descEnterProgress
+        }
+    }
+
+    private fun changeSlidingContentDescription(
+        position: Int,
+    ) {
+        binding.tvBoardingTitle.alpha = 1f
+        binding.tvBoardingDescription.alpha = 1f
+        binding.tvBoardingTitle.translationY = 0f
+        binding.tvBoardingDescription.translationY = 0f
+
+        binding.tvBoardingTitle.text = items[position].title
+        binding.tvBoardingDescription.text = items[position].description
     }
 }

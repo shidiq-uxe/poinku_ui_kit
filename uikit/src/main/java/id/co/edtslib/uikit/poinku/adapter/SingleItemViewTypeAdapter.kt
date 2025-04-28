@@ -67,6 +67,8 @@ class SingleItemViewTypeAdapter<T : Any, B : ViewBinding>(
 
 
     override fun getItemCount(): Int {
+        register.itemCountProvider?.let { return it() }
+
         return when {
             shimmerMode -> SHIMMER_ITEM_COUNT
             paginationState == PaginationState.Loading -> items.size + 1
@@ -109,6 +111,7 @@ class SingleItemViewTypeAdapter<T : Any, B : ViewBinding>(
         val onBindPaginationState: ((state: PaginationState, binding: B) -> Unit)? = null,
         val onBindShimmer: ((binding: B) -> Unit)? = null,
         val viewTypeResolver: ((item: T, position: Int) -> Int)? = null,
+        val itemCountProvider: (() -> Int)? = null,
         val onItemClick: ((binding: B, item: T, position: Int) -> Unit)? = null
     )
 
@@ -148,6 +151,7 @@ inline fun <T : Any, reified B : ViewBinding> singleItemViewTypeAdapter(
     noinline onBindPaginationState: ((state: SingleItemViewTypeAdapter.PaginationState, binding: B) -> Unit)? = null,
     noinline onBindShimmer: ((binding: B) -> Unit)? = null,
     noinline viewTypeResolver: ((item: T, position: Int) -> Int)? = null,
+    noinline itemCountProvider: (() -> Int)? = null,
     shimmerMode: Boolean = false,
     paginationState: SingleItemViewTypeAdapter.PaginationState = SingleItemViewTypeAdapter.PaginationState.Complete
 ): SingleItemViewTypeAdapter<T, B> {
@@ -157,6 +161,7 @@ inline fun <T : Any, reified B : ViewBinding> singleItemViewTypeAdapter(
             onBindPaginationState = onBindPaginationState,
             onBindShimmer = onBindShimmer,
             viewTypeResolver = viewTypeResolver,
+            itemCountProvider = itemCountProvider,
             onItemClick = onItemClick
         ),
         diff = diff,

@@ -1,114 +1,107 @@
 package id.co.edtslib.uikit.poinku.boarding.adapter
 
-import android.view.Gravity
-import androidx.constraintlayout.widget.ConstraintLayout
+import android.annotation.SuppressLint
+import android.app.Activity
+import android.content.Context
+import android.content.ContextWrapper
+import android.util.Log
+import android.view.ViewGroup
 import androidx.fragment.app.FragmentActivity
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.ViewTreeLifecycleOwner
+import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import id.co.edtslib.uikit.poinku.adapter.SingleItemViewTypeAdapter
-import id.co.edtslib.uikit.poinku.adapter.singleItemViewTypeAdapter
+import id.co.edtslib.uikit.poinku.R
 import id.co.edtslib.uikit.poinku.boarding.Boarding
-import id.co.edtslib.uikit.poinku.boarding.ContentAlignment
 import id.co.edtslib.uikit.poinku.databinding.ItemBoardingContentBinding
-import id.co.edtslib.uikit.poinku.utils.horizontalBias
-import kotlin.text.get
+import id.co.edtslib.uikit.poinku.utils.drawable
+import id.co.edtslib.uikit.poinku.utils.inflater
 
-object BoardingAdapter {
+class BoardingAdapter : RecyclerView.Adapter<BoardingAdapter.BoardingVH>() {
 
-    var circular = false
-    var contentAlignment: ContentAlignment = ContentAlignment.Center()
+    var list: List<Boarding> = emptyList()
+        private set
 
-    fun boardingAdapter(): SingleItemViewTypeAdapter<Boarding, ItemBoardingContentBinding> =
-        singleItemViewTypeAdapter(
-            diff = SingleItemViewTypeAdapter.Diff(
-                areContentsTheSame = { old, new -> old == new },
-                areItemsTheSame = { old, new -> old == new }
-            ),
-            onBindViewHolder = { position, item, itemBinding ->
-                itemBinding.bindViewWithData(item, position)
-                itemBinding.adjustIndicatorAlignment()
-            }
-        )
+    private val wrappedList: List<Boarding>
+        get() = if (list.size > 1) {
+            val first = list.first()
+            val last = list.last()
+            listOf(last) + list + first
+        } else {
+            list
+        }
 
-    private val boardingAdapter get() = boardingAdapter()
+    @SuppressLint("NotifyDataSetChanged")
+    fun setItems(items: List<Boarding>) {
+        list = items
+        notifyDataSetChanged()
+    }
+
+    fun getRealCount(): Int = list.size
 
     fun getRealPosition(position: Int): Int {
-        return if (circular && boardingAdapter.items.size > 1) {
-            position % boardingAdapter.items.size
-        } else {
-            position
+        return when {
+            list.size <= 1 -> position
+            position == 0 -> list.size - 1
+            position == wrappedList.lastIndex -> 0
+            else -> position - 1
         }
     }
 
-    fun getFakePosition(position: Int): Int {
-        return if (circular && boardingAdapter.items.size > 1) {
-            (boardingAdapter.itemCount / 2 - (boardingAdapter.itemCount /2) % boardingAdapter.items.size)+position
-        } else {
-            position
-        }
+    fun getStartPosition(): Int = if (list.size > 1) 1 else 0
+
+    override fun getItemCount(): Int = wrappedList.size
+
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BoardingVH {
+        val binding = ItemBoardingContentBinding.inflate(
+            parent.context.inflater,
+            parent,
+            false
+        )
+        return BoardingVH(binding)
     }
 
-    fun getInitialPosition(canBackOnFirstPosition: Boolean): Int {
-        return if (circular && boardingAdapter.items.size > 1) {
-            if (canBackOnFirstPosition) {
-                boardingAdapter.itemCount / 2 - (boardingAdapter.itemCount /2) % boardingAdapter.items.size
-            } else {
-                0
-            }
-        } else {
-            0
-        }
+    override fun onBindViewHolder(holder: BoardingVH, position: Int) {
+        holder.bind(position)
     }
 
-    private fun ItemBoardingContentBinding.bindViewWithData(item: Boarding, position: Int) {
-        val context =
-            if (root.context is FragmentActivity) root.context as FragmentActivity else root.context
+    inner class BoardingVH(private val binding: ItemBoardingContentBinding) :
+        RecyclerView.ViewHolder(binding.root) {
 
-        // Safeguard against destroyed activity or invalid context
-        val activity = (context as? FragmentActivity)
+        fun bind(position: Int) {
+            val realPosition = getRealPosition(position)
+            val item = list[realPosition]
 
-        if (activity != null && (activity.isDestroyed || activity.isFinishing)) {
-            // If the activity is destroyed, return early to avoid Glide loading issues
-            return
+            binding.bindViewWithData(item, realPosition)
         }
 
-        val image  = item.image?.let { image ->
-            when(image) {
-                is Int -> context.getDrawable(image)
-                is String -> if (image.startsWith("http")) {
-                    image
-                } else {
-                    context.resources.getIdentifier(
-                        image, "drawable",
-                        context.packageName
-                    )
+        private fun ItemBoardingContentBinding.bindViewWithData(item: Boarding, position: Int) {
+            val context = root.context
+
+            val image = item.image?.let { image ->
+                when (image) {
+                    is Int -> context.drawable(image)
+                    is String -> if (image.startsWith("http")) image
+                    else context.resources.getIdentifier(image, "drawable", context.packageName)
+                    else -> image
                 }
-                else -> image
+            }
+
+            if (context.isValidForGlide()) {
+                Glide.with(binding.root.context)
+                    .load(image)
+                    .into(binding.root)
             }
         }
 
-        Glide.with(context).load(image).into(ivBoardingIll)
-
-        tvBoardingTitle.text = item.title
-        tvBoardingDescription.text = item.description
-    }
-
-    private fun ItemBoardingContentBinding.adjustIndicatorAlignment() {
-        when(contentAlignment) {
-            is ContentAlignment.Start -> {
-                ivBoardingIll.horizontalBias(0f)
-                tvBoardingTitle.gravity = Gravity.START
-                tvBoardingDescription.gravity = Gravity.START
-            }
-            is ContentAlignment.Center -> {
-                ivBoardingIll.horizontalBias(0.5f)
-                tvBoardingTitle.gravity = Gravity.CENTER
-                tvBoardingDescription.gravity = Gravity.CENTER
-            }
-            is ContentAlignment.End -> {
-                ivBoardingIll.horizontalBias(1f)
-                tvBoardingTitle.gravity = Gravity.END
-                tvBoardingDescription.gravity = Gravity.END
+        fun Context.isValidForGlide(): Boolean {
+            return when (this) {
+                is Activity -> !this.isFinishing && !this.isDestroyed
+                is ContextWrapper -> baseContext.isValidForGlide()
+                else -> true
             }
         }
     }
 }
+
+

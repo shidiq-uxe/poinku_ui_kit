@@ -17,6 +17,7 @@ open class BaseIndicatorView constructor(
 ) : View(context, attrs, defStyleAttr), IndicatorInterface {
 
     var mIndicatorOptions: IndicatorOptions
+    var delegate: IndicatorDelegate? = null
 
     private var mViewPager2: ViewPager2? = null
     private var mRecyclerView: RecyclerView? = null
@@ -72,6 +73,8 @@ open class BaseIndicatorView constructor(
         position: Int,
         positionOffset: Float
     ) {
+        delegate?.onSelected(position)
+
         if (mIndicatorOptions.slideMode == IndicatorSlideMode.Companion.SCALE
             || mIndicatorOptions.slideMode == IndicatorSlideMode.Companion.COLOR
         ) {

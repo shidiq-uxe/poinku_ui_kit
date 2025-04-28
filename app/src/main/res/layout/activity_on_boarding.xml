@@ -13,30 +13,7 @@
         android:id="@+id/boardingPagerView"
         android:layout_width="match_parent"
         android:layout_height="@dimen/dimen_0"
-        android:layout_marginBottom="@dimen/m1"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toTopOf="@id/btnRegister"/>
-
-    <id.co.edtslib.uikit.poinku.button.Button
-        android:id="@+id/btnRegister"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="@dimen/dimen_10"
-        android:text="Daftar Sekarang"
-        android:layout_marginHorizontal="@dimen/dimen_10"
-        app:buttonType="filledMedium"
-        app:layout_constraintVertical_bias="1.0"
-        app:layout_constraintTop_toBottomOf="@id/boardingPagerView"
-        app:layout_constraintBottom_toTopOf="@id/btnLogin" />
-
-    <id.co.edtslib.uikit.poinku.button.Button
-        android:id="@+id/btnLogin"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Login"
-        android:layout_marginHorizontal="@dimen/dimen_10"
-        android:layout_marginBottom="@dimen/dimen_10"
-        app:buttonType="secondaryMedium"
         app:layout_constraintBottom_toBottomOf="parent"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
