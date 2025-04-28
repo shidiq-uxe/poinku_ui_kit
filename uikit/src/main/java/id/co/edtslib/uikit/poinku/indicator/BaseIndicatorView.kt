@@ -182,6 +182,7 @@ open class BaseIndicatorView constructor(
         return mIndicatorOptions.sliderGap
     }
 
+    // Todo : Attrs not synced programmatically
     fun setIndicatorGap(indicatorGap: Float) {
         mIndicatorOptions.sliderGap = indicatorGap
     }
