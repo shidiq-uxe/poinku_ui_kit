@@ -32,6 +32,7 @@ dependencies {
 2. [Homepage Reward Widget /w Parallax](docs/pages/HomePageRewardWidget.md)
 3. [Bucket Stamp Page](docs/pages/BucketStampPage.md)
 4. [Poin Search Page](docs/pages/PoinSearchPage.md)
+5. [Boarding](docs/pages/OnBoardingPage.md)
 
 ## Basic setup and initialization :
 

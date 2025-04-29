@@ -3,7 +3,6 @@ package id.co.edtslib.uikit.poinku.boarding
 import android.annotation.SuppressLint
 import android.content.Context
 import android.util.AttributeSet
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.MotionEvent
 import android.view.animation.AccelerateInterpolator
@@ -11,25 +10,16 @@ import android.view.animation.DecelerateInterpolator
 import android.view.animation.Interpolator
 import android.widget.FrameLayout
 import androidx.core.content.res.use
-import androidx.core.view.doOnLayout
-import androidx.core.view.isVisible
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager2.widget.ViewPager2
 import id.co.edtslib.uikit.poinku.R
 import id.co.edtslib.uikit.poinku.boarding.adapter.BoardingAdapter
 import id.co.edtslib.uikit.poinku.databinding.ViewBoardingPagerBinding
-import id.co.edtslib.uikit.poinku.indicator.IndicatorDelegate
-import id.co.edtslib.uikit.poinku.indicator.IndicatorOptions
-import id.co.edtslib.uikit.poinku.indicator.IndicatorSlideMode
-import id.co.edtslib.uikit.poinku.indicator.IndicatorStyle
-import id.co.edtslib.uikit.poinku.utils.dimen
 import id.co.edtslib.uikit.poinku.utils.horizontalBias
 import id.co.edtslib.uikit.poinku.utils.marginEnd
 import id.co.edtslib.uikit.poinku.utils.marginHorizontal
 import id.co.edtslib.uikit.poinku.utils.marginStart
 import id.co.edtslib.uikit.poinku.utils.setCurrentItem
-import id.co.edtslib.uikit.poinku.utils.transformer.ScalePageTransformer
-import kotlin.math.abs
 
 class BoardingPagerView @JvmOverloads constructor(
     context: Context,
@@ -172,7 +162,7 @@ class BoardingPagerView @JvmOverloads constructor(
 
     val titleInterpolator = DecelerateInterpolator(1.5f)
     val descInterpolator = AccelerateInterpolator(1.2f)
-    val delayFactor = 0.2f
+    val delayFactor = 0.25f
 
     private fun delayedInterpolation(
         interpolator: Interpolator,
@@ -229,7 +219,6 @@ class BoardingPagerView @JvmOverloads constructor(
                     }
                 }
                 val realPosition = adapter.getRealPosition(viewPager.currentItem)
-                changeSlidingContentDescription(realPosition)
                 indicatorView.onPageScrollStateChanged(state)
             }
         })
@@ -238,27 +227,49 @@ class BoardingPagerView @JvmOverloads constructor(
         binding.btnLogin.setOnClickListener { delegate?.onLoginButtonClicked(it) }
     }
 
-    private fun animateTextsDuringPageScroll(position: Int, positionOffset: Float) {
-        if (positionOffset <= 0.01f) return
+    private var lastOffset = 0f
 
-        val nextIndex = position + 1
-        val nextReal = adapter.getRealPosition(nextIndex)
+    private fun animateTextsDuringPageScroll(position: Int, offset: Float) {
+        if (offset in 0.01f..0.99f) {
+            val forward = offset > lastOffset
+            val incomingPos = if (forward) position + 1 else position
+            val real = adapter.getRealPosition(incomingPos)
 
-        val titleEnterProgress = titleInterpolator.getInterpolation(positionOffset)
-        val descEnterProgress = delayedInterpolation(descInterpolator, positionOffset, delayFactor)
+            val titleProgress = titleInterpolator.getInterpolation(
+                if (forward) offset else 1 - offset
+            )
 
-        if (nextReal < items.size) {
+            val descProgress = delayedInterpolation(
+                interpolator = descInterpolator,
+                rawOffset = if (forward) offset else 1 - offset,
+                delay = delayFactor,
+                scale = 1f
+            )
+
+            val enterTitleY = if (forward)
+                100f * (1 - titleProgress)
+            else
+                -100f * (1 - titleProgress)
+
+            val enterDescY = if (forward)
+                100f * (1 - descProgress)
+            else
+                -100f * (1 - descProgress)
+
             binding.tvBoardingTitle.apply {
-                text = items[nextReal].title
-                translationY = 100 * (1 - titleEnterProgress)
-                alpha = titleEnterProgress
+                text = items[real].title
+                translationY = enterTitleY
+                alpha = titleProgress
             }
+
             binding.tvBoardingDescription.apply {
-                text = items[nextReal].description
-                translationY = 100 * (1 - descEnterProgress)
-                alpha = descEnterProgress
+                text = items[real].description
+                translationY = enterDescY * 0.8f
+                alpha = descProgress * 0.8f
             }
         }
+
+        lastOffset = offset
     }
 
     private fun changeSlidingContentDescription(
