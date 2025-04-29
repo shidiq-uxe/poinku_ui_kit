@@ -247,15 +247,17 @@ class BoardingPagerView @JvmOverloads constructor(
         val titleEnterProgress = titleInterpolator.getInterpolation(positionOffset)
         val descEnterProgress = delayedInterpolation(descInterpolator, positionOffset, delayFactor)
 
-        binding.tvBoardingTitle.apply {
-            text = items[nextReal].title
-            translationY = 100 * (1 - titleEnterProgress)
-            alpha = titleEnterProgress
-        }
-        binding.tvBoardingDescription.apply {
-            text = items[nextReal].description
-            translationY = 100 * (1 - descEnterProgress)
-            alpha = descEnterProgress
+        if (nextReal < items.size) {
+            binding.tvBoardingTitle.apply {
+                text = items[nextReal].title
+                translationY = 100 * (1 - titleEnterProgress)
+                alpha = titleEnterProgress
+            }
+            binding.tvBoardingDescription.apply {
+                text = items[nextReal].description
+                translationY = 100 * (1 - descEnterProgress)
+                alpha = descEnterProgress
+            }
         }
     }
 

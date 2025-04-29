@@ -1,23 +1,28 @@
 package id.co.edtslib.poinkuuikit.boarding
 
+import android.graphics.Color
 import android.os.Build
-import android.os.Build.VERSION.SDK
 import android.os.Bundle
 import android.view.View
-import androidx.appcompat.app.AppCompatActivity
+import android.view.WindowInsetsController
 import androidx.core.view.ViewCompat
+import androidx.core.view.WindowCompat
 import androidx.core.view.WindowInsetsCompat
+import androidx.core.view.doOnAttach
+import androidx.core.view.updatePadding
 import id.co.edtslib.poinkuuikit.GuidelinesBaseActivity
 import id.co.edtslib.poinkuuikit.R
-import id.co.edtslib.uikit.poinku.R as UIKitR
 import id.co.edtslib.poinkuuikit.databinding.ActivityOnBoardingBinding
 import id.co.edtslib.uikit.poinku.boarding.Boarding
 import id.co.edtslib.uikit.poinku.boarding.ContentAlignment
 import id.co.edtslib.uikit.poinku.boarding.IndicatorAlignment
+import id.co.edtslib.uikit.poinku.utils.SystemBarStyle
 import id.co.edtslib.uikit.poinku.utils.drawable
 import id.co.edtslib.uikit.poinku.utils.seconds
 import id.co.edtslib.uikit.poinku.utils.setDarkStatusBar
+import id.co.edtslib.uikit.poinku.utils.setSystemBarStyle
 import id.co.edtslib.uikit.poinku.utils.viewBinding
+
 
 class OnBoardingActivity : GuidelinesBaseActivity() {
 
@@ -25,27 +30,22 @@ class OnBoardingActivity : GuidelinesBaseActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
         setContentView(R.layout.activity_on_boarding)
 
-        setDarkStatusBar()
+        setSystemBarStyle(
+            statusBarStyle = SystemBarStyle.Dark(Color.TRANSPARENT),
+            navigationBarStyle = SystemBarStyle.Dark(Color.TRANSPARENT)
+        )
 
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
-            val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
-            insets
-        }
+        WindowCompat.setDecorFitsSystemWindows(window, false)
 
-        @Suppress("DEPRECATION")
-        if (Build.VERSION.SDK_INT <= 34) {
-            window.apply {
-                statusBarColor = android.graphics.Color.TRANSPARENT
-                navigationBarColor = android.graphics.Color.TRANSPARENT
-
-                decorView.systemUiVisibility =
-                    View.SYSTEM_UI_FLAG_LAYOUT_STABLE or
-                            View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
+        window.decorView.setOnApplyWindowInsetsListener { view, insets ->
+           if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
+                val navBarInsets = insets.getInsets(WindowInsetsCompat.Type.navigationBars())
+                binding.root.updatePadding(0, 0, 0, navBarInsets.bottom)
             }
-
+            insets
         }
 
         setBoardingItems()
