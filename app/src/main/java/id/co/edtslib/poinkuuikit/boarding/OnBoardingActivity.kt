@@ -51,16 +51,16 @@ class OnBoardingActivity : GuidelinesBaseActivity(), BoardingPageListener {
             items = listOf<Boarding>(
                 Boarding(
                     image = drawable(R.drawable.ill1),
-                    title = "Kumpulkan Poin dan Stamp Buat Dapetin Kejutan!",
-                    description = "Kumpulin poin serta stamp dari setiap transaksi dan tukarkan dengan kupon menarik di sini!"
+                    title = "Kumpulin Poin, Dapat Hadiah!",
+                    description = "Kumpulin Poin & Stamp dari setiap transaksi, tukarkan dengan hadiah yang cuma ada di sini!"
                 ),Boarding(
                     image = drawable(R.drawable.ill2),
-                    title = "Dapetin Diskon, Bonus, Sampai Gratisan!",
-                    description = "Jangan lupa untuk gunakan kupon untuk mendapatkan banyak keuntungan!"
+                    title = "Anti Ribet, Nyaman Banget!",
+                    description = "Simpan struk belanja & cek riwayat transaksi kapan saja, semua dalam satu aplikasi."
                 ),Boarding(
                     image = drawable(R.drawable.ill3),
-                    title = "Semakin Sering Belanja, Semakin Untung!",
-                    description = "Makin sering kamu belanja semakin banyak bonus, serta diskon yang bisa kamu dapetin."
+                    title = "Member Lebih Untung!",
+                    description = "Nikmati berbagai Promo Khusus Member, Diskon, Bonus, sampai Belanja Gratis, yang dijamin untung banget!"
                 ),
             )
 

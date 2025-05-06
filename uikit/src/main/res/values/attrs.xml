@@ -386,4 +386,10 @@
         <attr name="titleTextAppearance"/>
     </declare-styleable>
 
+    <declare-styleable name="AnimatedStrokeConstraintLayout">
+        <attr name="cornerRadius"/>
+        <attr name="strokeWidth"/>
+        <attr name="strokeColor"/>
+    </declare-styleable>
+
 </resources>

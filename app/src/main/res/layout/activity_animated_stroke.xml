@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".profile.AnimatedStrokeActivity">
+
+    <id.co.edtslib.uikit.poinku.viewgroup.AnimatedStrokeConstraintLayout
+        android:id="@+id/referralEntryPoint"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/xs"
+        app:strokeWidth="@dimen/dimen_2"
+        app:strokeColor="@color/primary_30"
+        app:cornerRadius="@dimen/xxs"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent">
+
+        <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/ivIllustration"
+            android:layout_width="@dimen/dimen_0"
+            android:layout_height="@dimen/dimen_0"
+            android:src="@drawable/illustration_referral_aladin"
+            app:layout_constraintDimensionRatio="1:1"
+            app:layout_constraintTop_toTopOf="@id/tvTitle"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintBottom_toBottomOf="@id/tvDesc"/>
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/tvTitle"
+            android:layout_width="@dimen/dimen_0"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/xxxs"
+            android:lines="1"
+            android:textAppearance="@style/TextAppearance.Rubik.H2.Medium"
+            android:textColor="@color/primary_30"
+            android:gravity="center_vertical"
+            android:text="Ajak Teman, Dapat Untung Bareng!"
+            android:drawableEnd="@drawable/ic_arrow_left_toolbar"
+            android:drawableTint="@color/primary_30"
+            app:layout_constrainedWidth="true"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toEndOf="@id/ivIllustration"
+            app:layout_constraintEnd_toEndOf="parent"/>
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/tvDesc"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/xxs"
+            android:layout_marginStart="@dimen/xxxs"
+            android:maxLines="2"
+            android:ellipsize="end"
+            android:textAppearance="@style/TextAppearance.Rubik.B4.Light"
+            android:textColor="@color/grey_60"
+            android:text="Bagikan kode referral kamu untuk mendapatkan hadiah."
+            app:layout_constrainedWidth="true"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintTop_toBottomOf="@id/tvTitle"
+            app:layout_constraintStart_toEndOf="@id/ivIllustration"
+            app:layout_constraintEnd_toEndOf="parent"/>
+
+    </id.co.edtslib.uikit.poinku.viewgroup.AnimatedStrokeConstraintLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

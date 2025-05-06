@@ -15,6 +15,7 @@ import android.graphics.PorterDuffXfermode
 import android.graphics.RectF
 import android.util.AttributeSet
 import android.util.Log
+import android.view.ContextThemeWrapper
 import android.view.KeyEvent
 import android.view.MotionEvent
 import android.view.View
@@ -30,6 +31,7 @@ import com.google.android.material.shape.MarkerEdgeTreatment
 import com.google.android.material.shape.OffsetEdgeTreatment
 import com.google.android.material.shape.ShapeAppearanceModel
 import com.google.android.material.shape.TriangleEdgeTreatment
+import id.co.edtslib.uikit.poinku.R
 import id.co.edtslib.uikit.poinku.databinding.ViewCoachmarkBinding
 import id.co.edtslib.uikit.poinku.utils.deviceHeight
 import id.co.edtslib.uikit.poinku.utils.deviceWidth
@@ -43,7 +45,7 @@ class CoachMarkOverlay @JvmOverloads constructor(
     context: Context,
     attrs: AttributeSet? = null,
     defStyle: Int = 0
-) : FrameLayout(context, attrs, defStyle) {
+) : FrameLayout(ContextThemeWrapper(context, R.style.Theme_EDTS_UIKit), attrs, defStyle) {
 
     var coachMarkDelegate: CoachmarkDelegate? = null
 

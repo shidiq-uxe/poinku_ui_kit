@@ -11,6 +11,7 @@
         <item>Poin Search</item>
         <item>OnBoarding</item>
         <item>Auth</item>
+        <item>Stroke ViewGroup</item>
     </string-array>
 
     <string-array name="array_guidelines_font">

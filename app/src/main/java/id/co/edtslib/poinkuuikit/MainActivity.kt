@@ -13,6 +13,7 @@ import id.co.edtslib.poinkuuikit.databinding.ItemGuidelinesParentBinding
 import id.co.edtslib.poinkuuikit.ikupon_guidelines.GuidelinesHomeCouponActivity
 import id.co.edtslib.poinkuuikit.ikupon_guidelines.GuidelinesIkuponActivity
 import id.co.edtslib.poinkuuikit.poin_guidelines.GuidelinesPoinSearch
+import id.co.edtslib.poinkuuikit.profile.AnimatedStrokeActivity
 import id.co.edtslib.poinkuuikit.stamp_exchange_guidelines.GuidelinesBucketStampActivitty
 import id.co.edtslib.uikit.poinku.adapter.SingleItemViewTypeAdapter
 import id.co.edtslib.uikit.poinku.adapter.singleItemViewTypeAdapter
@@ -69,6 +70,7 @@ class MainActivity : AppCompatActivity() {
                         7 -> Intent(this, GuidelinesPoinSearch::class.java)
                         8 -> Intent(this, OnBoardingActivity::class.java)
                         9 -> Intent(this, RegisterActivity::class.java)
+                        10 -> Intent(this, AnimatedStrokeActivity::class.java)
                         else -> Intent(this, WIPActivity::class.java)
                     },
                     binding.sharedElementOptions
