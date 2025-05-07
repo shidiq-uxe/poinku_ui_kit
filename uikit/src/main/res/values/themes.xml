@@ -53,6 +53,43 @@
         <item name="colorDisableFill">@color/grey_30</item>
         <item name="colorFocusBorder">@color/primary_30</item>
 
+        <!--Todo: Complete All Tokens Typography-->
+        <!--Custom Typography-->
+        <item name="d1Heavy">@style/TextAppearance.Rubik.Semibold.D1</item>
+        <item name="d2Heavy">@style/TextAppearance.Rubik.Semibold.D2</item>
+        <item name="d3Heavy">@style/TextAppearance.Rubik.Semibold.D3</item>
+        <item name="h1Heavy">@style/TextAppearance.Rubik.H1.Heavy</item>
+        <item name="h1Medium">@style/TextAppearance.Rubik.H1.Medium</item>
+        <item name="h2Heavy">@style/TextAppearance.Rubik.H2.Heavy</item>
+        <item name="h2Medium">@style/TextAppearance.Rubik.H2.Medium</item>
+        <item name="h3Heavy">@style/TextAppearance.Rubik.H3.Heavy</item>
+        <item name="h3Medium">@style/TextAppearance.Rubik.H3.Medium</item>
+        <item name="h4Heavy">@style/TextAppearance.Rubik.H4.Heavy</item>
+        <item name="h4Medium">@style/TextAppearance.Rubik.H4.Medium</item>
+        <item name="b1Heavy">@style/TextAppearance.Rubik.B1.Semibold</item>
+        <item name="b1Medium">@style/TextAppearance.Rubik.B1.Medium</item>
+        <item name="b1Light">@style/TextAppearance.Rubik.B1.Light</item>
+        <item name="b2Heavy">@style/TextAppearance.Rubik.B2.Bulk</item>
+        <item name="b2Medium">@style/TextAppearance.Rubik.B2.Medium</item>
+        <item name="b2Light">@style/TextAppearance.Rubik.B2.Light</item>
+        <item name="b3Heavy">@style/TextAppearance.Rubik.B3.Heavy</item>
+        <item name="b3Medium">@style/TextAppearance.Rubik.B3.Medium</item>
+        <item name="b3Light">@style/TextAppearance.Rubik.B3.Light</item>
+        <item name="b4Heavy">@style/TextAppearance.Rubik.B4.Heavy</item>
+        <item name="b4Medium">@style/TextAppearance.Rubik.B4.Medium</item>
+        <item name="b4Light">@style/TextAppearance.Rubik.B4.Light</item>
+        <item name="b5Medium">@style/TextAppearance.Rubik.B5.Medium</item>
+        <item name="b5Light">@style/TextAppearance.Rubik.B5.Light</item>
+        <item name="p1Heavy">@style/TextAppearance.Rubik.P1.Heavy</item>
+        <item name="p1Light">@style/TextAppearance.Rubik.P1.Light</item>
+        <item name="p2Heavy">@style/TextAppearance.Rubik.P2.Heavy</item>
+        <item name="p2Light">@style/TextAppearance.Rubik.P2.Light</item>
+        <item name="p3Heavy">@style/TextAppearance.Rubik.P3.Heavy</item>
+        <item name="p3Light">@style/TextAppearance.Rubik.P3.Light</item>
+        <item name="buttonLarge">@style/TextAppearance.Rubik.Button.Large</item>
+        <item name="buttonMedium">@style/TextAppearance.Rubik.Button.Medium</item>
+        <item name="buttonSmall">@style/TextAppearance.Rubik.Button.Small</item>
+
         <!--Status Bar-->
         <item name="android:windowLightStatusBar" tools:targetApi="m">true</item>
 

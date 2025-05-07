@@ -40,6 +40,7 @@ import id.co.edtslib.uikit.poinku.utils.dp
 import id.co.edtslib.uikit.poinku.utils.inflater
 import id.co.edtslib.uikit.poinku.utils.interpolator.EaseInterpolator
 import kotlin.math.max
+import androidx.core.graphics.toColorInt
 
 // Todo : Add some optimization & customization later
 class CoachMarkOverlay @JvmOverloads constructor(
@@ -56,7 +57,7 @@ class CoachMarkOverlay @JvmOverloads constructor(
     private var targetRect: RectF? = null
 
     private val overlayPaint = Paint(Paint.ANTI_ALIAS_FLAG).apply {
-        color = Color.parseColor("#B3000000")
+        color = "#B3000000".toColorInt()
     }
 
     private val clearPaint = Paint(Paint.ANTI_ALIAS_FLAG).apply {

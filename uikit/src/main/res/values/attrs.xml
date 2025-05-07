@@ -24,6 +24,65 @@
     <attr name="colorDisableFill" format="color"/>
     <attr name="colorFocusBorder" format="color"/>
 
+    <!--Typography Attrs-->
+    <!--Display-->
+    <!--D1-->
+    <attr name="d1Heavy" format="reference"/>
+    <attr name="d1Medium" format="reference"/>
+    <!--D2-->
+    <attr name="d2Heavy" format="reference"/>
+    <attr name="d2Medium" format="reference"/>
+    <!--D3-->
+    <attr name="d3Heavy" format="reference"/>
+    <attr name="d3Medium" format="reference"/>
+    <!--Headline-->
+    <!--H1-->
+    <attr name="h1Heavy" format="reference"/>
+    <attr name="h1Medium" format="reference"/>
+    <!--H2-->
+    <attr name="h2Heavy" format="reference"/>
+    <attr name="h2Medium" format="reference"/>
+    <!--H3-->
+    <attr name="h3Heavy" format="reference"/>
+    <attr name="h3Medium" format="reference"/>
+    <!--H4-->
+    <attr name="h4Heavy" format="reference"/>
+    <attr name="h4Medium" format="reference"/>
+    <!--Body-->
+    <!--B1-->
+    <attr name="b1Heavy" format="reference"/>
+    <attr name="b1Medium" format="reference"/>
+    <attr name="b1Light" format="reference"/>
+    <!--B2-->
+    <attr name="b2Heavy" format="reference"/>
+    <attr name="b2Medium" format="reference"/>
+    <attr name="b2Light" format="reference"/>
+    <!--B3-->
+    <attr name="b3Heavy" format="reference"/>
+    <attr name="b3Medium" format="reference"/>
+    <attr name="b3Light" format="reference"/>
+    <!--B4-->
+    <attr name="b4Heavy" format="reference"/>
+    <attr name="b4Medium" format="reference"/>
+    <attr name="b4Light" format="reference"/>
+    <!--B5-->
+    <attr name="b5Medium" format="reference"/>
+    <attr name="b5Light" format="reference"/>
+    <!--Paragraph-->
+    <!--P1-->
+    <attr name="p1Heavy" format="reference"/>
+    <attr name="p1Light" format="reference"/>
+    <!--P2-->
+    <attr name="p2Heavy" format="reference"/>
+    <attr name="p2Light" format="reference"/>
+    <!--P3-->
+    <attr name="p3Heavy" format="reference"/>
+    <attr name="p3Light" format="reference"/>
+    <!--Button-->
+    <attr name="buttonLarge" format="enum"/>
+    <attr name="buttonMedium" format="enum"/>
+    <attr name="buttonSmall" format="enum"/>
+
     <attr name="buttonStyle" format="reference" />
 
     <attr name="searchBarStyle" format="reference"/>
