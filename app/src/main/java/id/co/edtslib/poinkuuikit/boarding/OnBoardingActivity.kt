@@ -50,17 +50,17 @@ class OnBoardingActivity : GuidelinesBaseActivity(), BoardingPageListener {
             autoScrollInterval = 3.seconds.toInt()
             items = listOf<Boarding>(
                 Boarding(
-                    image = drawable(R.drawable.ill1),
+                    image = drawable(R.drawable.wp1),
                     title = "Kumpulin Poin, Dapat Hadiah!",
                     description = "Kumpulin Poin & Stamp dari setiap transaksi, tukarkan dengan hadiah yang cuma ada di sini!"
                 ),Boarding(
-                    image = drawable(R.drawable.ill2),
-                    title = "Anti Ribet, Nyaman Banget!",
-                    description = "Simpan struk belanja & cek riwayat transaksi kapan saja, semua dalam satu aplikasi."
-                ),Boarding(
-                    image = drawable(R.drawable.ill3),
+                    image = drawable(R.drawable.wp2),
                     title = "Member Lebih Untung!",
-                    description = "Nikmati berbagai Promo Khusus Member, Diskon, Bonus, sampai Belanja Gratis, yang dijamin untung banget!"
+                    description = "Nikmati berbagai Promo Khusus Member, Diskon, Bonus, sampai Belanja Gratis, dijamin untung banget!"
+                ),Boarding(
+                    image = drawable(R.drawable.wp3),
+                    title = "Semua Ada di Poinku!",
+                    description = "Cek katalog promo terbaru, info event seru, sampai cek struk belanja, semua dalam satu aplikasi!"
                 ),
             )
 
