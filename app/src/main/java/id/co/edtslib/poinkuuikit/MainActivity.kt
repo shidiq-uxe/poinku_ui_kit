@@ -71,6 +71,8 @@ class MainActivity : AppCompatActivity() {
                         8 -> Intent(this, OnBoardingActivity::class.java)
                         9 -> Intent(this, RegisterActivity::class.java)
                         10 -> Intent(this, AnimatedStrokeActivity::class.java)
+                        11 -> Intent(this, GuidelinesProgressTrackerGroup::class.java)
+                        12 -> Intent(this, GuidelinesHomeCoachmark::class.java)
                         else -> Intent(this, WIPActivity::class.java)
                     },
                     binding.sharedElementOptions

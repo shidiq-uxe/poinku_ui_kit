@@ -1,6 +1,8 @@
 package id.co.edtslib.poinkuuikit.auth
 
 import android.os.Bundle
+import android.os.Handler
+import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.constraintlayout.widget.Guideline
@@ -26,6 +28,11 @@ class VerificationActivity : GuidelinesBaseActivity() {
         }
 
         initCountDown()
+        initProgressTracker()
+    }
+
+    private fun initProgressTracker() {
+        binding.ptgTracker.selectStep(1)
     }
 
     private fun initCountDown() {
@@ -33,6 +40,7 @@ class VerificationActivity : GuidelinesBaseActivity() {
             intervalInMillis = 10000
             start()
         }
+
 
         binding.ctvResendIn.delegate = object : CountdownTextViewDelegate {
             override fun onExpired() {

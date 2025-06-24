@@ -247,7 +247,10 @@ class GuidelinesBucketStampActivitty : GuidelinesBaseActivity() {
                     placeholderTargets.add(it)
                 }
             }
+        }
 
+        // 1 Second Delay before showing Coachmark & Spotlight or after loading all the api
+        Handler(Looper.getMainLooper()).postDelayed({
             // Map into coachmark items
             val coachmarkItems = placeholderTargets.indices.map { index ->
                 CoachMarkData(
@@ -257,14 +260,11 @@ class GuidelinesBucketStampActivitty : GuidelinesBaseActivity() {
                 )
             }
 
-            // 1 Second Delay before showing Coachmark & Spotlight or after loading all the api
-            Handler(Looper.getMainLooper()).postDelayed({
-                CoachMarkOverlay.Builder(this)
-                    .setDismissibleOnBack(true)
-                    .setCoachMarkItems(coachmarkItems)
-                    .setCoachMarkDelegate(coachMarkDelegate)
-                    .build()
-            }, 1000L)
-        }
+            CoachMarkOverlay.Builder(this)
+                .setDismissibleOnBack(true)
+                .setCoachMarkItems(coachmarkItems)
+                .setCoachMarkDelegate(coachMarkDelegate)
+                .build()
+        }, 1000L)
     }
 }

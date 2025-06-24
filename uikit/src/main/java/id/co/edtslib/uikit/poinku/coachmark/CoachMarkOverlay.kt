@@ -8,36 +8,30 @@ import android.animation.ValueAnimator
 import android.annotation.SuppressLint
 import android.content.Context
 import android.graphics.Canvas
-import android.graphics.Color
 import android.graphics.Paint
 import android.graphics.PorterDuff
 import android.graphics.PorterDuffXfermode
 import android.graphics.RectF
+import android.os.Build
 import android.util.AttributeSet
-import android.util.Log
 import android.view.KeyEvent
 import android.view.LayoutInflater
 import android.view.MotionEvent
 import android.view.View
 import android.view.ViewGroup
 import android.widget.FrameLayout
+import androidx.annotation.StyleRes
 import androidx.appcompat.view.ContextThemeWrapper
-import androidx.core.view.doOnLayout
-import androidx.core.view.doOnNextLayout
-import androidx.core.view.doOnPreDraw
 import androidx.core.view.isVisible
 import androidx.core.view.updateLayoutParams
 import androidx.fragment.app.FragmentActivity
-import com.google.android.material.shape.MarkerEdgeTreatment
 import com.google.android.material.shape.OffsetEdgeTreatment
 import com.google.android.material.shape.ShapeAppearanceModel
-import com.google.android.material.shape.TriangleEdgeTreatment
 import id.co.edtslib.uikit.poinku.R
 import id.co.edtslib.uikit.poinku.databinding.ViewCoachmarkBinding
 import id.co.edtslib.uikit.poinku.utils.deviceHeight
 import id.co.edtslib.uikit.poinku.utils.deviceWidth
 import id.co.edtslib.uikit.poinku.utils.dp
-import id.co.edtslib.uikit.poinku.utils.inflater
 import id.co.edtslib.uikit.poinku.utils.interpolator.EaseInterpolator
 import kotlin.math.max
 import androidx.core.graphics.toColorInt
@@ -71,6 +65,14 @@ class CoachMarkOverlay @JvmOverloads constructor(
 
     private var isDismissible = false
 
+    private var coachmarkDefaultWidthPercent = 0.84f
+        set(value) {
+            field = value
+            coachmarkBinding.root.requestLayout()
+        }
+
+    private var stepProgressDivider = "/"
+
     private val coachmarkBinding: ViewCoachmarkBinding =
         ViewCoachmarkBinding.inflate(LayoutInflater.from(this.context), this, false).apply {
             setOnButtonClickListener()
@@ -78,7 +80,7 @@ class CoachMarkOverlay @JvmOverloads constructor(
 
     private val coachmarkView: View = coachmarkBinding.root.apply {
         updateLayoutParams<LayoutParams> {
-            width = (context.deviceWidth * 0.84).toInt()
+            width = (context.deviceWidth * coachmarkDefaultWidthPercent).toInt()
         }
         alpha = 0f
     }
@@ -105,15 +107,6 @@ class CoachMarkOverlay @JvmOverloads constructor(
     /**
      * Sets the coach mark items.
      *
-     * @param items vararg list of [CoachMarkData] items.
-     */
-    fun setCoachMarkItems(vararg items: CoachMarkData) {
-        setCoachMarkItems(items.toList())
-    }
-
-    /**
-     * Sets the coach mark items.
-     *
      * @param items list of [CoachMarkData] items.
      */
     fun setCoachMarkItems(items: List<CoachMarkData>) {
@@ -121,6 +114,26 @@ class CoachMarkOverlay @JvmOverloads constructor(
         currentCoachMarkIndex = 0
         updateCoachMarkContent()
         updateCurrentTarget()
+    }
+
+    fun setCoachmarkTitleTextAppearance(@StyleRes resId: Int) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            coachmarkBinding.tvTiTle.setTextAppearance(resId)
+        }
+    }
+
+    fun setCoachmarkDescriptionTextAppearance(@StyleRes resId: Int) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            coachmarkBinding.tvDescription.setTextAppearance(resId)
+        }
+    }
+
+    fun setCoachmarkWidthPercent(percent: Float) {
+        coachmarkDefaultWidthPercent = percent
+    }
+
+    fun setStepProgressDivider(divider: String) {
+        stepProgressDivider = divider
     }
 
     /**
@@ -149,7 +162,7 @@ class CoachMarkOverlay @JvmOverloads constructor(
         with(coachmarkBinding) {
             tvTiTle.text = currentItem.title
             tvDescription.text = currentItem.description
-            tvCoachmarkCount.text = "${currentCoachMarkIndex.plus(1)}/${coachMarkItems.size}"
+            tvCoachmarkCount.text = "${currentCoachMarkIndex.plus(1)}$stepProgressDivider${coachMarkItems.size}"
             btnNext.text = if (isOnTheLastIndex) "Tutup" else "Berikutnya"
             btnSkip.isVisible = !isOnTheLastIndex
         }
@@ -201,35 +214,47 @@ class CoachMarkOverlay @JvmOverloads constructor(
         val overlayWidth = this.width.toFloat()
         val targetCenterX = rect.centerX()
 
-        // Calculate a centered horizontal position then clamp it between left and right bounds
         val centeredPosition = targetCenterX - coachmarkView.width / 2f
         val horizontal = centeredPosition.coerceIn(8.dp, overlayWidth - coachmarkView.width - 8.dp)
 
         return Pair(horizontal, vertical)
     }
 
-
     private fun updateCoachMarkShapeAppearanceEdge(
-        gravity: CoachMarkHorizontalGravity,
-        isEdgeAtTop: Boolean
+        targetCenterX: Float,
+        isEdgeAtTop: Boolean,
+        cardLeft: Float? = null
     ) {
-        val placement = when (gravity) {
-            CoachMarkHorizontalGravity.START -> coachmarkBinding.cardContainer.width.div(2).minus(20.dp).toFloat()
-            CoachMarkHorizontalGravity.CENTER -> 0f
-            CoachMarkHorizontalGravity.END -> -coachmarkBinding.cardContainer.width.div(2).minus(20.dp).toFloat()
-        }
+        coachmarkBinding.cardContainer.post {
+            val actualCardLeft = cardLeft ?: coachmarkView.translationX
+            val cardRight = actualCardLeft + coachmarkView.width
+            val cardCenterX = (actualCardLeft + cardRight) / 2f
 
-        val markerEdgeTreatment = RoundTipTriangleEdgeTreatment(12.dp, 8.dp, (1.5).toInt().dp, isEdgeAtTop)
-        val offsetEdgeTreatment = OffsetEdgeTreatment(markerEdgeTreatment, if (isEdgeAtTop) placement else -placement)
+            val offsetFromCardCenter = targetCenterX - cardCenterX
 
-        coachmarkBinding.cardContainer.shapeAppearanceModel = offsetEdgeTreatment.let {
-            ShapeAppearanceModel().toBuilder()
-                .setAllCornerSizes(8.dp)
-                .apply {
-                    if (isEdgeAtTop) setTopEdge(it)
-                    else setBottomEdge(it)
-                }
-                .build()
+            // IMPORTANT: setTopEdge and setBottomEdge have flipped coordinate systems
+            val correctedOffset = if (isEdgeAtTop) {
+                -offsetFromCardCenter
+            } else {
+                offsetFromCardCenter
+            }
+
+            val cardWidth = coachmarkBinding.cardContainer.width.toFloat()
+            val maxOffset = cardWidth / 2f - 16.dp
+            val clampedOffset = correctedOffset.coerceIn(-maxOffset, maxOffset)
+
+            val markerEdgeTreatment = RoundTipTriangleEdgeTreatment(12.dp, 8.dp, (1.5).toInt().dp, isEdgeAtTop)
+            val offsetEdgeTreatment = OffsetEdgeTreatment(markerEdgeTreatment, clampedOffset)
+
+            coachmarkBinding.cardContainer.shapeAppearanceModel = offsetEdgeTreatment.let {
+                ShapeAppearanceModel().toBuilder()
+                    .setAllCornerSizes(8.dp)
+                    .apply {
+                        if (isEdgeAtTop) setTopEdge(it)
+                        else setBottomEdge(it)
+                    }
+                    .build()
+            }
         }
     }
 
@@ -257,7 +282,7 @@ class CoachMarkOverlay @JvmOverloads constructor(
                 else -> CoachMarkHorizontalGravity.CENTER
             }
 
-            updateCoachMarkShapeAppearanceEdge(horizontalGravity, edgeIsAtTop)
+            updateCoachMarkShapeAppearanceEdge((targetCenterX), edgeIsAtTop)
         }
     }
 
@@ -277,13 +302,8 @@ class CoachMarkOverlay @JvmOverloads constructor(
 
         val targetCenterX = newRect.centerX()
         val isEdgeAtTop = finalY > newRect.bottom
-        val gravity = when {
-            targetCenterX < width / 3f -> CoachMarkHorizontalGravity.START
-            targetCenterX > width * 2 / 3f -> CoachMarkHorizontalGravity.END
-            else -> CoachMarkHorizontalGravity.CENTER
-        }
 
-        updateCoachMarkShapeAppearanceEdge(gravity, isEdgeAtTop)
+        updateCoachMarkShapeAppearanceEdge(targetCenterX, isEdgeAtTop, finalX)
 
         currentCoachMarkIndex++
         updateCoachMarkContent()
@@ -308,12 +328,13 @@ class CoachMarkOverlay @JvmOverloads constructor(
                 invalidate()
             }
             addListener(object : AnimatorListenerAdapter() {
-                override fun onAnimationEnd(animation: Animator) = onTransitionEnd()
+                override fun onAnimationEnd(animation: Animator) {
+                    onTransitionEnd()
+                }
             })
             start()
         }
     }
-
 
 
     /**
@@ -481,6 +502,15 @@ class CoachMarkOverlay @JvmOverloads constructor(
         private var container: ViewGroup? = context.window?.decorView as? ViewGroup
         private var delegate: CoachmarkDelegate? = null
 
+        @StyleRes
+        private var titleTextAppearance: Int = R.style.TextAppearance_Rubik_H3_Medium
+
+        @StyleRes
+        private var descriptionTextAppearance: Int = R.style.TextAppearance_Rubik_P2_Light
+
+        private var coachmarkWidthPercent: Float = 0.84f
+        private var stepProgressDivider: String = "/"
+
         fun setDismissibleOnBack(isDismissible: Boolean) = apply {
             this.dismissibleOnBack = isDismissible
         }
@@ -521,10 +551,36 @@ class CoachMarkOverlay @JvmOverloads constructor(
             this.delegate = delegate
         }
 
+        fun setCoachmarkTitleTextAppearance(@StyleRes resId: Int) = apply {
+            this.titleTextAppearance = resId
+        }
+
+        fun setCoachmarkDescriptionTextAppearance(@StyleRes resId: Int) = apply {
+            this.descriptionTextAppearance = resId
+        }
+
+        fun setCoachmarkWidthPercent(percent: Float) = apply {
+            this.coachmarkWidthPercent = percent
+        }
+
+        /**
+         * Sets the step progress divider.
+         * By Default "/" is used.
+         *
+         * @param divider of Step Progress Count.
+         */
+        fun setStepProgressDivider(divider: String) = apply {
+            this.stepProgressDivider = divider
+        }
+
         fun build(): CoachMarkOverlay {
             val overlay = CoachMarkOverlay(context)
             overlay.coachMarkDelegate = delegate
             overlay.setCoachMarkItems(coachMarkItems)
+            overlay.setCoachmarkTitleTextAppearance(titleTextAppearance)
+            overlay.setCoachmarkDescriptionTextAppearance(descriptionTextAppearance)
+            overlay.setCoachmarkWidthPercent(coachmarkWidthPercent)
+            overlay.setStepProgressDivider(stepProgressDivider)
             container?.let { overlay.setContainer(it) }
             overlay.isDismissible = dismissibleOnBack
             return overlay

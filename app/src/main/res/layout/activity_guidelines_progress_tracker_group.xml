@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".GuidelinesProgressTrackerGroup">
+
+    <com.google.android.material.imageview.ShapeableImageView
+        android:id="@+id/ivPlaceholder"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:layout_marginTop="@dimen/s"
+        app:srcCompat="@drawable/ic_placeholder_medium_24"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
+    <id.co.edtslib.uikit.poinku.progressindicator.ProgressTrackerGroup
+        android:id="@+id/progressTrackerGroup"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/xs"
+        android:layout_marginHorizontal="@dimen/s"
+        android:clipToPadding="false"
+        app:layout_constraintTop_toBottomOf="@id/ivPlaceholder"/>
+
+    <com.google.android.material.imageview.ShapeableImageView
+        android:layout_width="@dimen/dimen_0"
+        android:layout_height="@dimen/dimen_0"
+        android:layout_marginTop="@dimen/m2"
+        android:src="@color/grey_10"
+        android:adjustViewBounds="true"
+        app:layout_constraintTop_toBottomOf="@id/progressTrackerGroup"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -31,12 +31,12 @@
 
             <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/tvTiTle"
+                style="?h3Medium"
                 android:layout_width="@dimen/dimen_0"
                 android:layout_height="wrap_content"
                 android:layout_margin="@dimen/xs"
                 android:text="Total Stamp yang Kamu Punya"
                 android:textColor="@color/grey_80"
-                android:textAppearance="?h3Medium"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -45,12 +45,12 @@
 
             <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/tvDescription"
+                style="?p2Light"
                 android:layout_width="@dimen/dimen_0"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/xxxs"
                 android:layout_marginHorizontal="@dimen/xs"
                 android:textColor="@color/grey_80"
-                android:textAppearance="?p2Light"
                 app:layout_constraintTop_toBottomOf="@id/tvTiTle"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -59,6 +59,7 @@
 
             <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/tvCoachmarkCount"
+                style="?b3Light"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/xxs"
@@ -66,7 +67,6 @@
                 android:layout_marginBottom="@dimen/xs"
                 android:text="1/1"
                 android:textColor="@color/grey_50"
-                android:textAppearance="?b3Light"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="@id/btnNext"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -83,7 +83,6 @@
                 android:layout_marginBottom="@dimen/xs"
                 android:paddingVertical="@dimen/dimen_6"
                 android:paddingHorizontal="@dimen/xxs"
-                android:textAppearance="?buttonSmall"
                 android:text="Lewati"
                 app:layout_constraintVertical_bias="0.0"
                 app:layout_constraintTop_toBottomOf="@id/tvDescription"

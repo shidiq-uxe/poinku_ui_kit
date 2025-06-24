@@ -451,4 +451,8 @@
         <attr name="strokeColor"/>
     </declare-styleable>
 
+    <declare-styleable name="Badge">
+        <attr name="text"/>
+    </declare-styleable>
+
 </resources>

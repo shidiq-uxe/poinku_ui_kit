@@ -15,6 +15,7 @@
         <item name="iconTint">@color/slr_button_filled_text</item>
         <item name="rippleColor">@color/slr_button_filled_ripple</item>
         <item name="shapeAppearance">@style/ShapeAppearance.EDTS.UIKit.Poinku.Button</item>
+        <item name="textAppearance">@style/TextAppearance.Rubik.Button.Small</item>
     </style>
 
     <style name="Widget.EDTS.UIKit.Poinku.Button.Filled.Medium" parent="Widget.EDTS.UIKit.Poinku.Button.Filled">
@@ -76,6 +77,7 @@
         <item name="iconTint">@color/slr_button_outlined_text</item>
         <item name="rippleColor">@color/slr_button_text_ripple</item>
         <item name="shapeAppearance">@style/ShapeAppearance.EDTS.UIKit.Poinku.Button</item>
+        <item name="textAppearance">@style/TextAppearance.Rubik.Button.Small</item>
     </style>
 
     <style name="Widget.EDTS.UIKit.Poinku.Button.TextButton.Medium" parent="Widget.EDTS.UIKit.Poinku.Button.TextButton">

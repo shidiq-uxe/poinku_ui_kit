@@ -8,6 +8,29 @@
     tools:context=".auth.VerificationActivity"
     android:theme="@style/Theme.EDTS.UIKit">
 
+    <com.airbnb.lottie.LottieAnimationView
+        android:id="@+id/lavIntroIllustration"
+        android:layout_width="@dimen/dimen_0"
+        android:layout_height="@dimen/dimen_0"
+        android:layout_marginTop="@dimen/s"
+        app:lottie_rawRes="@raw/ill_lottie_verification"
+        app:lottie_loop="true"
+        app:lottie_autoPlay="true"
+        app:layout_constraintWidth_percent="0.45"
+        app:layout_constraintDimensionRatio="1:1"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
+    <id.co.edtslib.uikit.poinku.progressindicator.RegisterProgressTrackerGroup
+        android:id="@+id/ptgTracker"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/xs"
+        app:layout_constraintTop_toBottomOf="@id/lavIntroIllustration"
+        android:paddingHorizontal="@dimen/s"
+        android:clipToPadding="false"/>
+
     <com.google.android.material.textview.MaterialTextView
         android:id="@+id/tvGreetings"
         android:layout_width="@dimen/dimen_0"
@@ -16,7 +39,7 @@
         android:layout_marginHorizontal="@dimen/s"
         android:textAppearance="@style/TextAppearance.Rubik.Semibold.D2"
         android:text="Kode Verifikasi"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/ptgTracker"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"/>
 

@@ -26,6 +26,7 @@ dependencies {
 9. [BucketChipGroup](docs/BucketChipGroup.md)
 10. [DividerChipGroup](docs/DividerChipGroup.md)
 11. [PoinSearchToolbar](docs/PoinSearchToolbar.md)
+12. [ProgressTracker](docs/ProgressTrackerGroup.md)
 
 ## Pages Reference
 1. [I-Kupon Page](docs/pages/IkuponPage.md)

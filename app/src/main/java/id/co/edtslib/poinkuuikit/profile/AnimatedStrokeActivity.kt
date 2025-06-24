@@ -36,7 +36,13 @@ class AnimatedStrokeActivity : GuidelinesBaseActivity() {
             insets
         }
 
-        initCoachMark()
+        //initCoachMark()
+
+        binding.referralEntryPoint2.isGlowing = false
+        binding.referralEntryPoint3.onlyGlow = true
+
+        binding.referralEntryPoint.setInfinite(true)
+        binding.referralEntryPoint2.setInfinite(true)
 
     }
 
@@ -59,16 +65,18 @@ class AnimatedStrokeActivity : GuidelinesBaseActivity() {
             }
 
             override fun onDismissListener() {
-
+                binding.referralEntryPoint.setInfinite(false)
             }
         }
 
+        binding.referralEntryPoint.setInfinite(true)
+
         Handler(Looper.getMainLooper()).postDelayed({
-            /*CoachMarkOverlay.Builder(this)
+            CoachMarkOverlay.Builder(this)
                 .setDismissibleOnBack(true)
                 .setCoachMarkItems(coachmarkItems)
                 .setCoachMarkDelegate(coachMarkDelegate)
-                .build()*/
+                .build()
         }, 1000L)
     }
 }

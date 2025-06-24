@@ -15,6 +15,13 @@
         android:theme="@style/Theme.EDTS.UIKit.ActionBar"
         tools:targetApi="31">
         <activity
+            android:name=".GuidelinesHomeCoachmark"
+            android:theme="@style/Theme.EDTS.UIKit"
+            android:exported="false" />
+        <activity
+            android:name=".GuidelinesProgressTrackerGroup"
+            android:exported="false" />
+        <activity
             android:name=".profile.AnimatedStrokeActivity"
             android:exported="false" />
         <activity

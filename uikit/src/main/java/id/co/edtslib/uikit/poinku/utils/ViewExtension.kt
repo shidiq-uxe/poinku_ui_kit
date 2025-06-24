@@ -78,3 +78,12 @@ fun ShimmerFrameLayout.detachShimmerEffect(): View? {
     return originalView
 }
 
+fun View.disableClippingUpToRoot() {
+    if (this is ViewGroup) this.clipChildren = false
+    var current = this.parent
+    while (current is ViewGroup) {
+        current.clipChildren = false
+        current = current.parent
+    }
+}
+
