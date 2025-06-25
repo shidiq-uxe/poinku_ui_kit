@@ -44,7 +44,7 @@ class Badge @JvmOverloads constructor(
             field = value
             textView.text = value
             visibility = if (value.isNullOrEmpty()) GONE else VISIBLE
-            invalidate()
+            post { ensureCircularShape() }
         }
 
     @StyleRes
@@ -94,6 +94,42 @@ class Badge @JvmOverloads constructor(
             if(it.hasValue(R.styleable.Badge_text)) {
                 text = it.getString(R.styleable.Badge_text)
             }
+        }
+    }
+
+    private fun ensureCircularShape() {
+        val currentText = text
+        if (currentText?.length == 1) {
+            val textHeight = textView.height
+            val textWidth = textView.width
+
+            val minSize = maxOf(textHeight, textWidth)
+
+            layoutParams = layoutParams?.apply {
+                width = minSize
+                height = minSize
+            }
+
+            updatePadding(
+                left = (minSize - textWidth) / 2,
+                right = (minSize - textWidth) / 2,
+                top = (minSize - textHeight) / 2,
+                bottom = (minSize - textHeight) / 2
+            )
+        } else {
+            updatePadding(
+                left = 6.dp.toInt(),
+                right = 6.dp.toInt(),
+                top = 0,
+                bottom = 0
+            )
+        }
+    }
+
+    override fun onLayout(changed: Boolean, left: Int, top: Int, right: Int, bottom: Int) {
+        super.onLayout(changed, left, top, right, bottom)
+        if (changed) {
+            ensureCircularShape()
         }
     }
 }

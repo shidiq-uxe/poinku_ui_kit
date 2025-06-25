@@ -124,9 +124,8 @@ class RegisterProgressTrackerGroup @JvmOverloads constructor(
         textView.setTextColor(color)
 
         if (track == null && !isCompleted) {
-            Handler(Looper.getMainLooper()).postDelayed({
-                animateStepSelection(badge.parent as ViewGroup) }
-                , 750)
+            (badge.parent as ViewGroup).disableClippingUpToRoot()
+            Handler(Looper.getMainLooper()).postDelayed({ animateStepSelection(badge.parent as ViewGroup) }, 750)
         }
 
         track?.let { progressIndicator ->
