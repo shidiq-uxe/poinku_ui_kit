@@ -15,12 +15,20 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.0" />
 
+    <androidx.constraintlayout.widget.Placeholder
+        android:id="@+id/constraintGuideline"
+        android:layout_width="wrap_content"
+        android:layout_height="@dimen/dimen_1"
+        android:layout_marginBottom="@dimen/dimen_48"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/tv_boarding_title"/>
+
     <View
         android:layout_width="match_parent"
         android:layout_height="@dimen/dimen_0"
-        android:translationY="-48dp"
         android:background="@drawable/bg_boarding_overlay"
-        app:layout_constraintTop_toTopOf="@id/tv_boarding_title"
+        app:layout_constraintTop_toTopOf="@id/constraintGuideline"
         app:layout_constraintBottom_toBottomOf="parent"/>
 
     <com.google.android.material.textview.MaterialTextView
@@ -66,38 +74,56 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/m2"
         android:layout_marginHorizontal="@dimen/m2"
-        android:layout_marginBottom="@dimen/m2"
         app:indicator_gap="@dimen/dimen_8"
         app:indicator_default_width="@dimen/dimen_6"
         app:indicator_style="circle"
         app:indicator_slide_mode="scale"
         app:layout_constrainedWidth="true"
-        app:layout_constraintBottom_toTopOf="@id/btnRegister"
+        app:layout_constraintBottom_toTopOf="@id/shadowView"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/tv_boarding_description" />
 
-    <id.co.edtslib.uikit.poinku.button.Button
-        android:id="@+id/btnRegister"
+    <LinearLayout
+        android:id="@+id/shadowView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="@dimen/dimen_10"
-        android:text="Daftar Sekarang"
-        android:layout_marginHorizontal="@dimen/dimen_10"
-        app:buttonType="filledMedium"
-        app:layout_constraintVertical_bias="1.0"
+        android:layout_marginTop="@dimen/xxxs"
+        android:background="@drawable/bg_upper_shadow"
+        android:orientation="vertical"
         app:layout_constraintTop_toBottomOf="@id/indicator_view"
-        app:layout_constraintBottom_toTopOf="@id/btnLogin" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent">
 
-    <id.co.edtslib.uikit.poinku.button.Button
-        android:id="@+id/btnLogin"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Masuk"
-        android:layout_marginHorizontal="@dimen/dimen_10"
-        android:layout_marginBottom="@dimen/dimen_10"
-        app:buttonType="secondaryMedium"
-        app:layout_constraintTop_toBottomOf="@id/btnRegister"
-        app:layout_constraintBottom_toBottomOf="parent"/>
+        <id.co.edtslib.uikit.poinku.button.Button
+            android:id="@+id/btnRegister"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/s"
+            android:layout_marginBottom="@dimen/dimen_10"
+            android:text="Daftar Sekarang"
+            android:layout_marginHorizontal="@dimen/dimen_10"
+            app:buttonType="filled" />
+
+        <id.co.edtslib.uikit.poinku.button.Button
+            android:id="@+id/btnLogin"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Masuk"
+            android:layout_marginHorizontal="@dimen/dimen_10"
+            android:layout_marginBottom="@dimen/dimen_10"
+            app:buttonType="secondary"/>
+
+        <id.co.edtslib.uikit.poinku.button.Button
+            android:id="@+id/btnSkip"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Lihat-Lihat Dulu"
+            android:layout_marginHorizontal="@dimen/dimen_10"
+            android:layout_marginBottom="@dimen/dimen_10"
+            app:buttonType="text"/>
+
+    </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

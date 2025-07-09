@@ -7,4 +7,5 @@ interface BoardingPageListener {
     fun onPageScrolled(position: Int, positionOffset: Float, positionOffsetPixels: Int, fakePosition: Int)
     fun onRegisterButtonClicked(view: View)
     fun onLoginButtonClicked(view: View)
+    fun onSkipButtonClicked(view: View)
 }

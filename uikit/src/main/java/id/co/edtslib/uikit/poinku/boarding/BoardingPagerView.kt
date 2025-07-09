@@ -225,6 +225,7 @@ class BoardingPagerView @JvmOverloads constructor(
 
         binding.btnRegister.setOnClickListener { delegate?.onRegisterButtonClicked(it) }
         binding.btnLogin.setOnClickListener { delegate?.onLoginButtonClicked(it) }
+        binding.btnSkip.setOnClickListener { delegate?.onSkipButtonClicked(it) }
     }
 
     private var lastOffset = 0f

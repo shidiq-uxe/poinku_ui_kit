@@ -83,4 +83,8 @@ class OnBoardingActivity : GuidelinesBaseActivity(), BoardingPageListener {
     override fun onRegisterButtonClicked(view: View) {}
 
     override fun onLoginButtonClicked(view: View) {}
+
+    override fun onSkipButtonClicked(view: View) {
+
+    }
 }
