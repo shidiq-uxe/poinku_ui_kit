@@ -62,7 +62,7 @@ class Button @JvmOverloads constructor(
     @SuppressLint("ClickableViewAccessibility")
     override fun onTouchEvent(event: MotionEvent?): Boolean {
         event?.let { motionEvent ->
-            if (isEnabled) {
+            if (isEnabled && isClickable) {
                 when (motionEvent.action) {
                     MotionEvent.ACTION_DOWN -> {
                         this.animate().scaleX(pressedScale).scaleY(pressedScale).setDuration(100).start()
@@ -93,6 +93,8 @@ class Button @JvmOverloads constructor(
     }
 
     private fun applyStyle(buttonType: ButtonType) {
+        applyButtonSize(buttonType)
+
         ButtonAttrsFactory.applyAttributes(
             context = context,
             button = this,
@@ -101,15 +103,31 @@ class Button @JvmOverloads constructor(
         )
     }
 
+    // Fallback since applyStyle won't apply minHeight attributes
+    private fun applyButtonSize(buttonType: ButtonType) {
+        when(buttonType) {
+            ButtonType.FILLED, ButtonType.OUTLINED, ButtonType.TEXT -> {
+                this@Button.minHeight = resources.getDimensionPixelSize(R.dimen.dimen_28)
+            }
+            ButtonType.FILLED_MEDIUM, ButtonType.OUTLINED_MEDIUM, ButtonType.TEXT_MEDIUM -> {
+                this@Button.minHeight = resources.getDimensionPixelSize(R.dimen.l)
+            }
+            ButtonType.FILLED_LARGE, ButtonType.OUTLINED_LARGE, ButtonType.TEXT_LARGE -> {
+                this@Button.minHeight = resources.getDimensionPixelSize(R.dimen.xl)
+            }
+        }
+    }
+
     enum class ButtonType(val styleRes: Int) {
         FILLED(R.style.Widget_EDTS_UIKit_Poinku_Button_Filled),
         FILLED_MEDIUM(R.style.Widget_EDTS_UIKit_Poinku_Button_Filled_Medium),
-        SECONDARY(R.style.Widget_EDTS_UIKit_Poinku_Button_Outlined_Secondary),
-        SECONDARY_MEDIUM(R.style.Widget_EDTS_UIKit_Poinku_Button_Outlined_Secondary_Medium),
-        VARIANT(R.style.Widget_EDTS_UIKit_Poinku_Button_Filled_Variant),
-        VARIANT_MEDIUM(R.style.Widget_EDTS_UIKit_Poinku_Button_Filled_Variant_Medium),
+        FILLED_LARGE(R.style.Widget_EDTS_UIKit_Poinku_Button_Filled_Large),
+        OUTLINED(R.style.Widget_EDTS_UIKit_Poinku_Button_Outlined),
+        OUTLINED_MEDIUM(R.style.Widget_EDTS_UIKit_Poinku_Button_Outlined_Medium),
+        OUTLINED_LARGE(R.style.Widget_EDTS_UIKit_Poinku_Button_Outlined_Large),
         TEXT(R.style.Widget_EDTS_UIKit_Poinku_Button_TextButton),
         TEXT_MEDIUM(R.style.Widget_EDTS_UIKit_Poinku_Button_TextButton_Medium),
+        TEXT_LARGE(R.style.Widget_EDTS_UIKit_Poinku_Button_TextButton_Large),
     }
 
     companion object {

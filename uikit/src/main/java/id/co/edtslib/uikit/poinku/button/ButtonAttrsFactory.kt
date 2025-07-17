@@ -65,13 +65,19 @@ object ButtonAttrsFactory {
             themedContext.obtainStyledAttributes(styleRes, intArrayOf(
                 android.R.attr.padding,
                 android.R.attr.textAppearance,
-                android.R.attr.textColor
-            )).use { paddingAttributes ->
-                paddingAttributes.getDimensionPixelSize(0, -1).takeIf { it != -1 }?.let { padding ->
+                android.R.attr.textColor,
+                android.R.attr.minHeight,
+            )).use { androidAttributes ->
+                androidAttributes.getDimensionPixelSize(0, -1).takeIf { it != -1 }?.let { padding ->
                     button.setPadding(padding, padding, padding, padding)
                 }
 
-                paddingAttributes.getResourceId(1, -1).takeIf { it != -1 }?.let { textAppearanceResId ->
+                // This was not working
+                androidAttributes.getDimensionPixelSize(3, -1).takeIf { it != -1 }?.let { minHeight ->
+                    button.minHeight = minHeight
+                }
+
+                androidAttributes.getResourceId(1, -1).takeIf { it != -1 }?.let { textAppearanceResId ->
                     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
                         button.setTextAppearance(textAppearanceResId)
                     } else {
@@ -79,7 +85,7 @@ object ButtonAttrsFactory {
                     }
                 }
 
-                paddingAttributes.getColorStateList(2)?.let { textColor ->
+                androidAttributes.getColorStateList(2)?.let { textColor ->
                     button.setTextColor(textColor)
                 }
             }

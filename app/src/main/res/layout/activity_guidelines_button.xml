@@ -13,7 +13,10 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/s"
         android:layout_marginHorizontal="@dimen/s"
-        android:text="Filled Button"
+        android:text="Small"
+        app:buttonType="filled"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"/>
 
     <id.co.edtslib.uikit.poinku.button.Button
@@ -22,29 +25,46 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/s"
         android:layout_marginHorizontal="@dimen/s"
-        android:text="Filled Medium Button"
+        android:text="Medium"
         app:buttonType="filledMedium"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@id/btnFilled"/>
 
     <id.co.edtslib.uikit.poinku.button.Button
-        android:id="@+id/btnVariantFilled"
+        android:id="@+id/btnFilledLarge"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/s"
         android:layout_marginHorizontal="@dimen/s"
-        android:text="Variant Filled Button"
-        app:buttonType="variant"
+        android:text="Large"
+        app:buttonType="filledLarge"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@id/btnFilledMedium"/>
 
     <id.co.edtslib.uikit.poinku.button.Button
-        android:id="@+id/btnVariantFilledMedium"
+        android:id="@+id/btnFilledLargeDisabled"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/s"
         android:layout_marginHorizontal="@dimen/s"
-        android:text="Variant Medium Filled Button"
-        app:buttonType="variantMedium"
-        app:layout_constraintTop_toBottomOf="@id/btnVariantFilled"/>
+        android:enabled="false"
+        android:text="Filled Disabled"
+        app:buttonType="filledLarge"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/btnFilledLarge"/>
+
+    <com.google.android.material.divider.MaterialDivider
+        android:id="@+id/filledDivider"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/s"
+        android:layout_marginTop="@dimen/s"
+        app:dividerThickness="@dimen/dimen_1"
+        app:dividerColor="@color/grey_40"
+        app:layout_constraintTop_toBottomOf="@id/btnFilledLargeDisabled"/>
 
     <id.co.edtslib.uikit.poinku.button.Button
         android:id="@+id/btnSecondaryOutlined"
@@ -52,9 +72,9 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/s"
         android:layout_marginHorizontal="@dimen/s"
-        android:text="Secondary Outlined Button"
+        android:text="Outlined Small"
         app:buttonType="secondary"
-        app:layout_constraintTop_toBottomOf="@id/btnVariantFilledMedium"/>
+        app:layout_constraintTop_toBottomOf="@id/filledDivider"/>
 
     <id.co.edtslib.uikit.poinku.button.Button
         android:id="@+id/btnSecondaryOutlinedMedium"
@@ -62,9 +82,19 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/s"
         android:layout_marginHorizontal="@dimen/s"
-        android:text="Secondary Medium Outlined Button"
+        android:text="Outlined Medium"
         app:buttonType="secondaryMedium"
         app:layout_constraintTop_toBottomOf="@id/btnSecondaryOutlined"/>
+
+    <id.co.edtslib.uikit.poinku.button.Button
+        android:id="@+id/btnSecondaryOutlinedLarge"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/s"
+        android:layout_marginHorizontal="@dimen/s"
+        android:text="Outlined Large"
+        app:buttonType="secondaryLarge"
+        app:layout_constraintTop_toBottomOf="@id/btnSecondaryOutlinedMedium"/>
 
     <id.co.edtslib.uikit.poinku.button.Button
         android:id="@+id/btnDisabled"
@@ -72,9 +102,20 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/s"
         android:layout_marginHorizontal="@dimen/s"
-        android:text="Disabled Button"
+        android:text="Outlined Disabled"
         android:enabled="false"
-        app:layout_constraintTop_toBottomOf="@id/btnSecondaryOutlinedMedium"/>
+        app:buttonType="secondaryLarge"
+        app:layout_constraintTop_toBottomOf="@id/btnSecondaryOutlinedLarge"/>
+
+    <com.google.android.material.divider.MaterialDivider
+        android:id="@+id/outlinedDivider"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/s"
+        android:layout_marginTop="@dimen/s"
+        app:dividerThickness="@dimen/dimen_1"
+        app:dividerColor="@color/grey_40"
+        app:layout_constraintTop_toBottomOf="@id/btnDisabled"/>
 
     <id.co.edtslib.uikit.poinku.button.Button
         android:id="@+id/btnTextButton"
@@ -82,9 +123,9 @@
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/s"
         android:layout_marginTop="8dp"
-        android:text="Text Button"
+        android:text="Small Text Button"
         app:buttonType="text"
-        app:layout_constraintTop_toBottomOf="@id/btnDisabled" />
+        app:layout_constraintTop_toBottomOf="@id/outlinedDivider" />
 
     <id.co.edtslib.uikit.poinku.button.Button
         android:id="@+id/btnTextButtonMedium"
@@ -96,43 +137,44 @@
         app:layout_constraintTop_toBottomOf="@id/btnTextButton"/>
 
     <id.co.edtslib.uikit.poinku.button.Button
-        android:id="@+id/btnIconButton"
+        android:id="@+id/btnTextButtonLarge"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/s"
-        android:text="Icon Button"
-        app:buttonType="filledMedium"
-        app:icon="@drawable/ic_placeholder_medium_24"
-        app:iconGravity="textStart"
+        android:text="Large Text Button"
+        app:buttonType="textLarge"
         app:layout_constraintTop_toBottomOf="@id/btnTextButtonMedium"/>
 
-    <id.co.edtslib.uikit.poinku.ribbon.Ribbon
-        android:id="@+id/ribbon"
-        android:layout_width="wrap_content"
+    <id.co.edtslib.uikit.poinku.button.Button
+        android:id="@+id/btnTextButtonLargeDisabled"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/xxs"
-        android:layout_marginStart="-6dp"
-        android:elevation="@dimen/xxxs"
-        app:gravity="start"
-        app:text="999x"
-        app:textAppearance="@style/TextAppearance.Rubik.H2.Heavy"
-        app:layout_constraintTop_toTopOf="@id/btnDisabled"
-        app:layout_constraintStart_toStartOf="@id/btnTextButton"/>
+        android:layout_margin="@dimen/s"
+        android:enabled="false"
+        android:text="Large Text Button"
+        app:buttonType="textLarge"
+        app:layout_constraintTop_toBottomOf="@id/btnTextButtonLarge"/>
 
-    <id.co.edtslib.uikit.poinku.ribbon.Ribbon
-        android:id="@+id/ribbon2"
+    <com.google.android.material.divider.MaterialDivider
+        android:id="@+id/textButtonDivider"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/s"
+        android:layout_marginTop="@dimen/s"
+        app:dividerThickness="@dimen/dimen_1"
+        app:dividerColor="@color/grey_40"
+        app:layout_constraintTop_toBottomOf="@id/btnTextButtonLargeDisabled"/>
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btnIconButton"
+        style="@style/Widget.EDTS.UIKit.Poinku.Button.IconButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/xxs"
-        android:layout_marginStart="-6dp"
-        android:elevation="@dimen/xxxs"
-        app:containerStartColor="@color/secondary_10"
-        app:containerEndColor="@color/secondary_30"
-        app:triangleColor="@color/secondary_50"
-        app:gravity="start"
-        app:text="Baru!"
-        app:textAppearance="@style/TextAppearance.Rubik.H2.Heavy"
-        app:layout_constraintTop_toTopOf="@id/btnSecondaryOutlinedMedium"
-        app:layout_constraintStart_toStartOf="@id/btnTextButton"/>
+        android:layout_margin="@dimen/s"
+        app:icon="@drawable/ic_placeholder_medium_24"
+        app:iconGravity="textStart"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/textButtonDivider"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

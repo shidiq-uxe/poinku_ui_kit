@@ -73,6 +73,14 @@ class CoachMarkOverlay @JvmOverloads constructor(
 
     private var stepProgressDivider = "/"
 
+    internal var nextDefaultText = "Berikutnya"
+    internal var closeDefaultText = "Tutup"
+    internal var skipDefaultText = "Tutup"
+        set(value) {
+            field = value
+            coachmarkBinding.btnSkip.text = value
+        }
+
     private val coachmarkBinding: ViewCoachmarkBinding =
         ViewCoachmarkBinding.inflate(LayoutInflater.from(this.context), this, false).apply {
             setOnButtonClickListener()
@@ -163,7 +171,8 @@ class CoachMarkOverlay @JvmOverloads constructor(
             tvTiTle.text = currentItem.title
             tvDescription.text = currentItem.description
             tvCoachmarkCount.text = "${currentCoachMarkIndex.plus(1)}$stepProgressDivider${coachMarkItems.size}"
-            btnNext.text = if (isOnTheLastIndex) "Tutup" else "Berikutnya"
+            btnNext.text = if (isOnTheLastIndex) closeDefaultText else nextDefaultText
+            btnSkip.text = skipDefaultText
             btnSkip.isVisible = !isOnTheLastIndex
         }
     }
@@ -510,6 +519,8 @@ class CoachMarkOverlay @JvmOverloads constructor(
 
         private var coachmarkWidthPercent: Float = 0.84f
         private var stepProgressDivider: String = "/"
+        private var skipText: String = "Tutup"
+        private var nextText: String = "Berikutnya"
 
         fun setDismissibleOnBack(isDismissible: Boolean) = apply {
             this.dismissibleOnBack = isDismissible
@@ -563,6 +574,14 @@ class CoachMarkOverlay @JvmOverloads constructor(
             this.coachmarkWidthPercent = percent
         }
 
+        fun setCoachmarkSkipText(text: String) = apply {
+            this.skipText = text
+        }
+
+        fun setCoachmarkNextText(text: String) = apply {
+            this.nextText = text
+        }
+
         /**
          * Sets the step progress divider.
          * By Default "/" is used.
@@ -581,6 +600,8 @@ class CoachMarkOverlay @JvmOverloads constructor(
             overlay.setCoachmarkDescriptionTextAppearance(descriptionTextAppearance)
             overlay.setCoachmarkWidthPercent(coachmarkWidthPercent)
             overlay.setStepProgressDivider(stepProgressDivider)
+            overlay.skipDefaultText = skipText
+            overlay.nextDefaultText = nextText
             container?.let { overlay.setContainer(it) }
             overlay.isDismissible = dismissibleOnBack
             return overlay

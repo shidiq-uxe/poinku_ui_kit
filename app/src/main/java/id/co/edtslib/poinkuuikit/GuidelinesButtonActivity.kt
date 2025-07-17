@@ -22,10 +22,5 @@ class GuidelinesButtonActivity : AppCompatActivity() {
             insets
         }
 
-        binding.ribbon2.apply {
-            ribbonText = "Hot Product"
-            containerStartColor = context.color(UIKitR.color.gradient_red_start)
-            containerEndColor = context.color(UIKitR.color.gradient_red_end)
-        }
     }
 }

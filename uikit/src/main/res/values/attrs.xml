@@ -159,12 +159,13 @@
         <attr name="buttonType" format="enum">
             <enum name="filled" value="0" />
             <enum name="filledMedium" value="1" />
-            <enum name="secondary" value="2" />
-            <enum name="secondaryMedium" value="3" />
-            <enum name="variant" value="4" />
-            <enum name="variantMedium" value="5" />
+            <enum name="filledLarge" value="2" />
+            <enum name="secondary" value="3" />
+            <enum name="secondaryMedium" value="4" />
+            <enum name="secondaryLarge" value="5" />
             <enum name="text" value="6" />
             <enum name="textMedium" value="7" />
+            <enum name="textLarge" value="8" />
         </attr>
         <attr name="shouldShowShimmer" format="boolean"/>
         <attr name="pressedScale" format="float"/>

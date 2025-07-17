@@ -6,30 +6,41 @@
         <item name="android:insetLeft">@dimen/dimen_0</item>
         <item name="android:insetRight">@dimen/dimen_0</item>
         <item name="android:insetTop">@dimen/dimen_0</item>
-        <item name="android:minHeight">@dimen/dimen_0</item>
+        <item name="android:minHeight">@dimen/dimen_28</item>
         <item name="android:minWidth">@dimen/dimen_0</item>
         <item name="android:tag">@string/button_filled_tag</item>
         <item name="android:textColor">@color/slr_button_filled_text</item>
         <item name="backgroundTint">@color/slr_button_filled_bg</item>
+        <item name="android:paddingTop">@dimen/xxxs</item>
+        <item name="android:paddingBottom">@dimen/xxxs</item>
+        <item name="android:paddingStart">@dimen/xs</item>
+        <item name="android:paddingEnd">@dimen/xs</item>
         <item name="iconPadding">@dimen/xxxs</item>
         <item name="iconTint">@color/slr_button_filled_text</item>
         <item name="rippleColor">@color/slr_button_filled_ripple</item>
         <item name="shapeAppearance">@style/ShapeAppearance.EDTS.UIKit.Poinku.Button</item>
         <item name="textAppearance">@style/TextAppearance.Rubik.Button.Small</item>
+        <item name="android:textAppearance">@style/TextAppearance.Rubik.Button.Small</item>
     </style>
 
     <style name="Widget.EDTS.UIKit.Poinku.Button.Filled.Medium" parent="Widget.EDTS.UIKit.Poinku.Button.Filled">
-        <item name="android:padding">@dimen/xs</item>
-        <item name="android:textAppearance">@style/TextAppearance.Rubik.H2.Heavy</item>
+        <item name="android:minHeight">@dimen/l</item>
+        <item name="android:paddingTop">@dimen/dimen_5</item>
+        <item name="android:paddingBottom">@dimen/dimen_5</item>
+        <item name="android:paddingStart">@dimen/xs</item>
+        <item name="android:paddingEnd">@dimen/xs</item>
+        <item name="android:textAppearance">@style/TextAppearance.Rubik.Button.Medium</item>
         <item name="iconSize">@dimen/s</item>
     </style>
 
-    <style name="Widget.EDTS.UIKit.Poinku.Button.Filled.Variant" parent="Widget.EDTS.UIKit.Poinku.Button.Filled">
-        <item name="backgroundTint">@color/slr_button_alternative_filled_bg</item>
-    </style>
-
-    <style name="Widget.EDTS.UIKit.Poinku.Button.Filled.Variant.Medium" parent="Widget.EDTS.UIKit.Poinku.Button.Filled.Medium">
-        <item name="backgroundTint">@color/slr_button_alternative_filled_bg</item>
+    <style name="Widget.EDTS.UIKit.Poinku.Button.Filled.Large" parent="Widget.EDTS.UIKit.Poinku.Button.Filled">
+        <item name="android:paddingTop">@dimen/xxs</item>
+        <item name="android:paddingBottom">@dimen/xxs</item>
+        <item name="android:paddingStart">@dimen/xs</item>
+        <item name="android:paddingEnd">@dimen/xs</item>
+        <item name="android:minHeight">@dimen/xl</item>
+        <item name="android:textAppearance">@style/TextAppearance.Rubik.Button.Large</item>
+        <item name="iconSize">@dimen/m2</item>
     </style>
 
     <style name="Widget.EDTS.UIKit.Poinku.Button.Outlined" parent="Widget.Material3.Button.OutlinedButton">
@@ -38,29 +49,41 @@
         <item name="android:insetLeft">@dimen/dimen_0</item>
         <item name="android:insetRight">@dimen/dimen_0</item>
         <item name="android:minHeight">@dimen/dimen_0</item>
-        <item name="android:minWidth">@dimen/dimen_0</item>
+        <item name="android:minWidth">@dimen/dimen_28</item>
         <item name="android:tag">@string/button_outlined_tag</item>
         <item name="android:textColor">@color/slr_button_outlined_text</item>
         <item name="backgroundTint">@color/transparent</item>
+        <item name="android:paddingTop">@dimen/xxxs</item>
+        <item name="android:paddingBottom">@dimen/xxxs</item>
+        <item name="android:paddingStart">@dimen/xs</item>
+        <item name="android:paddingEnd">@dimen/xs</item>
         <item name="iconPadding">@dimen/xxxs</item>
         <item name="iconTint">@color/slr_button_outlined_text</item>
         <item name="rippleColor">@color/slr_button_outlined_ripple</item>
         <item name="shapeAppearance">@style/ShapeAppearance.EDTS.UIKit.Poinku.Button</item>
         <item name="strokeColor">@color/slr_button_outlined_stroke</item>
+        <item name="textAppearance">@style/TextAppearance.Rubik.Button.Small</item>
+        <item name="android:textAppearance">@style/TextAppearance.Rubik.Button.Small</item>
     </style>
 
     <style name="Widget.EDTS.UIKit.Poinku.Button.Outlined.Medium" parent="Widget.EDTS.UIKit.Poinku.Button.Outlined">
-        <item name="android:padding">@dimen/xs</item>
-        <item name="android:textAppearance">@style/TextAppearance.Rubik.H2.Heavy</item>
+        <item name="android:minHeight">@dimen/l</item>
+        <item name="android:paddingTop">@dimen/dimen_5</item>
+        <item name="android:paddingBottom">@dimen/dimen_5</item>
+        <item name="android:paddingStart">@dimen/xs</item>
+        <item name="android:paddingEnd">@dimen/xs</item>
+        <item name="android:textAppearance">@style/TextAppearance.Rubik.Button.Medium</item>
         <item name="iconSize">@dimen/s</item>
     </style>
 
-    <style name="Widget.EDTS.UIKit.Poinku.Button.Outlined.Secondary" parent="Widget.EDTS.UIKit.Poinku.Button.Outlined">
-        <item name="backgroundTint">@color/slr_button_secondary_outlined_bg</item>
-    </style>
-
-    <style name="Widget.EDTS.UIKit.Poinku.Button.Outlined.Secondary.Medium" parent="Widget.EDTS.UIKit.Poinku.Button.Outlined.Medium">
-        <item name="backgroundTint">@color/slr_button_secondary_outlined_bg</item>
+    <style name="Widget.EDTS.UIKit.Poinku.Button.Outlined.Large" parent="Widget.EDTS.UIKit.Poinku.Button.Outlined">
+        <item name="android:paddingTop">@dimen/xxs</item>
+        <item name="android:paddingBottom">@dimen/xxs</item>
+        <item name="android:paddingStart">@dimen/xs</item>
+        <item name="android:paddingEnd">@dimen/xs</item>
+        <item name="android:minHeight">@dimen/xl</item>
+        <item name="android:textAppearance">@style/TextAppearance.Rubik.Button.Large</item>
+        <item name="iconSize">@dimen/m2</item>
     </style>
 
     <style name="Widget.EDTS.UIKit.Poinku.Button.TextButton" parent="Widget.Material3.Button.TextButton">
@@ -68,22 +91,41 @@
         <item name="android:insetBottom">@dimen/dimen_0</item>
         <item name="android:insetLeft">@dimen/dimen_0</item>
         <item name="android:insetRight">@dimen/dimen_0</item>
-        <item name="android:minHeight">@dimen/dimen_0</item>
+        <item name="android:minHeight">@dimen/dimen_28</item>
         <item name="android:minWidth">@dimen/dimen_0</item>
         <item name="android:tag">@string/button_text_button_tag</item>
         <item name="android:textColor">@color/slr_button_outlined_text</item>
         <item name="backgroundTint">@color/transparent</item>
+        <item name="android:paddingTop">@dimen/xxxs</item>
+        <item name="android:paddingBottom">@dimen/xxxs</item>
+        <item name="android:paddingStart">@dimen/xs</item>
+        <item name="android:paddingEnd">@dimen/xs</item>
         <item name="iconPadding">@dimen/xxxs</item>
         <item name="iconTint">@color/slr_button_outlined_text</item>
         <item name="rippleColor">@color/slr_button_text_ripple</item>
         <item name="shapeAppearance">@style/ShapeAppearance.EDTS.UIKit.Poinku.Button</item>
         <item name="textAppearance">@style/TextAppearance.Rubik.Button.Small</item>
+        <item name="android:textAppearance">@style/TextAppearance.Rubik.Button.Small</item>
     </style>
 
     <style name="Widget.EDTS.UIKit.Poinku.Button.TextButton.Medium" parent="Widget.EDTS.UIKit.Poinku.Button.TextButton">
-        <item name="android:padding">@dimen/xxs</item>
-        <item name="android:textAppearance">@style/TextAppearance.Rubik.H2.Heavy</item>
+        <item name="android:minHeight">@dimen/l</item>
+        <item name="android:paddingTop">@dimen/dimen_5</item>
+        <item name="android:paddingBottom">@dimen/dimen_5</item>
+        <item name="android:paddingStart">@dimen/xs</item>
+        <item name="android:paddingEnd">@dimen/xs</item>
+        <item name="android:textAppearance">@style/TextAppearance.Rubik.Button.Medium</item>
         <item name="iconSize">@dimen/s</item>
+    </style>
+
+    <style name="Widget.EDTS.UIKit.Poinku.Button.TextButton.Large" parent="Widget.EDTS.UIKit.Poinku.Button.TextButton">
+        <item name="android:paddingTop">@dimen/xxs</item>
+        <item name="android:paddingBottom">@dimen/xxs</item>
+        <item name="android:paddingStart">@dimen/xs</item>
+        <item name="android:paddingEnd">@dimen/xs</item>
+        <item name="android:minHeight">@dimen/xl</item>
+        <item name="android:textAppearance">@style/TextAppearance.Rubik.Button.Large</item>
+        <item name="iconSize">@dimen/m2</item>
     </style>
 
     <style name="Widget.EDTS.UIKit.Poinku.Button.IconButton" parent="Widget.Material3.Button.IconButton">
