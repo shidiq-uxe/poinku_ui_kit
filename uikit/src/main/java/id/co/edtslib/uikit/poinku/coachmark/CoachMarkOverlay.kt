@@ -103,7 +103,6 @@ class CoachMarkOverlay @JvmOverloads constructor(
 
     private fun ViewCoachmarkBinding.setOnButtonClickListener() {
         btnNext.setOnClickListener {
-            coachMarkDelegate?.onNextClickClickListener()
             showNextCoachMark()
         }
         btnSkip.setOnClickListener {
@@ -159,6 +158,8 @@ class CoachMarkOverlay @JvmOverloads constructor(
         )
         container.addView(this, params)
     }
+
+    fun getCurrentCoachmarkIndex() = currentCoachMarkIndex
 
     @SuppressLint("SetTextI18n")
     private fun updateCoachMarkContent() {
@@ -353,7 +354,7 @@ class CoachMarkOverlay @JvmOverloads constructor(
         if (currentCoachMarkIndex < coachMarkItems.size - 1) {
             val nextTarget = coachMarkItems[currentCoachMarkIndex + 1].target
             transitionToTarget(nextTarget) {
-                coachMarkDelegate?.onNextClickClickListener()
+                coachMarkDelegate?.onNextClickClickListener(currentCoachMarkIndex.plus(1))
             }
         } else {
             dismiss {}

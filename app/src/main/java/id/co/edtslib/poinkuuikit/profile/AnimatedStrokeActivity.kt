@@ -56,7 +56,7 @@ class AnimatedStrokeActivity : GuidelinesBaseActivity() {
         )
 
         val coachMarkDelegate = object : CoachmarkDelegate {
-            override fun onNextClickClickListener() {
+            override fun onNextClickClickListener(index: Int) {
 
             }
 

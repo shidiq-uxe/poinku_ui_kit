@@ -205,8 +205,8 @@ class GuidelinesBucketStampActivitty : GuidelinesBaseActivity() {
     }
 
     private val coachMarkDelegate = object : CoachmarkDelegate {
-        override fun onNextClickClickListener() {
-
+        override fun onNextClickClickListener(index: Int) {
+            Log.e("Click Action", "Clicked Index : $index")
         }
 
         override fun onSkipClickListener() {
