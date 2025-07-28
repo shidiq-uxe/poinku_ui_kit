@@ -209,8 +209,8 @@ class GuidelinesBucketStampActivitty : GuidelinesBaseActivity() {
             Log.e("Click Action", "Clicked Index : $index")
         }
 
-        override fun onSkipClickListener() {
-
+        override fun onSkipClickListener(index: Int) {
+            Log.e("Click Action", "Skipped Index : $index")
         }
 
         override fun onDismissListener() {

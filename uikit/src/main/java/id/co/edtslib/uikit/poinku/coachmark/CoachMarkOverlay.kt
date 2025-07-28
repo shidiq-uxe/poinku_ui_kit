@@ -106,7 +106,7 @@ class CoachMarkOverlay @JvmOverloads constructor(
             showNextCoachMark()
         }
         btnSkip.setOnClickListener {
-            coachMarkDelegate?.onSkipClickListener()
+            coachMarkDelegate?.onSkipClickListener(currentCoachMarkIndex)
             dismiss {}
         }
     }
@@ -354,7 +354,7 @@ class CoachMarkOverlay @JvmOverloads constructor(
         if (currentCoachMarkIndex < coachMarkItems.size - 1) {
             val nextTarget = coachMarkItems[currentCoachMarkIndex + 1].target
             transitionToTarget(nextTarget) {
-                coachMarkDelegate?.onNextClickClickListener(currentCoachMarkIndex.plus(1))
+                coachMarkDelegate?.onNextClickClickListener(currentCoachMarkIndex)
             }
         } else {
             dismiss {}

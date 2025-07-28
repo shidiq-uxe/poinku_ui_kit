@@ -60,7 +60,7 @@ class AnimatedStrokeActivity : GuidelinesBaseActivity() {
 
             }
 
-            override fun onSkipClickListener() {
+            override fun onSkipClickListener(index: Int) {
 
             }
 
