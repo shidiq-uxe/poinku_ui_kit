@@ -224,9 +224,25 @@ class CoachMarkOverlay @JvmOverloads constructor(
 
         val overlayWidth = this.width.toFloat()
         val targetCenterX = rect.centerX()
+        val coachmarkWidth = coachmarkView.width.toFloat()
+        val padding = 8.dp
 
-        val centeredPosition = targetCenterX - coachmarkView.width / 2f
-        val horizontal = centeredPosition.coerceIn(8.dp, overlayWidth - coachmarkView.width - 8.dp)
+        // CRITICAL FIX: Handle zero or invalid dimensions
+        if (coachmarkWidth <= 0 || overlayWidth <= 0) {
+            // Fallback to default calculated width if view not measured yet
+            val fallbackWidth = (context.deviceWidth * coachmarkDefaultWidthPercent)
+            return Pair(
+                (overlayWidth - fallbackWidth) / 2f,
+                vertical
+            )
+        }
+
+        val centeredPosition = targetCenterX - coachmarkWidth / 2f
+
+        val minBound = padding
+        val maxBound = (overlayWidth - coachmarkWidth - padding).coerceAtLeast(minBound)
+
+        val horizontal = centeredPosition.coerceIn(minBound, maxBound)
 
         return Pair(horizontal, vertical)
     }
@@ -276,6 +292,16 @@ class CoachMarkOverlay @JvmOverloads constructor(
      */
     private fun updateCoachmarkPosition(rect: RectF) {
         coachmarkView.post {
+            if (coachmarkView.width <= 0 || coachmarkView.height <= 0) {
+                coachmarkView.measure(
+                    MeasureSpec.makeMeasureSpec(
+                        (context.deviceWidth * coachmarkDefaultWidthPercent).toInt(),
+                        MeasureSpec.EXACTLY
+                    ),
+                    MeasureSpec.makeMeasureSpec(0, MeasureSpec.UNSPECIFIED)
+                )
+            }
+
             val (newX, newY) = computeCoachmarkPosition(rect)
             coachmarkView.translationX = newX
             coachmarkView.translationY = newY
