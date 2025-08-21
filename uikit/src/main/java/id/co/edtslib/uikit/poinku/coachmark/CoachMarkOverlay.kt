@@ -35,6 +35,7 @@ import id.co.edtslib.uikit.poinku.utils.dp
 import id.co.edtslib.uikit.poinku.utils.interpolator.EaseInterpolator
 import kotlin.math.max
 import androidx.core.graphics.toColorInt
+import androidx.core.view.doOnPreDraw
 
 // Todo : Add some optimization & customization later
 class CoachMarkOverlay @JvmOverloads constructor(
@@ -69,6 +70,12 @@ class CoachMarkOverlay @JvmOverloads constructor(
         set(value) {
             field = value
             coachmarkBinding.root.requestLayout()
+        }
+
+    private var skipButtonVisibleByDefault = true
+        set(value) {
+            field = value
+            coachmarkBinding.btnSkip.isVisible = value
         }
 
     private var stepProgressDivider = "/"
@@ -175,7 +182,7 @@ class CoachMarkOverlay @JvmOverloads constructor(
             tvCoachmarkCount.text = "${currentCoachMarkIndex.plus(1)}$stepProgressDivider${coachMarkItems.size}"
             btnNext.text = if (isOnTheLastIndex) closeDefaultText else nextDefaultText
             btnSkip.text = skipDefaultText
-            btnSkip.isVisible = !isOnTheLastIndex
+            btnSkip.isVisible = !isOnTheLastIndex && skipButtonVisibleByDefault
         }
     }
 
@@ -201,9 +208,11 @@ class CoachMarkOverlay @JvmOverloads constructor(
         padding: Int = 4.dp.toInt()
     ) {
         this.spotlightShape = shape
-        targetRect = calculateTargetRect(target, padding)
-        updateCoachmarkPosition(targetRect!!)
-        startSpotlightAnimation()
+        target.doOnPreDraw {
+            targetRect = calculateTargetRect(target, padding)
+            updateCoachmarkPosition(targetRect!!)
+            startSpotlightAnimation()
+        }
     }
 
     /**
@@ -247,6 +256,17 @@ class CoachMarkOverlay @JvmOverloads constructor(
         return Pair(horizontal, vertical)
     }
 
+    /**
+     * Updates the appearance of the coach mark's card edge (the triangular pointer).
+     * This method calculates the offset of the triangle to align it with the target view.
+     *
+     * @param targetCenterX The horizontal center of the target view.
+     * @param isEdgeAtTop True if the card is positioned below the target (triangle points up),
+     *                   false if the card is above the target (triangle points down).
+     * @param cardLeft The left position of the coach mark card. If null, it's retrieved from
+     *                 the current translationX of the coachmarkView. This is useful during
+     *                 animations where the final position is known.
+     */
     private fun updateCoachMarkShapeAppearanceEdge(
         targetCenterX: Float,
         isEdgeAtTop: Boolean,
@@ -544,6 +564,7 @@ class CoachMarkOverlay @JvmOverloads constructor(
         private var descriptionTextAppearance: Int = R.style.TextAppearance_Rubik_P2_Light
 
         private var coachmarkWidthPercent: Float = 0.84f
+        private var skipButtonVisibleByDefault: Boolean = true
         private var stepProgressDivider: String = "/"
         private var skipText: String = "Tutup"
         private var nextText: String = "Berikutnya"
@@ -596,6 +617,11 @@ class CoachMarkOverlay @JvmOverloads constructor(
             this.descriptionTextAppearance = resId
         }
 
+        /**
+         * Sets the width of the coach mark as a percentage of the screen width.
+         *
+         * @param percent the width percentage (0.0 to 1.0).
+         */
         fun setCoachmarkWidthPercent(percent: Float) = apply {
             this.coachmarkWidthPercent = percent
         }
@@ -606,6 +632,10 @@ class CoachMarkOverlay @JvmOverloads constructor(
 
         fun setCoachmarkNextText(text: String) = apply {
             this.nextText = text
+        }
+
+        fun setSkipButtonVisibleByDefault(isVisible: Boolean) = apply {
+            this.skipButtonVisibleByDefault = isVisible
         }
 
         /**
@@ -626,6 +656,7 @@ class CoachMarkOverlay @JvmOverloads constructor(
             overlay.setCoachmarkDescriptionTextAppearance(descriptionTextAppearance)
             overlay.setCoachmarkWidthPercent(coachmarkWidthPercent)
             overlay.setStepProgressDivider(stepProgressDivider)
+            overlay.skipButtonVisibleByDefault = skipButtonVisibleByDefault
             overlay.skipDefaultText = skipText
             overlay.nextDefaultText = nextText
             container?.let { overlay.setContainer(it) }

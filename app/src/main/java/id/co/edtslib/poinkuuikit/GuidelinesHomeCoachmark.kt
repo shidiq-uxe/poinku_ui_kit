@@ -59,6 +59,7 @@ class GuidelinesHomeCoachmark : GuidelinesBaseActivity() {
             CoachMarkOverlay.Builder(this)
                 .setDismissibleOnBack(true)
                 .setCoachMarkItems(coachmarkItems)
+                .setSkipButtonVisibleByDefault(false)
                 .build()
         }, 1000L)
     }
