@@ -287,7 +287,9 @@ class CoachMarkOverlay @JvmOverloads constructor(
             }
 
             val cardWidth = coachmarkBinding.cardContainer.width.toFloat()
-            val maxOffset = cardWidth / 2f - 16.dp
+            if (cardWidth <= 0f) return@post
+
+            val maxOffset = (cardWidth / 2f - 16.dp).coerceAtLeast(0f)
             val clampedOffset = correctedOffset.coerceIn(-maxOffset, maxOffset)
 
             val markerEdgeTreatment = RoundTipTriangleEdgeTreatment(12.dp, 8.dp, (1.5).toInt().dp, isEdgeAtTop)

@@ -17,3 +17,7 @@ local.properties
 /.idea/gradle.xml
 /.idea/.name
 /.idea/compiler.xml
+/.idea/deviceManager.xml
+/.idea/AndroidProjectSystem.xml
+/.idea/deploymentTargetSelector.xml
+/.idea/material_theme_project_new.xml
